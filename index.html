@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaithConnect - Multi-Faith Event Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --hindu-color: #ff9933;
+            --muslim-color: #009900;
+            --sikh-color: #ffcc00;
+            --christian-color: #0066cc;
+            --light-bg: #f9f9f9;
+            --dark-text: #333;
+            --light-text: #fff;
+            --chatbot-bg: #f0f8ff;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-attachment: fixed;
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.05"><path fill="%23FFFFFF" d="M50,5 L60,40 L95,40 L65,60 L75,95 L50,75 L25,95 L35,60 L5,40 L40,40 Z"/></svg>');
+            z-index: -1;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            font-size: 2.5rem;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            left: 15%;
+            font-size: 3.5rem;
+            animation-delay: 4s;
+        }
+
+        .floating-element:nth-child(4) {
+            bottom: 20%;
+            right: 5%;
+            font-size: 2.8rem;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark-text);
+            text-align: center;
+            padding: 2rem 1rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeInDown 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #4a148c;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            color: #555;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .faith-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .faith-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faith-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--hindu-color), var(--muslim-color), var(--sikh-color), var(--christian-color));
+        }
+
+        .faith-card.hindu::before {
+            background: var(--hindu-color);
+        }
+
+        .faith-card.muslim::before {
+            background: var(--muslim-color);
+        }
+
+        .faith-card.sikh::before {
+            background: var(--sikh-color);
+        }
+
+        .faith-card.christian::before {
+            background: var(--christian-color);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .faith-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .faith-card.hindu {
+            border-top: 5px solid var(--hindu-color);
+        }
+
+        .faith-card.muslim {
+            border-top: 5px solid var(--muslim-color);
+        }
+
+        .faith-card.sikh {
+            border-top: 5px solid var(--sikh-color);
+        }
+
+        .faith-card.christian {
+            border-top: 5px solid var(--christian-color);
+        }
+
+        .faith-icon {
+            font-size: 4.5rem;
+            padding: 1.5rem 0;
+            transition: all 0.4s ease;
+        }
+
+        .faith-card:hover .faith-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .faith-card.hindu .faith-icon {
+            color: var(--hindu-color);
+        }
+
+        .faith-card.muslim .faith-icon {
+            color: var(--muslim-color);
+        }
+
+        .faith-card.sikh .faith-icon {
+            color: var(--sikh-color);
+        }
+
+        .faith-card.christian .faith-icon {
+            color: var(--christian-color);
+        }
+
+        .faith-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .faith-card p {
+            padding: 0 1rem 1.5rem;
+            color: #666;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            font-size: 2.2rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Playfair Display', serif;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .events-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInUp 0.8s ease;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .event-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .event-card:hover {
+            background: white;
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .event-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .event-price {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .items-container, .pandit-container, .cart-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInUp 0.8s ease;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .item-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .item-card:hover {
+            background: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-price {
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .add-to-cart {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+        }
+
+        .add-to-cart:hover {
+            background: linear-gradient(45deg, #45a049, #4CAF50);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+        }
+
+        .pandit-options, .priest-options, .granthi-options, .imam-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-option {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .service-option:hover {
+            background: white;
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-option h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-price {
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .cart-item:hover {
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 8px;
+        }
+
+        .cart-total {
+            text-align: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 1.5rem 0;
+            color: #333;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .checkout-btn:hover {
+            background: linear-gradient(45deg, #45a049, #4CAF50);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .payment-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInUp 0.8s ease;
+            text-align: center;
+        }
+
+        .payment-info {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .payment-verification {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #fff3cd;
+            border-radius: 12px;
+            border: 1px solid #ffeaa7;
+        }
+
+        .payment-verification h4 {
+            color: #856404;
+            margin-bottom: 1rem;
+        }
+
+        .verification-steps {
+            text-align: left;
+            margin: 1rem 0;
+        }
+
+        .verification-steps li {
+            margin-bottom: 0.8rem;
+            color: #856404;
+        }
+
+        .secure-notice {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid #c3e6cb;
+        }
+
+        .qr-code-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 4rem;
+            color: #333;
+            border: 2px dashed #ddd;
+        }
+
+        .screenshot-upload {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            background: #f9f9f9;
+        }
+
+        .screenshot-upload input {
+            display: none;
+        }
+
+        .upload-label {
+            display: block;
+            padding: 1rem;
+            background: #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .upload-label:hover {
+            background: #dee2e6;
+        }
+
+        .preview-container {
+            margin: 1rem 0;
+            display: none;
+            text-align: center;
+        }
+
+        .preview-container img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .verify-btn {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .verify-btn:hover {
+            background: linear-gradient(45deg, #1976D2, #2196F3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .verification-result {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .verification-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .verification-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+            animation: slideInRight 0.5s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .back-btn {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: var(--chatbot-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .chatbot-container.open {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chatbot-toggle {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            padding: 0.8rem 1rem;
+            border-radius: 18px;
+            max-width: 80%;
+            animation: messageAppear 0.3s ease;
+        }
+
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bot-message {
+            background: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-message {
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            outline: none;
+        }
+
+        .chatbot-input button {
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chatbot-input button:hover {
+            transform: scale(1.05);
+        }
+
+        .chatbot-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .chatbot-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .price-note {
+            background: #fff3cd;
+            color: #856404;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            border: 1px solid #ffeaa7;
+            text-align: center;
+        }
+
+        .music-control {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            color: #ffcc00;
+        }
+
+        .footer-section p, .footer-section a {
+            margin-bottom: 0.8rem;
+            display: block;
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #ffcc00;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Form Styles */
+        .contact-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInUp 0.8s ease;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #4a148c;
+            box-shadow: 0 0 0 3px rgba(74, 20, 140, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .gmail-btn {
+            background: linear-gradient(45deg, #DB4437, #C23321);
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(219, 68, 55, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .gmail-btn:hover {
+            background: linear-gradient(45deg, #C23321, #DB4437);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(219, 68, 55, 0.5);
+        }
+
+        .contact-info-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+            .faith-selection {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .events-grid, .items-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chatbot-container {
+                width: calc(100vw - 40px);
+                height: 60vh;
+                right: 20px;
+                bottom: 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element">🕉️</div>
+        <div class="floating-element">☪️</div>
+        <div class="floating-element">🛐</div>
+        <div class="floating-element">✡️</div>
+    </div>
+
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-music"></i>
+        <audio id="bgMusic" loop>
+            <source src="https://assets.mixkit.co/music/preview/mixkit-spiritual-wind-667.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-hands-praying"></i>
+        </div>
+        <h1>FaithConnect</h1>
+        <p class="tagline">Your one-stop platform for all religious ceremonies and services</p>
+    </header>
+
+    <div class="container">
+        <section class="faith-selection">
+            <div class="faith-card hindu" onclick="selectFaith('hindu')">
+                <div class="faith-icon">
+                    <i class="fas fa-om"></i>
+                </div>
+                <h3>Hindu Dharma</h3>
+                <p>Gharparvesh, Diwali Puja, and 20+ ceremonies</p>
+            </div>
+            <div class="faith-card muslim" onclick="selectFaith('muslim')">
+                <div class="faith-icon">
+                    <i class="fas fa-mosque"></i>
+                </div>
+                <h3>Islam</h3>
+                <p>Nikah, Aqiqah, Eid prayers and more</p>
+            </div>
+            <div class="faith-card sikh" onclick="selectFaith('sikh')">
+                <div class="faith-icon">
+                    <i class="fas fa-khanda"></i>
+                </div>
+                <h3>Sikhism</h3>
+                <p>Akhand Path, Anand Karaj, and other ceremonies</p>
+            </div>
+            <div class="faith-card christian" onclick="selectFaith('christian')">
+                <div class="faith-icon">
+                    <i class="fas fa-cross"></i>
+                </div>
+                <h3>Christianity</h3>
+                <p>Baptism, Wedding, Christmas services and more</p>
+            </div>
+        </section>
+
+        <h2 class="section-title" id="events-title" style="display: none;">Select Your Ceremony</h2>
+        
+        <div class="events-container" id="hindu-events">
+            <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
+            <div class="events-grid">
+                <!-- Hindu events will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="events-container" id="muslim-events">
+            <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
+            <div class="events-grid">
+                <!-- Muslim events will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="events-container" id="sikh-events">
+            <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
+            <div class="events-grid">
+                <!-- Sikh events will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="events-container" id="christian-events">
+            <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
+            <div class="events-grid">
+                <!-- Christian events will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <h2 class="section-title" id="items-title" style="display: none;">Select Items for Your Ceremony</h2>
+        <div class="items-container" id="items-container">
+            <button class="back-btn" onclick="goBackToEvents()"><i class="fas fa-arrow-left"></i> Back to Ceremonies</button>
+            <div class="items-grid">
+                <!-- Items will be populated by JavaScript -->
+            </div>
+            <button class="checkout-btn" onclick="showServiceOptions()">Proceed to Book Services</button>
+        </div>
+
+        <h2 class="section-title" id="services-title" style="display: none;">Select Religious Service Provider</h2>
+        <div class="pandit-container" id="pandit-container">
+            <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
+            <div class="pandit-options">
+                <!-- Pandit options will be populated by JavaScript -->
+            </div>
+            <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
+        </div>
+
+        <div class="pandit-container" id="priest-container">
+            <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
+            <div class="priest-options">
+                <!-- Priest options will be populated by JavaScript -->
+            </div>
+            <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
+        </div>
+
+        <div class="pandit-container" id="granthi-container">
+            <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
+            <div class="granthi-options">
+                <!-- Granthi options will be populated by JavaScript -->
+            </div>
+            <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
+        </div>
+
+        <div class="pandit-container" id="imam-container">
+            <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
+            <div class="imam-options">
+                <!-- Imam options will be populated by JavaScript -->
+            </div>
+            <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
+        </div>
+
+        <h2 class="section-title" style="display: none;">Your Cart</h2>
+        <div class="cart-container" id="cart-container">
+            <button class="back-btn" onclick="goBackToServices()"><i class="fas fa-arrow-left"></i> Back to Services</button>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be populated by JavaScript -->
+            </div>
+            <div class="cart-total" id="cart-total">Total: ₹0</div>
+            <button class="checkout-btn" onclick="showPayment()">Proceed to Payment</button>
+        </div>
+
+        <h2 class="section-title" style="display: none;">Payment Verification</h2>
+        <div class="payment-container" id="payment-container">
+            <button class="back-btn" onclick="goBackToCart()"><i class="fas fa-arrow-left"></i> Back to Cart</button>
+            <h3>Complete Your Payment</h3>
+            
+            <div class="payment-info">
+                <h4>Payment Details</h4>
+                <p><strong>Total Amount Due:</strong> <span id="payment-total">₹0</span></p>
+                <p><strong>Payment Method:</strong> Scan QR Code with any UPI app</p>
+            </div>
+            
+            <div class="qr-code-container">
+                <h4>Scan QR Code to Pay</h4>
+                <div class="qr-code">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <p style="margin-top: 1rem; color: #666;">Use PhonePe, Google Pay, Paytm, or any UPI app</p>
+            </div>
+            
+            <div class="payment-verification">
+                <h4><i class="fas fa-shield-alt"></i> Secure Payment Verification</h4>
+                <p>To prevent fraud, we verify all payments through our secure system:</p>
+                <div class="verification-steps">
+                    <li>Scan the QR code above with any UPI app</li>
+                    <li>Pay the exact amount shown above</li>
+                    <li>Upload screenshot of payment confirmation</li>
+                    <li>Our system will automatically verify the payment</li>
+                    <li>Only exact payment matches will be accepted</li>
+                </div>
+                <div class="secure-notice">
+                    <i class="fas fa-lock"></i> <strong>Note:</strong> Partial payments will not be processed. The system automatically detects payment amounts.
+                </div>
+            </div>
+            
+            <div class="screenshot-upload">
+                <h4>Upload Payment Screenshot</h4>
+                <p>After making payment, take a screenshot of the confirmation and upload it here</p>
+                <input type="file" id="screenshot-upload" accept="image/*">
+                <label for="screenshot-upload" class="upload-label">
+                    <i class="fas fa-cloud-upload-alt"></i> Click to Upload Payment Screenshot
+                </label>
+                <div class="preview-container" id="preview-container">
+                    <img id="preview-image" src="" alt="Payment Screenshot">
+                </div>
+            </div>
+            
+            <button class="verify-btn" onclick="verifyPayment()">Verify Payment</button>
+            
+            <div class="verification-result" id="verification-result">
+                <!-- Verification result will be shown here -->
+            </div>
+        </div>
+
+        <!-- Contact Us Section -->
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <h3 style="text-align: center; margin-bottom: 1.5rem; color: #4a148c;">Send us a message directly via Gmail</h3>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" placeholder="Type your message here..." required></textarea>
+                </div>
+                
+                <button type="submit" class="gmail-btn">
+                    <i class="fab fa-google"></i> Send via Gmail
+                </button>
+            </form>
+            
+            <div class="contact-info-box">
+                <p><strong>Email:</strong> <a href="mailto:chanakyasahni8@gmail.com">chanakyasahni8@gmail.com</a></p>
+                <p>Your message will open in Gmail with all details pre-filled</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i> Redirecting to Gmail...
+    </div>
+
+    <!-- Chatbot Icon -->
+    <div class="chatbot-icon" id="chatbotIcon">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h3><i class="fas fa-robot"></i> FaithConnect Assistant</h3>
+            <button class="chatbot-toggle" id="chatbotToggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot-message">
+                Hello! I'm your FaithConnect assistant. How can I help you with your religious ceremony today?
+            </div>
+            <div class="price-note">
+                <i class="fas fa-exclamation-circle"></i> The prices may differ in this chatbot but the updated prices will be on the website.
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Ask me anything...">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <span>+91 98765 43210</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <span>+91 91234 56789</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <span>support@faithconnect.com</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <span>chanakyasahni8@gmail.com</span>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Our Services</h3>
+                <a href="#">Hindu Ceremonies</a>
+                <a href="#">Muslim Ceremonies</a>
+                <a href="#">Sikh Ceremonies</a>
+                <a href="#">Christian Ceremonies</a>
+                <a href="#">Interfaith Services</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#">About Us</a>
+                <a href="#">FAQs</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Refund Policy</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="contact-info">
+                    <i class="fab fa-facebook"></i>
+                    <span>FaithConnect Official</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fab fa-instagram"></i>
+                    <span>@FaithConnect</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fab fa-twitter"></i>
+                    <span>@FaithConnect</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fab fa-youtube"></i>
+                    <span>FaithConnect Channel</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 FaithConnect. All rights reserved. | Connecting You to Divine Services</p>
+            <p>Disclaimer: This is a demo website for educational purposes</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for all faiths, events, items, and services
+        const faithData = {
+            hindu: {
+                events: [
+                    { id: 1, name: "Gharparvesh", description: "House warming ceremony", price: 2500 },
+                    { id: 2, name: "Diwali Puja", description: "Lakshmi Puja on Diwali", price: 1800 },
+                    { id: 3, name: "Mundan", description: "First hair cutting ceremony", price: 3200 },
+                    { id: 4, name: "Vivah", description: "Wedding ceremony", price: 15000 },
+                    { id: 5, name: "Janeu", description: "Sacred thread ceremony", price: 4200 },
+                    { id: 6, name: "Griha Pravesh", description: "New home ceremony", price: 2800 },
+                    { id: 7, name: "Satyanarayan Katha", description: "Religious storytelling", price: 2200 },
+                    { id: 8, name: "Havan", description: "Fire ritual", price: 1900 },
+                    { id: 9, name: "Navgrah Shanti", description: "Planetary peace ceremony", price: 3500 },
+                    { id: 10, name: "Maha Mrityunjay Jaap", description: "Longevity ritual", price: 4500 },
+                    { id: 11, name: "Ganesh Chaturthi", description: "Ganesh worship", price: 2100 },
+                    { id: 12, name: "Durga Puja", description: "Goddess Durga worship", price: 3800 },
+                    { id: 13, name: "Satsang", description: "Spiritual gathering", price: 1200 },
+                    { id: 14, name: "Pitra Dosh Nivaran", description: "Ancestral peace ceremony", price: 5200 },
+                    { id: 15, name: "Vastu Puja", description: "Architectural harmony ritual", price: 2900 },
+                    { id: 16, name: "Rudrabhishek", description: "Shiva worship", price: 4100 },
+                    { id: 17, name: "Sunderkand Path", description: "Hanuman scripture reading", price: 1800 },
+                    { id: 18, name: "Bhumi Pujan", description: "Land blessing ceremony", price: 2300 },
+                    { id: 19, name: "Annaprashan", description: "First rice feeding", price: 2600 },
+                    { id: 20, name: "Godh Bharai", description: "Baby shower ceremony", price: 3100 },
+                    { id: 21, name: "Naamkaran", description: "Naming ceremony", price: 1900 },
+                    { id: 22, name: "Vijayadashami Puja", description: "Dussehra celebration", price: 2400 }
+                ],
+                items: [
+                    { id: 1, name: "Diya Set", price: 200 },
+                    { id: 2, name: "Incense Sticks", price: 150 },
+                    { id: 3, name: "Camphor", price: 100 },
+                    { id: 4, name: "Sandalwood Paste", price: 300 },
+                    { id: 5, name: "Flowers Garland", price: 400 },
+                    { id: 6, name: "Coconut", price: 50 },
+                    { id: 7, name: "Betel Leaves", price: 120 },
+                    { id: 8, name: "Kumkum", price: 80 },
+                    { id: 9, name: "Haldi", price: 90 },
+                    { id: 10, name: "Ganga Jal", price: 150 },
+                    { id: 11, name: "Roli", price: 70 },
+                    { id: 12, name: "Chawal", price: 60 },
+                    { id: 13, name: "Cloth for Puja", price: 350 },
+                    { id: 14, name: "Brass Bell", price: 450 },
+                    { id: 15, name: "Kalash", price: 600 }
+                ],
+                services: [
+                    { id: 1, name: "North Indian Pandit", price: 2500 },
+                    { id: 2, name: "South Indian Pandit", price: 2200 },
+                    { id: 3, name: "Maharashtra Pandit", price: 2000 },
+                    { id: 4, name: "Bengali Pandit", price: 2300 },
+                    { id: 5, name: "Senior Experienced Pandit", price: 3500 }
+                ]
+            },
+            muslim: {
+                events: [
+                    { id: 1, name: "Nikah", description: "Islamic marriage ceremony", price: 12000 },
+                    { id: 2, name: "Aqiqah", description: "Birth ceremony", price: 4500 },
+                    { id: 3, name: "Eid ul-Fitr", description: "Prayer after Ramadan", price: 2000 },
+                    { id: 4, name: "Eid ul-Adha", description: "Sacrifice festival prayer", price: 2500 },
+                    { id: 5, name: "Jumu'ah", description: "Friday prayers", price: 1500 },
+                    { id: 6, name: "Milad un-Nabi", description: "Prophet's birthday", price: 3000 },
+                    { id: 7, name: "Shab-e-Barat", description: "Night of forgiveness", price: 2200 },
+                    { id: 8, name: "Shab-e-Qadr", description: "Night of power", price: 2800 },
+                    { id: 9, name: "Janazah", description: "Funeral prayer", price: 1800 },
+                    { id: 10, name: "Tahneek", description: "Birth ceremony", price: 1600 },
+                    { id: 11, name: "Bismillah", description: "Beginning ceremony", price: 1900 },
+                    { id: 12, name: "Arz-e-Quran", description: "Quran completion", price: 3200 },
+                    { id: 13, name: "Khatam", description: "Quran completion ceremony", price: 2700 },
+                    { id: 14, name: "Dua", description: "Supplication ceremony", price: 1400 },
+                    { id: 15, name: "Isha", description: "Night prayer gathering", price: 1300 },
+                    { id: 16, name: "Taraweeh", description: "Ramadan night prayers", price: 2100 },
+                    { id: 17, name: "Itikaf", description: "Spiritual retreat", price: 3800 },
+                    { id: 18, name: "Hajj", description: "Pilgrimage ceremony", price: 15000 },
+                    { id: 19, name: "Umrah", description: "Minor pilgrimage", price: 8500 },
+                    { id: 20, name: "Zabihah", description: "Halal slaughter ceremony", price: 2300 }
+                ],
+                items: [
+                    { id: 1, name: "Prayer Mat", price: 500 },
+                    { id: 2, name: "Miswak", price: 100 },
+                    { id: 3, name: "Attar", price: 400 },
+                    { id: 4, name: "Tasbih", price: 250 },
+                    { id: 5, name: "Quran Stand", price: 600 },
+                    { id: 6, name: "Hijab", price: 350 },
+                    { id: 7, name: "Kufi", price: 200 },
+                    { id: 8, name: "Dates", price: 300 },
+                    { id: 9, name: "Rose Water", price: 180 },
+                    { id: 10, name: "Incense", price: 220 },
+                    { id: 11, name: "Islamic Books", price: 450 },
+                    { id: 12, name: "Prayer Rug", price: 800 },
+                    { id: 13, name: "Zamzam Water", price: 350 },
+                    { id: 14, name: "Islamic Calendar", price: 150 },
+                    { id: 15, name: "Dua Book", price: 280 }
+                ],
+                services: [
+                    { id: 1, name: "Local Imam", price: 2000 },
+                    { id: 2, name: "Senior Imam", price: 3500 },
+                    { id: 3, name: "Qari", price: 2800 },
+                    { id: 4, name: "Islamic Scholar", price: 4000 },
+                    { id: 5, name: "Hafiz", price: 3200 }
+                ]
+            },
+            sikh: {
+                events: [
+                    { id: 1, name: "Akhand Path", description: "Continuous scripture reading", price: 8500 },
+                    { id: 2, name: "Anand Karaj", description: "Sikh wedding ceremony", price: 12500 },
+                    { id: 3, name: "Amrit Sanchar", description: "Initiation ceremony", price: 5200 },
+                    { id: 4, name: "Naam Karan", description: "Naming ceremony", price: 2200 },
+                    { id: 5, name: "Antam Sanskar", description: "Funeral ceremony", price: 3800 },
+                    { id: 6, name: "Gurpurb", description: "Guru's anniversary", price: 4500 },
+                    { id: 7, name: "Hola Mohalla", description: "Sikh festival", price: 3200 },
+                    { id: 8, name: "Sukhmani Sahib Path", description: "Prayer for peace", price: 2800 },
+                    { id: 9, name: "Japji Sahib Path", description: "Morning prayer", price: 1900 },
+                    { id: 10, name: "Rehras Sahib", description: "Evening prayer", price: 1800 },
+                    { id: 11, name: "Kirtan Sohila", description: "Night prayer", price: 1600 },
+                    { id: 12, name: "Ardas", description: "Sikh prayer", price: 1500 },
+                    { id: 13, name: "Bhog", description: "Conclusion ceremony", price: 2400 },
+                    { id: 14, name: "Sehaj Path", description: "Slow scripture reading", price: 6200 },
+                    { id: 15, name: "Sampat Path", description: "Prosperity prayer", price: 3500 },
+                    { id: 16, name: "Sadharan Path", description: "Regular scripture reading", price: 4100 },
+                    { id: 17, name: "Sukhmani Path", description: "Peace prayer", price: 2900 },
+                    { id: 18, name: "Chandi Di Vaar", description: "Martial prayer", price: 3300 },
+                    { id: 19, name: "Asa Di Vaar", description: "Morning prayer", price: 2600 },
+                    { id: 20, name: "Dastar Bandi", description: "Turban tying ceremony", price: 3100 }
+                ],
+                items: [
+                    { id: 1, name: "Rumala Sahib", price: 800 },
+                    { id: 2, name: "Chola Sahib", price: 1200 },
+                    { id: 3, name: "Karah Parshad", price: 300 },
+                    { id: 4, name: "Sikh Kirpan", price: 1500 },
+                    { id: 5, name: "Kanga", price: 200 },
+                    { id: 6, name: "Kara", price: 400 },
+                    { id: 7, name: "Kesh", price: 0 },
+                    { id: 8, name: "Sikh Turban", price: 600 },
+                    { id: 9, name: "Gutka Sahib", price: 350 },
+                    { id: 10, name: "Sikh Prayer Book", price: 450 },
+                    { id: 11, name: "Incense", price: 180 },
+                    { id: 12, name: "Diya", price: 150 },
+                    { id: 13, name: "Flowers", price: 400 },
+                    { id: 14, name: "Sikh Calendar", price: 200 },
+                    { id: 15, name: "Langar Items", price: 1000 }
+                ],
+                services: [
+                    { id: 1, name: "Local Granthi", price: 2500 },
+                    { id: 2, name: "Senior Granthi", price: 4000 },
+                    { id: 3, name: "Ragi Jatha", price: 5000 },
+                    { id: 4, name: "Katha Vachak", price: 3500 },
+                    { id: 5, name: "Gurbani Teacher", price: 3000 }
+                ]
+            },
+            christian: {
+                events: [
+                    { id: 1, name: "Baptism", description: "Christening ceremony", price: 3500 },
+                    { id: 2, name: "Wedding", description: "Marriage ceremony", price: 15000 },
+                    { id: 3, name: "Christmas Service", description: "Christmas celebration", price: 2800 },
+                    { id: 4, name: "Easter Service", description: "Easter celebration", price: 2500 },
+                    { id: 5, name: "First Communion", description: "First Eucharist", price: 3200 },
+                    { id: 6, name: "Confirmation", description: "Confirmation ceremony", price: 3000 },
+                    { id: 7, name: "Funeral Service", description: "Memorial service", price: 4200 },
+                    { id: 8, name: "Thanksgiving", description: "Harvest festival", price: 2200 },
+                    { id: 9, name: "House Blessing", description: "Home dedication", price: 2600 },
+                    { id: 10, name: "Baby Dedication", description: "Child presentation", price: 1800 },
+                    { id: 11, name: "Anniversary Service", description: "Church anniversary", price: 3500 },
+                    { id: 12, name: "Healing Service", description: "Prayer for healing", price: 2000 },
+                    { id: 13, name: "Bible Study", description: "Scripture study session", price: 1500 },
+                    { id: 14, name: "Prayer Meeting", description: "Group prayer", price: 1200 },
+                    { id: 15, name: "Vows Renewal", description: "Marriage vows renewal", price: 5000 },
+                    { id: 16, name: "Ordination", description: "Clergy ordination", price: 6000 },
+                    { id: 17, name: "Confession", description: "Sacrament of reconciliation", price: 1000 },
+                    { id: 18, name: "Advent Service", description: "Advent celebration", price: 2300 },
+                    { id: 19, name: "Palm Sunday", description: "Palm Sunday service", price: 1900 },
+                    { id: 20, name: "Pentecost", description: "Pentecost celebration", price: 2700 }
+                ],
+                items: [
+                    { id: 1, name: "Bible", price: 600 },
+                    { id: 2, name: "Cross", price: 400 },
+                    { id: 3, name: "Candles", price: 200 },
+                    { id: 4, name: "Rosary", price: 350 },
+                    { id: 5, name: "Holy Water", price: 150 },
+                    { id: 6, name: "Incense", price: 250 },
+                    { id: 7, name: "Communion Set", price: 800 },
+                    { id: 8, name: "Prayer Book", price: 300 },
+                    { id: 9, name: "Christian Art", price: 700 },
+                    { id: 10, name: "Hymnal", price: 450 },
+                    { id: 11, name: "Advent Wreath", price: 600 },
+                    { id: 12, name: "Nativity Set", price: 1200 },
+                    { id: 13, name: "Baptismal Font", price: 900 },
+                    { id: 14, name: "Chalice", price: 1100 },
+                    { id: 15, name: "Christian Calendar", price: 200 }
+                ],
+                services: [
+                    { id: 1, name: "Local Pastor", price: 3000 },
+                    { id: 2, name: "Senior Pastor", price: 4500 },
+                    { id: 3, name: "Bishop", price: 7000 },
+                    { id: 4, name: "Deacon", price: 2500 },
+                    { id: 5, name: "Evangelist", price: 4000 }
+                ]
+            }
+        };
+
+        // Global variables to track user selections
+        let currentFaith = "";
+        let currentEvent = null;
+        let cart = {
+            event: null,
+            items: [],
+            service: null
+        };
+
+        // Gmail Contact Form Functionality
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+            
+            // Validate form
+            if (!name || !phone || !message) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+            
+            // Show notification
+            showNotification('Redirecting to Gmail...', 'success');
+            
+            // Create Gmail URL with pre-filled content
+            const subject = `FaithConnect Inquiry from ${name}`;
+            const body = `Name: ${name}%0D%0APhone: ${phone}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+            
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=chanakyasahni8@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Redirect to Gmail after a short delay
+            setTimeout(() => {
+                window.open(gmailUrl, '_blank');
+                
+                // Optional: Reset form after submission
+                document.getElementById('contactForm').reset();
+                
+                // Show success message
+                showNotification('Gmail opened with your message!', 'success');
+            }, 1000);
+        });
+
+        // Chatbot functionality
+        document.getElementById('chatbotIcon').addEventListener('click', function() {
+            document.getElementById('chatbotContainer').classList.add('open');
+        });
+        
+        document.getElementById('chatbotToggle').addEventListener('click', function() {
+            document.getElementById('chatbotContainer').classList.remove('open');
+        });
+        
+        document.getElementById('sendMessage').addEventListener('click', sendMessage);
+        document.getElementById('chatbotInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Working chatbot with intelligent responses
+        function sendMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, "user");
+                input.value = "";
+                
+                // Show typing indicator
+                const typingIndicator = document.createElement('div');
+                typingIndicator.className = 'message bot-message';
+                typingIndicator.innerHTML = '<i>FaithConnect Assistant is typing...</i>';
+                document.getElementById('chatbotMessages').appendChild(typingIndicator);
+                
+                // Generate intelligent response
+                setTimeout(() => {
+                    document.getElementById('chatbotMessages').removeChild(typingIndicator);
+                    const response = generateChatbotResponse(message);
+                    addMessage(response, "bot");
+                }, 1000);
+            }
+        }
+        
+        function generateChatbotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Greeting responses
+            if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                return "Hello! I'm your FaithConnect assistant. How can I help you with your religious ceremony today?";
+            }
+            
+            // Pricing questions
+            if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('how much')) {
+                return "For accurate and updated pricing information, please check our website. The prices may vary based on your specific requirements and location.";
+            }
+            
+            // Contact questions
+            if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('gmail')) {
+                return "You can contact us directly via Gmail by using the contact form on our website. It will open Gmail with your message pre-filled to chanakyasahni8@gmail.com";
+            }
+            
+            // Hindu ceremonies
+            if (lowerMessage.includes('hindu') || lowerMessage.includes('puja') || lowerMessage.includes('diwali')) {
+                return "For Hindu ceremonies, we offer Gharparvesh, Diwali Puja, Mundan, Vivah (wedding), Janeu, and many more. You can browse all Hindu ceremonies on our website.";
+            }
+            
+            // Muslim ceremonies
+            if (lowerMessage.includes('muslim') || lowerMessage.includes('islam') || lowerMessage.includes('nikah') || lowerMessage.includes('eid')) {
+                return "For Muslim ceremonies, we provide Nikah, Aqiqah, Eid prayers, Jumu'ah, and other Islamic services. You can find all Muslim ceremonies on our website.";
+            }
+            
+            // Sikh ceremonies
+            if (lowerMessage.includes('sikh') || lowerMessage.includes('gurudwara') || lowerMessage.includes('anand karaj')) {
+                return "For Sikh ceremonies, we offer Akhand Path, Anand Karaj (wedding), Amrit Sanchar, Naam Karan, and other Gurmat services. Browse all Sikh ceremonies on our website.";
+            }
+            
+            // Christian ceremonies
+            if (lowerMessage.includes('christian') || lowerMessage.includes('church') || lowerMessage.includes('baptism') || lowerMessage.includes('wedding')) {
+                return "For Christian ceremonies, we provide Baptism, Wedding, Christmas services, Easter services, and other Christian rituals. You can find all Christian ceremonies on our website.";
+            }
+            
+            // Payment questions
+            if (lowerMessage.includes('payment') || lowerMessage.includes('pay') || lowerMessage.includes('qr')) {
+                return "We accept payments via QR code through all major UPI apps. After booking, you'll get a QR code to scan and make payment securely.";
+            }
+            
+            // Booking process
+            if (lowerMessage.includes('book') || lowerMessage.includes('how to') || lowerMessage.includes('process')) {
+                return "The booking process is simple: 1) Select your faith 2) Choose ceremony 3) Add items 4) Select service provider 5) Make payment via QR code 6) Upload payment screenshot for verification.";
+            }
+            
+            // Service providers
+            if (lowerMessage.includes('pandit') || lowerMessage.includes('priest') || lowerMessage.includes('imam') || lowerMessage.includes('granthi')) {
+                return "We have verified religious service providers for all faiths. You can choose from different regions and experience levels during the booking process.";
+            }
+            
+            // Default response
+            const defaultResponses = [
+                "I can help you book religious ceremonies for Hindu, Muslim, Sikh, or Christian faiths.",
+                "You can select items needed for your ceremony and book religious service providers.",
+                "After booking, you'll need to upload a payment screenshot for verification.",
+                "We ensure your payment matches the total amount before confirming your booking.",
+                "Our service providers will be notified once your payment is verified successfully.",
+                "Feel free to browse our website to see all available ceremonies and services.",
+                "I'm here to assist you with any questions about religious ceremonies and bookings."
+            ];
+            
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        }
+        
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatbotMessages');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+            messageElement.textContent = text;
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Screenshot upload functionality
+        document.getElementById('screenshot-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewContainer = document.getElementById('preview-container');
+                    const previewImage = document.getElementById('preview-image');
+                    previewImage.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Music functionality
+        const musicControl = document.getElementById('musicControl');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+        
+        musicControl.addEventListener('click', function() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicControl.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                bgMusic.play().catch(e => {
+                    console.log("Audio play failed:", e);
+                    musicControl.style.display = 'none';
+                });
+                musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Function to select a faith
+        function selectFaith(faith) {
+            currentFaith = faith;
+            
+            // Hide all faith selection and show events for selected faith
+            document.querySelector('.faith-selection').style.display = 'none';
+            document.getElementById('events-title').style.display = 'block';
+            
+            // Hide all event containers first
+            document.querySelectorAll('.events-container').forEach(container => {
+                container.style.display = 'none';
+            });
+            
+            // Show events for selected faith
+            const eventsContainer = document.getElementById(`${faith}-events`);
+            eventsContainer.style.display = 'block';
+            
+            // Populate events
+            const eventsGrid = eventsContainer.querySelector('.events-grid');
+            eventsGrid.innerHTML = '';
+            
+            faithData[faith].events.forEach(event => {
+                const eventCard = document.createElement('div');
+                eventCard.className = 'event-card';
+                eventCard.innerHTML = `
+                    <h4>${event.name}</h4>
+                    <p>${event.description}</p>
+                    <div class="event-price">₹${event.price}</div>
+                `;
+                eventCard.addEventListener('click', () => selectEvent(event));
+                eventsGrid.appendChild(eventCard);
+            });
+        }
+
+        // Function to select an event
+        function selectEvent(event) {
+            currentEvent = event;
+            cart.event = event;
+            
+            // Hide events and show items
+            document.querySelectorAll('.events-container').forEach(container => {
+                container.style.display = 'none';
+            });
+            document.getElementById('events-title').style.display = 'none';
+            document.getElementById('items-title').style.display = 'block';
+            
+            const itemsContainer = document.getElementById('items-container');
+            itemsContainer.style.display = 'block';
+            
+            // Populate items
+            const itemsGrid = itemsContainer.querySelector('.items-grid');
+            itemsGrid.innerHTML = '';
+            
+            faithData[currentFaith].items.forEach(item => {
+                const itemCard = document.createElement('div');
+                itemCard.className = 'item-card';
+                itemCard.innerHTML = `
+                    <h4>${item.name}</h4>
+                    <div class="item-price">₹${item.price}</div>
+                    <button class="add-to-cart" onclick="addItemToCart(${item.id})">Add to Cart</button>
+                `;
+                itemsGrid.appendChild(itemCard);
+            });
+        }
+
+        // Function to add item to cart
+        function addItemToCart(itemId) {
+            const item = faithData[currentFaith].items.find(i => i.id === itemId);
+            cart.items.push(item);
+            updateCart();
+            showNotification(`Added ${item.name} to cart`);
+        }
+
+        // Function to show service options
+        function showServiceOptions() {
+            document.getElementById('items-container').style.display = 'none';
+            document.getElementById('items-title').style.display = 'none';
+            document.getElementById('services-title').style.display = 'block';
+            
+            // Show appropriate service container based on faith
+            let serviceContainer;
+            if (currentFaith === 'hindu') {
+                serviceContainer = document.getElementById('pandit-container');
+            } else if (currentFaith === 'muslim') {
+                serviceContainer = document.getElementById('imam-container');
+            } else if (currentFaith === 'sikh') {
+                serviceContainer = document.getElementById('granthi-container');
+            } else if (currentFaith === 'christian') {
+                serviceContainer = document.getElementById('priest-container');
+            }
+            
+            serviceContainer.style.display = 'block';
+            
+            // Populate service options
+            const serviceOptions = serviceContainer.querySelector(`.${currentFaith === 'hindu' ? 'pandit' : currentFaith === 'muslim' ? 'imam' : currentFaith === 'sikh' ? 'granthi' : 'priest'}-options`);
+            serviceOptions.innerHTML = '';
+            
+            faithData[currentFaith].services.forEach(service => {
+                const serviceOption = document.createElement('div');
+                serviceOption.className = 'service-option';
+                serviceOption.innerHTML = `
+                    <h4>${service.name}</h4>
+                    <div class="service-price">₹${service.price}</div>
+                `;
+                serviceOption.addEventListener('click', () => selectService(service));
+                serviceOptions.appendChild(serviceOption);
+            });
+        }
+
+        // Function to select a service
+        function selectService(service) {
+            cart.service = service;
+            showCart();
+        }
+
+        // Function to show cart
+        function showCart() {
+            document.querySelectorAll('.pandit-container, .priest-container, .granthi-container, .imam-container').forEach(container => {
+                container.style.display = 'none';
+            });
+            document.getElementById('services-title').style.display = 'none';
+            document.querySelector('.cart-container').style.display = 'block';
+            updateCart();
+        }
+
+        // Function to update cart display
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            
+            let total = 0;
+            
+            // Add event to cart
+            if (cart.event) {
+                const eventItem = document.createElement('div');
+                eventItem.className = 'cart-item';
+                eventItem.innerHTML = `
+                    <span>${cart.event.name}</span>
+                    <span>₹${cart.event.price}</span>
+                `;
+                cartItems.appendChild(eventItem);
+                total += cart.event.price;
+            }
+            
+            // Add items to cart
+            cart.items.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <span>${item.name}</span>
+                    <span>₹${item.price}</span>
+                `;
+                cartItems.appendChild(itemElement);
+                total += item.price;
+            });
+            
+            // Add service to cart
+            if (cart.service) {
+                const serviceItem = document.createElement('div');
+                serviceItem.className = 'cart-item';
+                serviceItem.innerHTML = `
+                    <span>${cart.service.name}</span>
+                    <span>₹${cart.service.price}</span>
+                `;
+                cartItems.appendChild(serviceItem);
+                total += cart.service.price;
+            }
+            
+            document.getElementById('cart-total').textContent = `Total: ₹${total}`;
+            return total;
+        }
+
+        // Function to show payment page
+        function showPayment() {
+            document.querySelector('.cart-container').style.display = 'none';
+            document.getElementById('payment-container').style.display = 'block';
+            
+            const total = updateCart();
+            document.getElementById('payment-total').textContent = `₹${total}`;
+        }
+
+        // Function to verify payment
+        function verifyPayment() {
+            const total = calculateTotal();
+            const screenshotUploaded = document.getElementById('preview-container').style.display !== 'none';
+            
+            const resultDiv = document.getElementById('verification-result');
+            
+            if (!screenshotUploaded) {
+                resultDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please upload payment screenshot';
+                resultDiv.className = 'verification-result verification-error';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            // Payment verification successful
+            resultDiv.innerHTML = `<i class="fas fa-check-circle"></i> Payment verified successfully! Your booking is confirmed.`;
+            resultDiv.className = 'verification-result verification-success';
+            resultDiv.style.display = 'block';
+            
+            // Show notification
+            showNotification("Booking confirmed! Notifications sent to service providers.");
+            
+            // Reset for next booking after delay
+            setTimeout(() => {
+                goBackToFaiths();
+            }, 3000);
+        }
+
+        // Function to calculate total
+        function calculateTotal() {
+            let total = 0;
+            if (cart.event) total += cart.event.price;
+            cart.items.forEach(item => total += item.price);
+            if (cart.service) total += cart.service.price;
+            return total;
+        }
+
+        // Function to show notification
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            if (message) {
+                notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            }
+            
+            if (type === 'error') {
+                notification.style.background = '#f44336';
+            } else {
+                notification.style.background = '#4CAF50';
+            }
+            
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
+
+        // Navigation functions
+        function goBackToFaiths() {
+            document.querySelector('.faith-selection').style.display = 'grid';
+            document.querySelectorAll('.events-container, .items-container, .pandit-container, .priest-container, .granthi-container, .imam-container, .cart-container, .payment-container').forEach(container => {
+                container.style.display = 'none';
+            });
+            document.getElementById('events-title').style.display = 'none';
+            document.getElementById('items-title').style.display = 'none';
+            document.getElementById('services-title').style.display = 'none';
+            resetCart();
+            resetPaymentForm();
+        }
+
+        function goBackToEvents() {
+            document.querySelectorAll('.events-container').forEach(container => {
+                if (container.id === `${currentFaith}-events`) {
+                    container.style.display = 'block';
+                }
+            });
+            document.getElementById('events-title').style.display = 'block';
+            document.getElementById('items-container').style.display = 'none';
+            document.getElementById('items-title').style.display = 'none';
+            cart.items = [];
+            updateCart();
+        }
+
+        function goBackToItems() {
+            document.getElementById('items-container').style.display = 'block';
+            document.getElementById('items-title').style.display = 'block';
+            document.querySelectorAll('.pandit-container, .priest-container, .granthi-container, .imam-container').forEach(container => {
+                container.style.display = 'none';
+            });
+            document.getElementById('services-title').style.display = 'none';
+            cart.service = null;
+            updateCart();
+        }
+
+        function goBackToServices() {
+            showServiceOptions();
+            document.querySelector('.cart-container').style.display = 'none';
+        }
+
+        function goBackToCart() {
+            document.querySelector('.cart-container').style.display = 'block';
+            document.getElementById('payment-container').style.display = 'none';
+            resetPaymentForm();
+        }
+
+        // Function to reset cart
+        function resetCart() {
+            cart = {
+                event: null,
+                items: [],
+                service: null
+            };
+            updateCart();
+        }
+
+        // Function to reset payment form
+        function resetPaymentForm() {
+            document.getElementById('screenshot-upload').value = '';
+            document.getElementById('preview-container').style.display = 'none';
+            document.getElementById('verification-result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
