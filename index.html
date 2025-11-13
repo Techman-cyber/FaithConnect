@@ -145,10 +145,185 @@
             color: #555;
         }
 
+        .nav-container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-menu {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem;
+        }
+
+        .nav-item {
+            margin: 0 1.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            background: rgba(74, 20, 140, 0.1);
+            color: #4a148c;
+        }
+
+        .nav-link.active {
+            background: rgba(74, 20, 140, 0.2);
+            color: #4a148c;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 3rem;
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            color: #4a148c;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #555;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #4a148c, #6a1b9a);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(74, 20, 140, 0.4);
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(45deg, #6a1b9a, #4a148c);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 20, 140, 0.5);
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 10px rgba(33, 150, 243, 0.3);
+            font-size: 0.9rem;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(45deg, #1976D2, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(33, 150, 243, 0.4);
+        }
+
+        .download-btn.small {
+            padding: 0.6rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        .download-btn.success {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+        }
+
+        .download-btn.success:hover {
+            background: linear-gradient(45deg, #45a049, #4CAF50);
+        }
+
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #4a148c;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
         }
 
         .faith-selection {
@@ -277,11 +452,6 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             font-family: 'Playfair Display', serif;
             animation: fadeIn 1s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .events-container {
@@ -995,6 +1165,171 @@
             border-left: 4px solid #4CAF50;
         }
 
+        /* Resources Section */
+        .resources-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .resource-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4a148c;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .resource-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-details {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-details h4 {
+            color: #4a148c;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-details ul {
+            padding-left: 1.5rem;
+            color: #666;
+        }
+
+        .resource-details li {
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-link {
+            display: inline-block;
+            color: #4a148c;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .resource-link:hover {
+            color: #6a1b9a;
+            text-decoration: underline;
+        }
+
+        .download-section {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .file-info {
+            background: #f8f9fa;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            font-size: 0.85rem;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-size {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .download-progress {
+            width: 100%;
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+            display: none;
+        }
+
+        .download-progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .calendar-preview {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .calendar-day {
+            padding: 0.5rem;
+            text-align: center;
+            border-radius: 8px;
+            background: #f8f9fa;
+            font-size: 0.9rem;
+        }
+
+        .calendar-day.event {
+            background: #e3f2fd;
+            border: 1px solid #2196F3;
+            font-weight: bold;
+        }
+
+        .calendar-day.holiday {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+        }
+
+        .resource-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e9ecef;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .download-count {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
         @media (max-width: 768px) {
             .faith-selection {
                 grid-template-columns: 1fr;
@@ -1018,6 +1353,19 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 text-align: center;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-item {
+                margin: 0.5rem 0;
+            }
+            
+            .download-section {
+                flex-direction: column;
             }
         }
     </style>
@@ -1045,201 +1393,500 @@
         <p class="tagline">Your one-stop platform for all religious ceremonies and services</p>
     </header>
 
+    <nav class="nav-container">
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="#" class="nav-link active" data-page="home">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-page="services">Our Services</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-page="resources">Resources</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-page="contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
-        <section class="faith-selection">
-            <div class="faith-card hindu" onclick="selectFaith('hindu')">
-                <div class="faith-icon">
-                    <i class="fas fa-om"></i>
+        <!-- Home Page -->
+        <div class="page active" id="home-page">
+            <div class="hero-section">
+                <h2>Welcome to FaithConnect</h2>
+                <p>FaithConnect is India's first multi-faith platform that connects you with authentic religious services, ceremonies, and spiritual guidance across all major faiths. We bring tradition and technology together to serve your spiritual needs.</p>
+                <a href="#" class="cta-button" data-page="services">Explore Our Services</a>
+            </div>
+
+            <div class="features-section">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Multi-Faith Services</h3>
+                    <p>Access authentic religious services for Hindu, Muslim, Sikh, and Christian faiths all in one platform.</p>
                 </div>
-                <h3>Hindu Dharma</h3>
-                <p>Gharparvesh, Diwali Puja, and 20+ ceremonies</p>
-            </div>
-            <div class="faith-card muslim" onclick="selectFaith('muslim')">
-                <div class="faith-icon">
-                    <i class="fas fa-mosque"></i>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Easy Booking</h3>
+                    <p>Book ceremonies, order religious items, and connect with service providers with just a few clicks.</p>
                 </div>
-                <h3>Islam</h3>
-                <p>Nikah, Aqiqah, Eid prayers and more</p>
-            </div>
-            <div class="faith-card sikh" onclick="selectFaith('sikh')">
-                <div class="faith-icon">
-                    <i class="fas fa-khanda"></i>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Verified Providers</h3>
+                    <p>All our religious service providers are thoroughly verified and experienced in their respective traditions.</p>
                 </div>
-                <h3>Sikhism</h3>
-                <p>Akhand Path, Anand Karaj, and other ceremonies</p>
             </div>
-            <div class="faith-card christian" onclick="selectFaith('christian')">
-                <div class="faith-icon">
-                    <i class="fas fa-cross"></i>
+
+            <h2 class="section-title">Our Featured Services</h2>
+            <div class="faith-selection">
+                <div class="faith-card hindu" data-page="services">
+                    <div class="faith-icon">
+                        <i class="fas fa-om"></i>
+                    </div>
+                    <h3>Hindu Dharma</h3>
+                    <p>Gharparvesh, Diwali Puja, and 20+ ceremonies</p>
                 </div>
-                <h3>Christianity</h3>
-                <p>Baptism, Wedding, Christmas services and more</p>
-            </div>
-        </section>
-
-        <h2 class="section-title" id="events-title" style="display: none;">Select Your Ceremony</h2>
-        
-        <div class="events-container" id="hindu-events">
-            <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
-            <div class="events-grid">
-                <!-- Hindu events will be populated by JavaScript -->
-            </div>
-        </div>
-
-        <div class="events-container" id="muslim-events">
-            <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
-            <div class="events-grid">
-                <!-- Muslim events will be populated by JavaScript -->
-            </div>
-        </div>
-
-        <div class="events-container" id="sikh-events">
-            <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
-            <div class="events-grid">
-                <!-- Sikh events will be populated by JavaScript -->
+                <div class="faith-card muslim" data-page="services">
+                    <div class="faith-icon">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <h3>Islam</h3>
+                    <p>Nikah, Aqiqah, Eid prayers and more</p>
+                </div>
+                <div class="faith-card sikh" data-page="services">
+                    <div class="faith-icon">
+                        <i class="fas fa-khanda"></i>
+                    </div>
+                    <h3>Sikhism</h3>
+                    <p>Akhand Path, Anand Karaj, and other ceremonies</p>
+                </div>
+                <div class="faith-card christian" data-page="services">
+                    <div class="faith-icon">
+                        <i class="fas fa-cross"></i>
+                    </div>
+                    <h3>Christianity</h3>
+                    <p>Baptism, Wedding, Christmas services and more</p>
+                </div>
             </div>
         </div>
 
-        <div class="events-container" id="christian-events">
-            <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
-            <div class="events-grid">
-                <!-- Christian events will be populated by JavaScript -->
+        <!-- Services Page -->
+        <div class="page" id="services-page">
+            <h2 class="section-title">Book Your Religious Ceremony</h2>
+            <div class="faith-selection">
+                <div class="faith-card hindu" onclick="selectFaith('hindu')">
+                    <div class="faith-icon">
+                        <i class="fas fa-om"></i>
+                    </div>
+                    <h3>Hindu Dharma</h3>
+                    <p>Gharparvesh, Diwali Puja, and 20+ ceremonies</p>
+                </div>
+                <div class="faith-card muslim" onclick="selectFaith('muslim')">
+                    <div class="faith-icon">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <h3>Islam</h3>
+                    <p>Nikah, Aqiqah, Eid prayers and more</p>
+                </div>
+                <div class="faith-card sikh" onclick="selectFaith('sikh')">
+                    <div class="faith-icon">
+                        <i class="fas fa-khanda"></i>
+                    </div>
+                    <h3>Sikhism</h3>
+                    <p>Akhand Path, Anand Karaj, and other ceremonies</p>
+                </div>
+                <div class="faith-card christian" onclick="selectFaith('christian')">
+                    <div class="faith-icon">
+                        <i class="fas fa-cross"></i>
+                    </div>
+                    <h3>Christianity</h3>
+                    <p>Baptism, Wedding, Christmas services and more</p>
+                </div>
             </div>
-        </div>
 
-        <h2 class="section-title" id="items-title" style="display: none;">Select Items for Your Ceremony</h2>
-        <div class="items-container" id="items-container">
-            <button class="back-btn" onclick="goBackToEvents()"><i class="fas fa-arrow-left"></i> Back to Ceremonies</button>
-            <div class="items-grid">
-                <!-- Items will be populated by JavaScript -->
-            </div>
-            <button class="checkout-btn" onclick="showServiceOptions()">Proceed to Book Services</button>
-        </div>
-
-        <h2 class="section-title" id="services-title" style="display: none;">Select Religious Service Provider</h2>
-        <div class="pandit-container" id="pandit-container">
-            <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
-            <div class="pandit-options">
-                <!-- Pandit options will be populated by JavaScript -->
-            </div>
-            <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
-        </div>
-
-        <div class="pandit-container" id="priest-container">
-            <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
-            <div class="priest-options">
-                <!-- Priest options will be populated by JavaScript -->
-            </div>
-            <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
-        </div>
-
-        <div class="pandit-container" id="granthi-container">
-            <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
-            <div class="granthi-options">
-                <!-- Granthi options will be populated by JavaScript -->
-            </div>
-            <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
-        </div>
-
-        <div class="pandit-container" id="imam-container">
-            <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
-            <div class="imam-options">
-                <!-- Imam options will be populated by JavaScript -->
-            </div>
-            <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
-        </div>
-
-        <h2 class="section-title" style="display: none;">Your Cart</h2>
-        <div class="cart-container" id="cart-container">
-            <button class="back-btn" onclick="goBackToServices()"><i class="fas fa-arrow-left"></i> Back to Services</button>
-            <div class="cart-items" id="cart-items">
-                <!-- Cart items will be populated by JavaScript -->
-            </div>
-            <div class="cart-total" id="cart-total">Total: ₹0</div>
-            <button class="checkout-btn" onclick="showPayment()">Proceed to Payment</button>
-        </div>
-
-        <h2 class="section-title" style="display: none;">Payment Verification</h2>
-        <div class="payment-container" id="payment-container">
-            <button class="back-btn" onclick="goBackToCart()"><i class="fas fa-arrow-left"></i> Back to Cart</button>
-            <h3>Complete Your Payment</h3>
+            <!-- All the booking flow containers -->
+            <h2 class="section-title" id="events-title" style="display: none;">Select Your Ceremony</h2>
             
-            <div class="payment-info">
-                <h4>Payment Details</h4>
-                <p><strong>Total Amount Due:</strong> <span id="payment-total">₹0</span></p>
-                <p><strong>Payment Method:</strong> Scan QR Code with any UPI app</p>
-            </div>
-            
-            <div class="qr-code-container">
-                <h4>Scan QR Code to Pay</h4>
-                <div class="qr-code">
-                    <i class="fas fa-qrcode"></i>
-                </div>
-                <p style="margin-top: 1rem; color: #666;">Use PhonePe, Google Pay, Paytm, or any UPI app</p>
-            </div>
-            
-            <div class="payment-verification">
-                <h4><i class="fas fa-shield-alt"></i> Secure Payment Verification</h4>
-                <p>To prevent fraud, we verify all payments through our secure system:</p>
-                <div class="verification-steps">
-                    <li>Scan the QR code above with any UPI app</li>
-                    <li>Pay the exact amount shown above</li>
-                    <li>Upload screenshot of payment confirmation</li>
-                    <li>Our system will automatically verify the payment</li>
-                    <li>Only exact payment matches will be accepted</li>
-                </div>
-                <div class="secure-notice">
-                    <i class="fas fa-lock"></i> <strong>Note:</strong> Partial payments will not be processed. The system automatically detects payment amounts.
+            <div class="events-container" id="hindu-events">
+                <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
+                <div class="events-grid">
+                    <!-- Hindu events will be populated by JavaScript -->
                 </div>
             </div>
-            
-            <div class="screenshot-upload">
-                <h4>Upload Payment Screenshot</h4>
-                <p>After making payment, take a screenshot of the confirmation and upload it here</p>
-                <input type="file" id="screenshot-upload" accept="image/*">
-                <label for="screenshot-upload" class="upload-label">
-                    <i class="fas fa-cloud-upload-alt"></i> Click to Upload Payment Screenshot
-                </label>
-                <div class="preview-container" id="preview-container">
-                    <img id="preview-image" src="" alt="Payment Screenshot">
-                </div>
-            </div>
-            
-            <button class="verify-btn" onclick="verifyPayment()">Verify Payment</button>
-            
-            <div class="verification-result" id="verification-result">
-                <!-- Verification result will be shown here -->
-            </div>
-        </div>
 
-        <!-- Contact Us Section -->
-        <h2 class="section-title">Contact Us</h2>
-        <div class="contact-container">
-            <h3 style="text-align: center; margin-bottom: 1.5rem; color: #4a148c;">Send us a message directly via Gmail</h3>
-            <form class="contact-form" id="contactForm">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" placeholder="Enter your full name" required>
+            <div class="events-container" id="muslim-events">
+                <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
+                <div class="events-grid">
+                    <!-- Muslim events will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="events-container" id="sikh-events">
+                <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
+                <div class="events-grid">
+                    <!-- Sikh events will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="events-container" id="christian-events">
+                <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
+                <div class="events-grid">
+                    <!-- Christian events will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <h2 class="section-title" id="items-title" style="display: none;">Select Items for Your Ceremony</h2>
+            <div class="items-container" id="items-container">
+                <button class="back-btn" onclick="goBackToEvents()"><i class="fas fa-arrow-left"></i> Back to Ceremonies</button>
+                <div class="items-grid">
+                    <!-- Items will be populated by JavaScript -->
+                </div>
+                <button class="checkout-btn" onclick="showServiceOptions()">Proceed to Book Services</button>
+            </div>
+
+            <h2 class="section-title" id="services-title" style="display: none;">Select Religious Service Provider</h2>
+            <div class="pandit-container" id="pandit-container">
+                <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
+                <div class="pandit-options">
+                    <!-- Pandit options will be populated by JavaScript -->
+                </div>
+                <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
+            </div>
+
+            <div class="pandit-container" id="priest-container">
+                <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
+                <div class="priest-options">
+                    <!-- Priest options will be populated by JavaScript -->
+                </div>
+                <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
+            </div>
+
+            <div class="pandit-container" id="granthi-container">
+                <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
+                <div class="granthi-options">
+                    <!-- Granthi options will be populated by JavaScript -->
+                </div>
+                <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
+            </div>
+
+            <div class="pandit-container" id="imam-container">
+                <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
+                <div class="imam-options">
+                    <!-- Imam options will be populated by JavaScript -->
+                </div>
+                <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
+            </div>
+
+            <h2 class="section-title" style="display: none;">Your Cart</h2>
+            <div class="cart-container" id="cart-container">
+                <button class="back-btn" onclick="goBackToServices()"><i class="fas fa-arrow-left"></i> Back to Services</button>
+                <div class="cart-items" id="cart-items">
+                    <!-- Cart items will be populated by JavaScript -->
+                </div>
+                <div class="cart-total" id="cart-total">Total: ₹0</div>
+                <button class="checkout-btn" onclick="showPayment()">Proceed to Payment</button>
+            </div>
+
+            <h2 class="section-title" style="display: none;">Payment Verification</h2>
+            <div class="payment-container" id="payment-container">
+                <button class="back-btn" onclick="goBackToCart()"><i class="fas fa-arrow-left"></i> Back to Cart</button>
+                <h3>Complete Your Payment</h3>
+                
+                <div class="payment-info">
+                    <h4>Payment Details</h4>
+                    <p><strong>Total Amount Due:</strong> <span id="payment-total">₹0</span></p>
+                    <p><strong>Payment Method:</strong> Scan QR Code with any UPI app</p>
                 </div>
                 
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                <div class="qr-code-container">
+                    <h4>Scan QR Code to Pay</h4>
+                    <div class="qr-code">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <p style="margin-top: 1rem; color: #666;">Use PhonePe, Google Pay, Paytm, or any UPI app</p>
                 </div>
                 
-                <div class="form-group">
-                    <label for="message">Your Message</label>
-                    <textarea id="message" placeholder="Type your message here..." required></textarea>
+                <div class="payment-verification">
+                    <h4><i class="fas fa-shield-alt"></i> Secure Payment Verification</h4>
+                    <p>To prevent fraud, we verify all payments through our secure system:</p>
+                    <div class="verification-steps">
+                        <li>Scan the QR code above with any UPI app</li>
+                        <li>Pay the exact amount shown above</li>
+                        <li>Upload screenshot of payment confirmation</li>
+                        <li>Our system will automatically verify the payment</li>
+                        <li>Only exact payment matches will be accepted</li>
+                    </div>
+                    <div class="secure-notice">
+                        <i class="fas fa-lock"></i> <strong>Note:</strong> Partial payments will not be processed. The system automatically detects payment amounts.
+                    </div>
                 </div>
                 
-                <button type="submit" class="gmail-btn">
-                    <i class="fab fa-google"></i> Send via Gmail
-                </button>
-            </form>
+                <div class="screenshot-upload">
+                    <h4>Upload Payment Screenshot</h4>
+                    <p>After making payment, take a screenshot of the confirmation and upload it here</p>
+                    <input type="file" id="screenshot-upload" accept="image/*">
+                    <label for="screenshot-upload" class="upload-label">
+                        <i class="fas fa-cloud-upload-alt"></i> Click to Upload Payment Screenshot
+                    </label>
+                    <div class="preview-container" id="preview-container">
+                        <img id="preview-image" src="" alt="Payment Screenshot">
+                    </div>
+                </div>
+                
+                <button class="verify-btn" onclick="verifyPayment()">Verify Payment</button>
+                
+                <div class="verification-result" id="verification-result">
+                    <!-- Verification result will be shown here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Page -->
+        <div class="page" id="resources-page">
+            <h2 class="section-title">FaithConnect Resources</h2>
             
-            <div class="contact-info-box">
-                <p><strong>Email:</strong> <a href="mailto:chanakyasahni8@gmail.com">chanakyasahni8@gmail.com</a></p>
-                <p>Your message will open in Gmail with all details pre-filled</p>
+            <div class="resources-section">
+                <!-- Multi-Faith Calendar Resource -->
+                <div class="resource-card">
+                    <h3><i class="fas fa-calendar-alt"></i> Multi-Faith Religious Calendar 2024-2025</h3>
+                    <p>Comprehensive calendar featuring all major festivals, holy days, and observances across Hindu, Muslim, Sikh, and Christian traditions.</p>
+                    <div class="resource-details">
+                        <h4>Upcoming Events:</h4>
+                        <ul>
+                            <li><strong>Diwali</strong> - October 31, 2024 (Hindu)</li>
+                            <li><strong>Eid al-Fitr</strong> - April 10, 2024 (Muslim)</li>
+                            <li><strong>Guru Nanak Jayanti</strong> - November 15, 2024 (Sikh)</li>
+                            <li><strong>Christmas</strong> - December 25, 2024 (Christian)</li>
+                        </ul>
+                    </div>
+                    <div class="file-info">
+                        <span><i class="fas fa-file-pdf"></i> PDF Document <span class="file-size">2.4 MB</span></span>
+                        <span class="download-count"><i class="fas fa-download"></i> 1,247 downloads</span>
+                    </div>
+                    <div class="download-progress" id="calendar-progress">
+                        <div class="download-progress-bar" id="calendar-progress-bar"></div>
+                    </div>
+                    <div class="download-section">
+                        <button class="download-btn" onclick="downloadResource('calendar', this)">
+                            <i class="fas fa-download"></i> Download Calendar (PDF)
+                        </button>
+                        <button class="download-btn" onclick="downloadResource('calendar-print', this)">
+                            <i class="fas fa-print"></i> Print Version
+                        </button>
+                        <button class="download-btn small" onclick="downloadResource('calendar-ical', this)">
+                            <i class="fas fa-calendar-plus"></i> iCal
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Starter Guide Resource -->
+                <div class="resource-card">
+                    <h3><i class="fas fa-book"></i> FaithConnect Starter Guide</h3>
+                    <p>Complete beginner's guide to using FaithConnect. Learn how to book ceremonies, understand different faith traditions, and make the most of our platform.</p>
+                    <div class="resource-details">
+                        <h4>Guide Includes:</h4>
+                        <ul>
+                            <li>Platform Introduction & Features</li>
+                            <li>Step-by-Step Booking Process</li>
+                            <li>Faith-Specific Ceremony Information</li>
+                            <li>Service Provider Selection Guide</li>
+                            <li>Payment & Verification Process</li>
+                        </ul>
+                    </div>
+                    <div class="file-info">
+                        <span><i class="fas fa-file-pdf"></i> PDF Document <span class="file-size">5.7 MB</span></span>
+                        <span class="download-count"><i class="fas fa-download"></i> 892 downloads</span>
+                    </div>
+                    <div class="download-progress" id="starter-guide-progress">
+                        <div class="download-progress-bar" id="starter-guide-progress-bar"></div>
+                    </div>
+                    <div class="download-section">
+                        <button class="download-btn" onclick="downloadResource('starter-guide', this)">
+                            <i class="fas fa-download"></i> Download Starter Guide
+                        </button>
+                        <button class="download-btn" onclick="downloadResource('starter-guide-mobile', this)">
+                            <i class="fas fa-mobile-alt"></i> Mobile Version
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hindu Ceremonies Guide -->
+                <div class="resource-card">
+                    <h3><i class="fas fa-om"></i> Hindu Ceremonies Complete Guide</h3>
+                    <p>Detailed guide to Hindu ceremonies including Vivah (Wedding), Gharparvesh, Mundan, Diwali Puja, and 20+ other ceremonies with rituals and requirements.</p>
+                    <div class="resource-details">
+                        <h4>Covered Ceremonies:</h4>
+                        <ul>
+                            <li>Vivah (Wedding) - Complete Rituals</li>
+                            <li>Gharparvesh - House Warming</li>
+                            <li>Mundan - First Hair Cutting</li>
+                            <li>Diwali Puja - Lakshmi Worship</li>
+                            <li>Janeu - Sacred Thread</li>
+                        </ul>
+                    </div>
+                    <div class="file-info">
+                        <span><i class="fas fa-file-pdf"></i> PDF Document <span class="file-size">3.2 MB</span></span>
+                        <span class="download-count"><i class="fas fa-download"></i> 734 downloads</span>
+                    </div>
+                    <div class="download-progress" id="hindu-guide-progress">
+                        <div class="download-progress-bar" id="hindu-guide-progress-bar"></div>
+                    </div>
+                    <div class="download-section">
+                        <button class="download-btn" onclick="downloadResource('hindu-guide', this)">
+                            <i class="fas fa-download"></i> Download Guide
+                        </button>
+                        <button class="download-btn small" onclick="downloadResource('hindu-checklist', this)">
+                            <i class="fas fa-list-check"></i> Checklist
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Muslim Ceremonies Guide -->
+                <div class="resource-card">
+                    <h3><i class="fas fa-mosque"></i> Muslim Ceremonies Guide</h3>
+                    <p>Comprehensive guide to Islamic ceremonies including Nikah, Aqiqah, Eid prayers, Jumu'ah, and other Islamic services with proper protocols.</p>
+                    <div class="resource-details">
+                        <h4>Covered Ceremonies:</h4>
+                        <ul>
+                            <li>Nikah - Islamic Marriage</li>
+                            <li>Aqiqah - Birth Ceremony</li>
+                            <li>Eid Prayers - Festival Prayers</li>
+                            <li>Jumu'ah - Friday Prayers</li>
+                            <li>Janazah - Funeral Prayers</li>
+                        </ul>
+                    </div>
+                    <div class="file-info">
+                        <span><i class="fas fa-file-pdf"></i> PDF Document <span class="file-size">2.8 MB</span></span>
+                        <span class="download-count"><i class="fas fa-download"></i> 568 downloads</span>
+                    </div>
+                    <div class="download-progress" id="muslim-guide-progress">
+                        <div class="download-progress-bar" id="muslim-guide-progress-bar"></div>
+                    </div>
+                    <div class="download-section">
+                        <button class="download-btn" onclick="downloadResource('muslim-guide', this)">
+                            <i class="fas fa-download"></i> Download Guide
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Prayer Collection -->
+                <div class="resource-card">
+                    <h3><i class="fas fa-pray"></i> Multi-Faith Prayer Collection</h3>
+                    <p>Beautiful collection of prayers, mantras, hymns, and devotional texts from all four faith traditions with translations and explanations.</p>
+                    <div class="resource-details">
+                        <h4>Includes:</h4>
+                        <ul>
+                            <li>Daily Prayers - All Faiths</li>
+                            <li>Festival Special Prayers</li>
+                            <li>Meditation Guides</li>
+                            <li>Sacred Text Readings</li>
+                            <li>Seasonal Prayers & Hymns</li>
+                        </ul>
+                    </div>
+                    <div class="file-info">
+                        <span><i class="fas fa-file-pdf"></i> PDF Document <span class="file-size">4.1 MB</span></span>
+                        <span class="download-count"><i class="fas fa-download"></i> 1,023 downloads</span>
+                    </div>
+                    <div class="download-progress" id="prayer-collection-progress">
+                        <div class="download-progress-bar" id="prayer-collection-progress-bar"></div>
+                    </div>
+                    <div class="download-section">
+                        <button class="download-btn" onclick="downloadResource('prayer-collection', this)">
+                            <i class="fas fa-download"></i> Download Prayer Book
+                        </button>
+                        <button class="download-btn small" onclick="downloadResource('prayer-audio', this)">
+                            <i class="fas fa-volume-up"></i> Audio Version
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dietary Guide -->
+                <div class="resource-card">
+                    <h3><i class="fas fa-utensils"></i> Religious Dietary Guide</h3>
+                    <p>Complete guide to religious dietary laws, festival foods, traditional recipes, and cooking guidelines for ceremonies across all faiths.</p>
+                    <div class="resource-details">
+                        <h4>Covered Topics:</h4>
+                        <ul>
+                            <li>Hindu Satvik Food Principles</li>
+                            <li>Muslim Halal Guidelines</li>
+                            <li>Sikh Langar Traditions</li>
+                            <li>Christian Communion & Fasting</li>
+                            <li>Festival Recipes & Menus</li>
+                        </ul>
+                    </div>
+                    <div class="file-info">
+                        <span><i class="fas fa-file-pdf"></i> PDF Document <span class="file-size">3.5 MB</span></span>
+                        <span class="download-count"><i class="fas fa-download"></i> 645 downloads</span>
+                    </div>
+                    <div class="download-progress" id="dietary-guide-progress">
+                        <div class="download-progress-bar" id="dietary-guide-progress-bar"></div>
+                    </div>
+                    <div class="download-section">
+                        <button class="download-btn" onclick="downloadResource('dietary-guide', this)">
+                            <i class="fas fa-download"></i> Download Guide
+                        </button>
+                        <button class="download-btn small" onclick="downloadResource('festival-recipes', this)">
+                            <i class="fas fa-utensils"></i> Recipes Only
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Download Section -->
+            <div class="hero-section" style="margin-top: 2rem;">
+                <h2>Quick Downloads</h2>
+                <p>Get all essential resources in one click or download individual guides as needed.</p>
+                <div class="download-section" style="justify-content: center; margin-top: 2rem;">
+                    <button class="cta-button" onclick="downloadAllResources()" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-download"></i> Download All Resources (ZIP)
+                    </button>
+                </div>
+                <div style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <button class="download-btn small" onclick="downloadResource('quick-calendar', this)">
+                        <i class="fas fa-calendar"></i> Calendar Only
+                    </button>
+                    <button class="download-btn small" onclick="downloadResource('quick-starter', this)">
+                        <i class="fas fa-book"></i> Starter Guide
+                    </button>
+                    <button class="download-btn small" onclick="downloadResource('quick-prayers', this)">
+                        <i class="fas fa-pray"></i> Prayer Collection
+                    </button>
+                    <button class="download-btn small" onclick="downloadResource('quick-dietary', this)">
+                        <i class="fas fa-utensils"></i> Dietary Guide
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Us Page -->
+        <div class="page" id="contact-page">
+            <h2 class="section-title">Contact Us</h2>
+            
+            <div class="contact-container">
+                <h3 style="text-align: center; margin-bottom: 1.5rem; color: #4a148c;">Send us a message directly via Gmail</h3>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" placeholder="Type your message here..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="gmail-btn">
+                        <i class="fab fa-google"></i> Send via Gmail
+                    </button>
+                </form>
+                
+                <div class="contact-info-box">
+                    <p><strong>Email:</strong> <a href="mailto:chanakyasahni8@gmail.com">chanakyasahni8@gmail.com</a></p>
+                    <p>Your message will open in Gmail with all details pre-filled</p>
+                </div>
             </div>
         </div>
     </div>
@@ -1299,17 +1946,17 @@
             
             <div class="footer-section">
                 <h3>Our Services</h3>
-                <a href="#">Hindu Ceremonies</a>
-                <a href="#">Muslim Ceremonies</a>
-                <a href="#">Sikh Ceremonies</a>
-                <a href="#">Christian Ceremonies</a>
-                <a href="#">Interfaith Services</a>
+                <a href="#" data-page="services">Hindu Ceremonies</a>
+                <a href="#" data-page="services">Muslim Ceremonies</a>
+                <a href="#" data-page="services">Sikh Ceremonies</a>
+                <a href="#" data-page="services">Christian Ceremonies</a>
+                <a href="#" data-page="services">Interfaith Services</a>
             </div>
             
             <div class="footer-section">
                 <h3>Quick Links</h3>
-                <a href="#">About Us</a>
-                <a href="#">FAQs</a>
+                <a href="#" data-page="home">About Us</a>
+                <a href="#" data-page="resources">FAQs</a>
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms & Conditions</a>
                 <a href="#">Refund Policy</a>
@@ -1343,7 +1990,1262 @@
     </footer>
 
     <script>
-        // Data for all faiths, events, items, and services
+        // Page Navigation
+        document.querySelectorAll('.nav-link, .cta-button, .faith-card[data-page], .footer-section a[data-page]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pageId = this.getAttribute('data-page');
+                if (pageId) {
+                    showPage(pageId);
+                }
+            });
+        });
+
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(`${pageId}-page`).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.nav-link[data-page="${pageId}"]`).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Download Resources Functionality with actual file creation
+        function downloadResource(resourceType, buttonElement = null) {
+            const resources = {
+                'calendar': {
+                    filename: 'FaithConnect-Religious-Calendar-2024-2025.pdf',
+                    content: generateCalendarPDF(),
+                    message: 'Religious Calendar downloaded successfully!',
+                    progressId: 'calendar-progress',
+                    size: '2.4 MB'
+                },
+                'calendar-print': {
+                    filename: 'FaithConnect-Calendar-Print-Version.pdf',
+                    content: generatePrintCalendar(),
+                    message: 'Printable calendar version downloaded!',
+                    progressId: 'calendar-progress',
+                    size: '1.8 MB'
+                },
+                'calendar-ical': {
+                    filename: 'FaithConnect-Calendar-2024-2025.ics',
+                    content: generateICalCalendar(),
+                    message: 'iCal calendar downloaded! Import to your calendar app.',
+                    progressId: 'calendar-progress',
+                    size: '0.8 MB'
+                },
+                'starter-guide': {
+                    filename: 'FaithConnect-Complete-Starter-Guide.pdf',
+                    content: generateStarterGuide(),
+                    message: 'Starter Guide downloaded successfully!',
+                    progressId: 'starter-guide-progress',
+                    size: '5.7 MB'
+                },
+                'starter-guide-mobile': {
+                    filename: 'FaithConnect-Starter-Guide-Mobile.pdf',
+                    content: generateMobileStarterGuide(),
+                    message: 'Mobile Starter Guide downloaded!',
+                    progressId: 'starter-guide-progress',
+                    size: '3.2 MB'
+                },
+                'hindu-guide': {
+                    filename: 'Hindu-Ceremonies-Complete-Guide.pdf',
+                    content: generateHinduGuide(),
+                    message: 'Hindu Ceremonies Guide downloaded!',
+                    progressId: 'hindu-guide-progress',
+                    size: '3.2 MB'
+                },
+                'hindu-checklist': {
+                    filename: 'Hindu-Ceremony-Checklist.pdf',
+                    content: generateHinduChecklist(),
+                    message: 'Hindu Ceremony Checklist downloaded!',
+                    progressId: 'hindu-guide-progress',
+                    size: '1.1 MB'
+                },
+                'muslim-guide': {
+                    filename: 'Muslim-Ceremonies-Complete-Guide.pdf',
+                    content: generateMuslimGuide(),
+                    message: 'Muslim Ceremonies Guide downloaded!',
+                    progressId: 'muslim-guide-progress',
+                    size: '2.8 MB'
+                },
+                'prayer-collection': {
+                    filename: 'Multi-Faith-Prayer-Collection.pdf',
+                    content: generatePrayerCollection(),
+                    message: 'Prayer Collection downloaded successfully!',
+                    progressId: 'prayer-collection-progress',
+                    size: '4.1 MB'
+                },
+                'prayer-audio': {
+                    filename: 'Prayer-Collection-Readings.mp3',
+                    content: generateAudioPlaceholder(),
+                    message: 'Audio prayers guide downloaded!',
+                    progressId: 'prayer-collection-progress',
+                    size: '15.2 MB'
+                },
+                'dietary-guide': {
+                    filename: 'Religious-Dietary-Guide.pdf',
+                    content: generateDietaryGuide(),
+                    message: 'Dietary Guide downloaded successfully!',
+                    progressId: 'dietary-guide-progress',
+                    size: '3.5 MB'
+                },
+                'festival-recipes': {
+                    filename: 'Festival-Recipes-Collection.pdf',
+                    content: generateFestivalRecipes(),
+                    message: 'Festival Recipes downloaded!',
+                    progressId: 'dietary-guide-progress',
+                    size: '2.1 MB'
+                },
+                'quick-calendar': {
+                    filename: 'FaithConnect-Quick-Calendar.pdf',
+                    content: generateQuickCalendar(),
+                    message: 'Quick Calendar downloaded!',
+                    size: '1.2 MB'
+                },
+                'quick-starter': {
+                    filename: 'FaithConnect-Quick-Start.pdf',
+                    content: generateQuickStart(),
+                    message: 'Quick Start Guide downloaded!',
+                    size: '2.3 MB'
+                },
+                'quick-prayers': {
+                    filename: 'Essential-Prayers.pdf',
+                    content: generateEssentialPrayers(),
+                    message: 'Essential Prayers downloaded!',
+                    size: '1.8 MB'
+                },
+                'quick-dietary': {
+                    filename: 'Dietary-Basics.pdf',
+                    content: generateDietaryBasics(),
+                    message: 'Dietary Basics downloaded!',
+                    size: '1.5 MB'
+                }
+            };
+
+            const resource = resources[resourceType];
+            if (resource) {
+                // Show download progress
+                if (resource.progressId) {
+                    const progressBar = document.getElementById(resource.progressId);
+                    const progressBarInner = document.getElementById(resource.progressId + '-bar');
+                    if (progressBar && progressBarInner) {
+                        progressBar.style.display = 'block';
+                        progressBarInner.style.width = '0%';
+                        
+                        // Simulate download progress
+                        let progress = 0;
+                        const progressInterval = setInterval(() => {
+                            progress += Math.random() * 15;
+                            if (progress >= 100) {
+                                progress = 100;
+                                clearInterval(progressInterval);
+                                setTimeout(() => {
+                                    progressBar.style.display = 'none';
+                                }, 500);
+                            }
+                            progressBarInner.style.width = progress + '%';
+                        }, 100);
+                    }
+                }
+
+                // Update button state
+                if (buttonElement) {
+                    const originalHTML = buttonElement.innerHTML;
+                    buttonElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+                    buttonElement.disabled = true;
+                }
+
+                // Simulate file download delay
+                setTimeout(() => {
+                    // Create and download actual file
+                    const blob = new Blob([resource.content], { type: getMimeType(resource.filename) });
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = resource.filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(url);
+
+                    // Show success notification
+                    showNotification(resource.message, 'success');
+
+                    // Update download count visually
+                    updateDownloadCount(resourceType);
+
+                    // Reset button state
+                    if (buttonElement) {
+                        buttonElement.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
+                        buttonElement.classList.add('success');
+                        setTimeout(() => {
+                            buttonElement.innerHTML = originalHTML;
+                            buttonElement.classList.remove('success');
+                            buttonElement.disabled = false;
+                        }, 2000);
+                    }
+                }, 1500);
+            }
+        }
+
+        // Download all resources as ZIP
+        function downloadAllResources() {
+            showNotification('Preparing all resources for download...', 'success');
+            
+            // Create a comprehensive guide combining all resources
+            const allResourcesContent = `
+FAITHCONNECT COMPLETE RESOURCE COLLECTION
+=========================================
+
+This package includes all essential FaithConnect resources:
+
+1. Religious Calendar 2024-2025
+2. Complete Starter Guide
+3. Hindu Ceremonies Guide
+4. Muslim Ceremonies Guide
+5. Multi-Faith Prayer Collection
+6. Religious Dietary Guide
+7. Festival Recipes Collection
+8. Ceremony Checklists
+
+Visit https://faithconnect.com for updated resources and services.
+
+Thank you for using FaithConnect!
+            `.trim();
+
+            const blob = new Blob([allResourcesContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'FaithConnect-Complete-Resources-Package.txt';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+
+            setTimeout(() => {
+                showNotification('All resources downloaded successfully!', 'success');
+            }, 1000);
+        }
+
+        // Helper function to get MIME type from filename
+        function getMimeType(filename) {
+            if (filename.endsWith('.pdf')) return 'application/pdf';
+            if (filename.endsWith('.ics')) return 'text/calendar';
+            if (filename.endsWith('.mp3')) return 'audio/mpeg';
+            return 'application/octet-stream';
+        }
+
+        // Update download count visually
+        function updateDownloadCount(resourceType) {
+            // In a real application, this would update a database
+            // For demo purposes, we'll just update the visual count
+            const resourceCards = document.querySelectorAll('.resource-card');
+            resourceCards.forEach(card => {
+                const downloadCount = card.querySelector('.download-count');
+                if (downloadCount) {
+                    const currentCount = parseInt(downloadCount.textContent.match(/\d+/)[0]) || 0;
+                    downloadCount.innerHTML = `<i class="fas fa-download"></i> ${currentCount + 1} downloads`;
+                }
+            });
+        }
+
+        // Content generation functions (simulated)
+        function generateCalendarPDF() {
+            return `FAITHCONNECT RELIGIOUS CALENDAR 2024-2025
+
+COMPREHENSIVE MULTI-FAITH CALENDAR
+
+This calendar includes all major religious festivals, holy days, and observances
+across Hindu, Muslim, Sikh, and Christian traditions for the years 2024-2025.
+
+HINDU FESTIVALS 2024-2025:
+- Makar Sankranti: January 14, 2024
+- Vasant Panchami: January 25, 2024
+- Maha Shivaratri: March 8, 2024
+- Holi: March 25, 2024
+- Ram Navami: April 17, 2024
+- Hanuman Jayanti: April 23, 2024
+- Akshaya Tritiya: May 10, 2024
+- Vat Savitri: June 6, 2024
+- Jagannath Rath Yatra: July 7, 2024
+- Guru Purnima: July 21, 2024
+- Raksha Bandhan: August 19, 2024
+- Janmashtami: August 26, 2024
+- Ganesh Chaturthi: September 7, 2024
+- Navratri: October 3-12, 2024
+- Durga Puja: October 9-13, 2024
+- Dussehra: October 12, 2024
+- Karva Chauth: October 20, 2024
+- Diwali: October 31, 2024
+- Govardhan Puja: November 1, 2024
+- Bhai Dooj: November 2, 2024
+- Chhath Puja: November 7-10, 2024
+
+MUSLIM FESTIVALS 2024-2025:
+- Eid al-Fitr: April 10, 2024
+- Eid al-Adha: June 16, 2024
+- Islamic New Year: July 7, 2024
+- Ashura: July 16, 2024
+- Mawlid al-Nabi: September 15, 2024
+- Ramadan: March 1 - March 30, 2025
+
+SIKH FESTIVALS 2024-2025:
+- Guru Gobind Singh Jayanti: January 5, 2024
+- Hola Mohalla: March 25, 2024
+- Vaisakhi: April 13, 2024
+- Guru Arjan Dev Martyrdom: June 16, 2024
+- Guru Purnima: July 21, 2024
+- Parkash Guru Granth Sahib: September 1, 2024
+- Bandi Chhor Divas: October 31, 2024
+- Guru Nanak Jayanti: November 15, 2024
+- Guru Tegh Bahadur Martyrdom: November 24, 2024
+
+CHRISTIAN FESTIVALS 2024-2025:
+- Good Friday: March 29, 2024
+- Easter Sunday: March 31, 2024
+- Pentecost: May 19, 2024
+- Christmas: December 25, 2024
+- Epiphany: January 6, 2025
+- Ash Wednesday: February 26, 2025
+- Palm Sunday: April 13, 2025
+- Good Friday: April 18, 2025
+- Easter Sunday: April 20, 2025
+
+This calendar is provided by FaithConnect - Connecting you to divine services.
+For booking ceremonies and religious services, visit: faithconnect.com
+            `;
+        }
+
+        function generateStarterGuide() {
+            return `FAITHCONNECT COMPLETE STARTER GUIDE
+
+WELCOME TO FAITHCONNECT
+=======================
+
+Thank you for choosing FaithConnect, India's first multi-faith platform connecting you with authentic religious services across all major faith traditions.
+
+TABLE OF CONTENTS
+-----------------
+1. Introduction to FaithConnect
+2. How to Book Ceremonies
+3. Understanding Different Faith Traditions
+4. Service Provider Selection Guide
+5. Payment & Verification Process
+6. Frequently Asked Questions
+7. Contact & Support
+
+CHAPTER 1: INTRODUCTION TO FAITHCONNECT
+---------------------------------------
+FaithConnect is a revolutionary platform that brings tradition and technology together. We serve four major faith traditions:
+
+- Hindu Dharma
+- Islam
+- Sikhism
+- Christianity
+
+Our mission is to make authentic religious services accessible to everyone, regardless of location or background.
+
+CHAPTER 2: HOW TO BOOK CEREMONIES
+----------------------------------
+The booking process is simple and straightforward:
+
+1. Select Your Faith: Choose from Hindu, Muslim, Sikh, or Christian
+2. Choose Ceremony: Browse through 15+ ceremonies for each faith
+3. Select Items: Add necessary religious items to your cart
+4. Book Service Provider: Choose from verified religious leaders
+5. Make Payment: Secure payment via QR code
+6. Verification: Upload payment screenshot for confirmation
+
+CHAPTER 3: UNDERSTANDING DIFFERENT FAITH TRADITIONS
+----------------------------------------------------
+HINDU DHARMA:
+- Over 20 ceremonies including Vivah, Gharparvesh, Mundan
+- Traditional rituals with authentic pandits
+- Complete puja samagri available
+
+ISLAM:
+- Nikah, Aqiqah, Eid prayers and more
+- Verified Imams and Islamic scholars
+- Halal-certified services
+
+SIKHISM:
+- Akhand Path, Anand Karaj, Amrit Sanchar
+- Experienced Granthis and Ragis
+- Gurmat-compliant services
+
+CHRISTIANITY:
+- Baptism, Wedding, Christmas services
+- Ordained Pastors and Bishops
+- Traditional Christian rituals
+
+CHAPTER 4: SERVICE PROVIDER SELECTION GUIDE
+-------------------------------------------
+All our service providers are:
+- Thoroughly verified and background checked
+- Experienced in their respective traditions
+- Rated by previous customers
+- Available for consultation
+
+CHAPTER 5: PAYMENT & VERIFICATION PROCESS
+-----------------------------------------
+We use a secure payment verification system:
+
+1. Scan QR code with any UPI app
+2. Pay the exact amount shown
+3. Upload payment screenshot
+4. Automatic verification
+5. Booking confirmation
+
+CHAPTER 6: FREQUENTLY ASKED QUESTIONS
+--------------------------------------
+Q: How do I know the service providers are authentic?
+A: All providers undergo thorough verification including background checks and certification verification.
+
+Q: Can I book ceremonies for interfaith marriages?
+A: Yes, we specialize in interfaith ceremonies with proper protocols.
+
+Q: What if I need to cancel my booking?
+A: Cancellation policies vary by service type. Contact support for assistance.
+
+CHAPTER 7: CONTACT & SUPPORT
+-----------------------------
+Email: support@faithconnect.com
+Phone: +91 98765 43210, +91 91234 56789
+Gmail: chanakyasahni8@gmail.com
+
+Thank you for choosing FaithConnect!
+We are honored to serve your spiritual needs.
+            `;
+        }
+
+        function generateHinduGuide() {
+            return `HINDU CEREMONIES COMPLETE GUIDE
+
+COMPREHENSIVE GUIDE TO HINDU RELIGIOUS CEREMONIES
+
+This guide covers all major Hindu ceremonies with detailed rituals, requirements, and procedures.
+
+TABLE OF CONTENTS
+-----------------
+1. Introduction to Hindu Ceremonies
+2. Samskaras (Sacraments)
+3. Festival Pujas
+4. Daily Worship
+5. Special Ceremonies
+6. Ritual Items Guide
+7. Pandit Selection
+
+CHAPTER 1: INTRODUCTION TO HINDU CEREMONIES
+-------------------------------------------
+Hindu ceremonies, known as Samskaras, are sacred rituals that mark important life events. There are 16 major Samskaras in Hindu tradition.
+
+CHAPTER 2: MAJOR SAMSKARAS (SACRAMENTS)
+----------------------------------------
+1. GARBHADHANA (Conception Ceremony)
+   - Performed before conception
+   - Blessings for healthy child
+   - Rituals for fertility
+
+2. PUMSAVANA (Fetus Protection)
+   - During 3rd month of pregnancy
+   - Prayers for child's health
+   - Protection rituals
+
+3. SIMANTONNAYANA (Hair Parting)
+   - 7th month of pregnancy
+   - Protection of mother and child
+   - Vedic mantras
+
+4. JATAKARMA (Birth Ceremony)
+   - Immediately after birth
+   - First feeding ritual
+   - Naming ceremony
+
+5. NAMKARANA (Naming Ceremony)
+   - 11th day after birth
+   - Formal naming of child
+   - Horoscope preparation
+
+6. NISHKRAMANA (First Outing)
+   - 4th month after birth
+   - Child's first exposure to sun/moon
+   - Temple visit
+
+7. ANNAPRASHANA (First Feeding)
+   - 6th month after birth
+   - First solid food
+   - Blessings for good health
+
+8. CHUDAKARANA (Mundan - First Hair Cut)
+   - 1st or 3rd year
+   - Head shaving ceremony
+   - Purification ritual
+
+9. KARNVEDH (Ear Piercing)
+   - 1st or 3rd year
+   - Ear piercing for protection
+   - Health benefits
+
+10. VIDYARAMBH (Start of Education)
+    - 4th or 5th year
+    - Beginning of formal education
+    - Saraswati Puja
+
+11. UPANAYANA (Sacred Thread)
+    - 8th to 12th year
+    - Initiation into Vedic studies
+    - Gayatri Mantra initiation
+
+12. VEDARAMBH (Vedic Studies)
+    - After Upanayana
+    - Beginning of Vedic education
+    - Guru worship
+
+13. KESHANTA (First Shave)
+    - 16th year
+    - First shaving ceremony
+    - Transition to adulthood
+
+14. SAMAVARTANA (End of Studies)
+    - Completion of education
+    - Return from Gurukul
+    - Graduation ceremony
+
+15. VIVAH (Marriage)
+    - Most important Samskara
+    - Seven steps around sacred fire
+    - Lifetime commitment
+
+16. ANTYESTHI (Last Rites)
+    - Funeral ceremonies
+    - Final Samskara
+    - Liberation rituals
+
+CHAPTER 3: MAJOR FESTIVAL PUJAS
+--------------------------------
+1. DIWALI PUJA
+   - Lakshmi Puja for wealth
+   - Kali Puja in some regions
+   - Ganesh Puja for wisdom
+
+2. DURGA PUJA
+   - 9-day festival
+   - Goddess Durga worship
+   - Victory over evil
+
+3. GANESH CHATURTHI
+   - Lord Ganesh worship
+   - 10-day festival
+   - Modak offering
+
+4. HOLI
+   - Festival of colors
+   - Holika Dahan
+   - Celebration of spring
+
+5. MAKAR SANKRANTI
+   - Sun God worship
+   - Kite flying festival
+   - Harvest celebration
+
+6. RAKSHA BANDHAN
+   - Brother-sister bond
+   - Rakhi tying ceremony
+   - Protection vows
+
+7. JANMASHTAMI
+   - Lord Krishna's birth
+   - Midnight celebrations
+   - Dahi Handi
+
+8. MAHA SHIVRATRI
+   - Lord Shiva worship
+   - Night-long vigil
+   - Bael leaves offering
+
+CHAPTER 4: DAILY WORSHIP
+-------------------------
+1. SANDHYA VANDANA
+   - Morning and evening prayers
+   - Gayatri Mantra chanting
+   - Sun worship
+
+2. PUJA VIDHI
+   - Daily worship procedure
+   - 16-step worship
+   - Mantra chanting
+
+CHAPTER 5: SPECIAL CEREMONIES
+------------------------------
+1. GRIHA PRAVESH (House Warming)
+   - New home blessing
+   - Vastu Puja
+   - Protection rituals
+
+2. VAHAN PUJA (Vehicle Blessing)
+   - Vehicle protection
+   - Safe travel prayers
+   - Regular ceremony
+
+3. BUSINESS PUJA
+   - Shop/office opening
+   - Lakshmi Puja for prosperity
+   - Success rituals
+
+CHAPTER 6: RITUAL ITEMS GUIDE
+------------------------------
+Essential items for Hindu ceremonies:
+
+1. PUJA THALI CONTENTS:
+   - Diya (Oil Lamp)
+   - Incense Sticks
+   - Camphor
+   - Kumkum
+   - Turmeric
+   - Sandalwood Paste
+   - Flowers
+   - Fruits
+   - Betel Leaves
+   - Coconut
+
+2. SPECIAL ITEMS:
+   - Kalash (Sacred Pot)
+   - Yagyopaveet (Sacred Thread)
+   - Rudraksha Beads
+   - Tulsi Leaves
+   - Bael Leaves
+
+CHAPTER 7: PANDIT SELECTION GUIDE
+----------------------------------
+Choosing the right Pandit:
+
+1. QUALIFICATIONS:
+   - Vedic education
+   - Experience level
+   - Specialization
+   - Language proficiency
+
+2. VERIFICATION:
+   - Background check
+   - Customer reviews
+   - Certification
+   - Experience proof
+
+3. SERVICES:
+   - Ceremony performance
+   - Mantra chanting
+   - Ritual guidance
+   - Custom ceremonies
+
+CONCLUSION
+----------
+This guide provides comprehensive information about Hindu ceremonies. For booking authentic Pandits and ceremonies, visit FaithConnect.
+
+All ceremonies are performed according to Vedic traditions with proper rituals and mantras.
+
+FAITHCONNECT - Connecting you to authentic Hindu religious services.
+            `;
+        }
+
+        function generateMuslimGuide() {
+            return `MUSLIM CEREMONIES COMPLETE GUIDE
+
+COMPREHENSIVE GUIDE TO ISLAMIC RELIGIOUS CEREMONIES
+
+This guide covers all major Islamic ceremonies with detailed procedures, requirements, and protocols according to Quran and Sunnah.
+
+TABLE OF CONTENTS
+-----------------
+1. Introduction to Islamic Ceremonies
+2. Five Pillars of Islam
+3. Life Cycle Ceremonies
+4. Festival Prayers
+5. Daily Worship
+6. Special Prayers
+7. Imam Selection Guide
+
+CHAPTER 1: INTRODUCTION TO ISLAMIC CEREMONIES
+----------------------------------------------
+Islamic ceremonies are based on Quranic teachings and Prophet Muhammad's (PBUH) traditions. All ceremonies must follow Shariah principles.
+
+CHAPTER 2: FIVE PILLARS OF ISLAM
+---------------------------------
+1. SHAHADA (Declaration of Faith)
+   - First pillar of Islam
+   - Testimony of faith
+   - "La ilaha illallah, Muhammadur rasulullah"
+
+2. SALAH (Prayer)
+   - Five daily prayers
+   - Fard (obligatory) prayers
+   - Sunnah and Nafl prayers
+
+3. ZAKAT (Charity)
+   - Obligatory charity
+   - 2.5% of savings
+   - Purification of wealth
+
+4. SAWM (Fasting)
+   - Ramadan fasting
+   - Spiritual purification
+   - Self-discipline
+
+5. HAJJ (Pilgrimage)
+   - Mecca pilgrimage
+   - Once in lifetime obligation
+   - Spiritual journey
+
+CHAPTER 3: LIFE CYCLE CEREMONIES
+---------------------------------
+1. AQIQAH (Birth Ceremony)
+   - 7th day after birth
+   - Animal sacrifice
+   - Head shaving
+   - Name giving ceremony
+
+2. KHITAN (Circumcision)
+   - For male children
+   - Sunnah of Prophet Ibrahim
+   - Hygiene and purity
+
+3. NIKAH (Marriage)
+   - Islamic marriage contract
+   - Mahr (dower) specification
+   - Walima (marriage feast)
+   - Rights and responsibilities
+
+4. JANAZAH (Funeral)
+   - Ghusl (ritual bath)
+   - Kafan (shrouding)
+   - Salat al-Janazah
+   - Burial procedures
+
+CHAPTER 4: FESTIVAL PRAYERS
+----------------------------
+1. EID AL-FITR
+   - End of Ramadan
+   - Special Eid prayer
+   - Zakat al-Fitr
+   - Community celebration
+
+2. EID AL-ADHA
+   - Festival of sacrifice
+   - Hajj completion
+   - Qurbani (sacrifice)
+   - Takbeerat
+
+3. JUMM'AH (Friday Prayer)
+   - Weekly congregation
+   - Khutbah (sermon)
+   - Special blessings
+
+CHAPTER 5: DAILY WORSHIP
+-------------------------
+1. FIVE DAILY PRAYERS:
+   - Fajr (Dawn)
+   - Dhuhr (Noon)
+   - Asr (Afternoon)
+   - Maghrib (Sunset)
+   - Isha (Night)
+
+2. TAHARAT (Purification)
+   - Wudu (ablution)
+   - Ghusl (bath)
+   - Tayammum (dry ablution)
+
+3. QURAN RECITATION
+   - Daily reading
+   - Tajweed rules
+   - Memorization
+
+CHAPTER 6: SPECIAL PRAYERS
+---------------------------
+1. TARAWEEH
+   - Ramadan night prayers
+   - 20 rakats
+   - Quran completion
+
+2. TAHajjud
+   - Night vigil prayers
+   - Special blessings
+   - Acceptance of prayers
+
+3. ISTIKHARA
+   - Guidance prayer
+   - Decision making
+   - Divine guidance
+
+4. SALAT UL-HAJAH
+   - Need prayer
+   - Specific requests
+   - Problem solving
+
+CHAPTER 7: IMAM SELECTION GUIDE
+--------------------------------
+Choosing the right Imam:
+
+1. QUALIFICATIONS:
+   - Islamic education
+   - Quran knowledge
+   - Hadith knowledge
+   - Fiqh understanding
+
+2. VERIFICATION:
+   - Madrassa certification
+   - Experience proof
+   - Community recognition
+   - Language skills
+
+3. SERVICES:
+   - Prayer leadership
+   - Nikah performance
+   - Funeral services
+   - Islamic counseling
+
+CONCLUSION
+----------
+This guide provides comprehensive information about Islamic ceremonies. For booking authentic Imams and Islamic services, visit FaithConnect.
+
+All ceremonies are performed according to Quran and Sunnah with proper Islamic protocols.
+
+FAITHCONNECT - Connecting you to authentic Islamic religious services.
+            `;
+        }
+
+        function generatePrayerCollection() {
+            return `MULTI-FAITH PRAYER COLLECTION
+
+BEAUTIFUL COLLECTION OF PRAYERS FROM ALL FOUR FAITH TRADITIONS
+
+This collection includes prayers, mantras, hymns, and devotional texts from Hindu, Muslim, Sikh, and Christian traditions with translations and explanations.
+
+TABLE OF CONTENTS
+-----------------
+1. Hindu Prayers and Mantras
+2. Muslim Duas and Prayers
+3. Sikh Shabads and Prayers
+4. Christian Hymns and Prayers
+5. Daily Prayer Guide
+6. Festival Special Prayers
+7. Meditation and Contemplation
+
+CHAPTER 1: HINDU PRAYERS AND MANTRAS
+-------------------------------------
+1. GAYATRI MANTRA
+   Sanskrit: 
+   ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्
+
+   Translation:
+   "We meditate on the glory of the Creator,
+   Who has created the Universe,
+   Who is worthy of Worship,
+   Who is the embodiment of Knowledge and Light,
+   Who is the remover of all Sin and Ignorance,
+   May He enlighten our Intellect."
+
+2. MAHA MRITYUNJAYA MANTRA
+   Sanskrit:
+   ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्
+   उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात्
+
+   Translation:
+   "We worship the three-eyed Lord Shiva who is fragrant and who nourishes all beings.
+   May He liberate us from death for the sake of immortality,
+   even as the cucumber is severed from its bondage to the creeper."
+
+3. SHANTI MANTRA
+   Sanskrit:
+   ॐ सर्वेशां स्वस्तिर्भवतु सर्वेशां शान्तिर्भवतु
+   सर्वेशां पूर्णंभवतु सर्वेशां मङ्गलंभवतु
+   ॐ शान्तिः शान्तिः शान्तिः
+
+   Translation:
+   "May there be well-being for all,
+   May there be peace for all,
+   May there be fulfillment for all,
+   May there be auspiciousness for all,
+   Om peace, peace, peace."
+
+CHAPTER 2: MUSLIM DUAS AND PRAYERS
+-----------------------------------
+1. OPENING PRAYER (Surah Al-Fatihah)
+   Arabic:
+   بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+   الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+   الرَّحْمَٰنِ الرَّحِيمِ
+   مَالِكِ يَوْمِ الدِّينِ
+   إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
+   اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
+   صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
+
+   Translation:
+   "In the name of Allah, the Entirely Merciful, the Especially Merciful.
+   Praise be to Allah, Lord of the worlds,
+   The Entirely Merciful, the Especially Merciful,
+   Sovereign of the Day of Recompense.
+   It is You we worship and You we ask for help.
+   Guide us to the straight path -
+   The path of those upon whom You have bestowed favor,
+   not of those who have earned Your anger or of those who are astray."
+
+2. MORNING DUA
+   Arabic:
+   أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ
+
+   Translation:
+   "We have reached the morning and at this very time all sovereignty belongs to Allah,
+   and all praise is for Allah. None has the right to be worshipped except Allah,
+   alone without any partner."
+
+3. PROTECTION DUA
+   Arabic:
+   أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِن شَرِّ مَا خَلَقَ
+
+   Translation:
+   "I seek refuge in the perfect words of Allah from the evil of what He has created."
+
+CHAPTER 3: SIKH SHABADS AND PRAYERS
+------------------------------------
+1. JAPJI SAHIB (Opening Verse)
+   Gurmukhi:
+   ੴ ਸਤਿ ਨਾਮੁ ਕਰਤਾ ਪੁਰਖੁ ਨਿਰਭਉ ਨਿਰਵੈਰੁ ਅਕਾਲ ਮੂਰਤਿ ਅਜੂਨੀ ਸੈਭੰ ਗੁਰ ਪ੍ਰਸਾਦਿ ॥
+
+   Translation:
+   "There is One God,
+   Truth is His Name,
+   Creative Being Personified,
+   No Fear, No Hatred,
+   Image of the Timeless Being,
+   Beyond Birth, Self-Existent,
+   By Guru's Grace."
+
+2. ARDAS (Sikh Prayer)
+   Gurmukhi:
+   ੴ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਹਿ
+   ਸ੍ਰੀ ਭਗੌਤੀ ਜੀ ਸਹਾਇ
+   ਵਾਰ ਸ੍ਰੀ ਭਗੌਤੀ ਜੀ ਕੀ ਪਾਤਸਾਹੀ ੧੦
+
+   Translation:
+   "One Universal Creator God, Victory belongs to God.
+   May the respected sword (God in the form of the destroyer of evil) help us!
+   Ode of the respected sword recited by the Tenth Guru."
+
+3. SHABAD HAZARE
+   Gurmukhi:
+   ਤੇਰਾ ਕੀਤਾ ਜਾਤੋ ਨਾਹੀ ਮੈਨੋ ਜੋਗੁ ਕੀਤੋਈ ॥
+   ਮੈ ਨਿਰਗੁਣਿਆਰੇ ਕੋ ਗੁਣੁ ਨਾਹੀ ਅਪਣਾ ਪਰਭੁ ਧਿਆਈ ॥
+
+   Translation:
+   "I cannot even assess what You have done for me,
+   You have made me into a Yogi.
+   I am unworthy, I have no virtues at all,
+   but I meditate on my God."
+
+CHAPTER 4: CHRISTIAN HYMNS AND PRAYERS
+---------------------------------------
+1. THE LORD'S PRAYER
+   "Our Father, who art in heaven,
+   Hallowed be thy Name.
+   Thy kingdom come.
+   Thy will be done,
+   On earth as it is in heaven.
+   Give us this day our daily bread.
+   And forgive us our trespasses,
+   As we forgive those who trespass against us.
+   And lead us not into temptation,
+   But deliver us from evil.
+   For thine is the kingdom,
+   and the power, and the glory,
+   for ever and ever. Amen."
+
+2. PSALM 23
+   "The Lord is my shepherd; I shall not want.
+   He maketh me to lie down in green pastures:
+   he leadeth me beside the still waters.
+   He restoreth my soul:
+   he leadeth me in the paths of righteousness for his name's sake.
+   Yea, though I walk through the valley of the shadow of death,
+   I will fear no evil: for thou art with me;
+   thy rod and thy staff they comfort me.
+   Thou preparest a table before me in the presence of mine enemies:
+   thou anointest my head with oil; my cup runneth over.
+   Surely goodness and mercy shall follow me all the days of my life:
+   and I will dwell in the house of the Lord for ever."
+
+3. SERENITY PRAYER
+   "God, grant me the serenity to accept the things I cannot change,
+   courage to change the things I can,
+   and wisdom to know the difference."
+
+CHAPTER 5: DAILY PRAYER GUIDE
+------------------------------
+MORNING PRAYERS:
+- Hindu: Gayatri Mantra and Surya Namaskar
+- Muslim: Fajr Prayer and Morning Duas
+- Sikh: Japji Sahib and Morning Prayers
+- Christian: Morning Devotion and Lord's Prayer
+
+EVENING PRAYERS:
+- Hindu: Sandhya Vandana and Shanti Mantra
+- Muslim: Maghrib Prayer and Evening Duas
+- Sikh: Rehras Sahib and Evening Prayers
+- Christian: Evening Devotion and Psalms
+
+CHAPTER 6: FESTIVAL SPECIAL PRAYERS
+------------------------------------
+DIWALI:
+- Lakshmi Mantras and Ganesh Stotras
+
+EID:
+- Takbeerat and Special Duas
+
+GURPURB:
+- Special Shabads and Ardas
+
+CHRISTMAS:
+- Christmas Carols and Nativity Prayers
+
+CHAPTER 7: MEDITATION AND CONTEMPLATION
+----------------------------------------
+1. BREATHING EXERCISES
+2. MANTRA MEDITATION
+3. MINDFULNESS PRACTICE
+4. CONTEMPLATIVE PRAYER
+
+CONCLUSION
+----------
+This prayer collection brings together the beautiful spiritual traditions of four major faiths. May these prayers bring peace, comfort, and spiritual growth to all who use them.
+
+FAITHCONNECT - Connecting you to divine prayers across all faiths.
+            `;
+        }
+
+        function generateDietaryGuide() {
+            return `RELIGIOUS DIETARY GUIDE
+
+COMPLETE GUIDE TO RELIGIOUS DIETARY LAWS AND FOOD TRADITIONS
+
+This comprehensive guide covers dietary practices, restrictions, and festival foods across Hindu, Muslim, Sikh, and Christian traditions.
+
+TABLE OF CONTENTS
+-----------------
+1. Introduction to Religious Dietary Practices
+2. Hindu Dietary Guidelines
+3. Muslim Dietary Guidelines (Halal)
+4. Sikh Dietary Guidelines
+5. Christian Dietary Practices
+6. Festival Foods and Recipes
+7. Fasting Guidelines
+8. Cooking for Religious Ceremonies
+
+CHAPTER 1: INTRODUCTION TO RELIGIOUS DIETARY PRACTICES
+-------------------------------------------------------
+Food holds significant spiritual importance across all religious traditions. This guide helps understand and respect various dietary practices.
+
+CHAPTER 2: HINDU DIETARY GUIDELINES
+------------------------------------
+1. SATVIK DIET
+   - Pure, clean, and wholesome foods
+   - Promotes spiritual growth
+   - Includes fruits, vegetables, grains, dairy
+   - Excludes onion, garlic, meat, fish, eggs
+
+2. RAJASIC FOODS
+   - Stimulating foods
+   - Can increase passion and restlessness
+   - Includes spicy, salty, sour foods
+
+3. TAMASIC FOODS
+   - Dulling foods
+   - Promotes inertia and ignorance
+   - Includes meat, alcohol, stale food
+
+4. VEGETARIANISM
+   - Ahimsa (non-violence) principle
+   - Most Hindus are vegetarian
+   - No beef consumption (cow is sacred)
+
+5. FASTING PRACTICES
+   - Ekadashi fasting (11th day of lunar cycle)
+   - Navratri fasting
+   - Maha Shivratri fasting
+   - Fasting rules vary by region and tradition
+
+CHAPTER 3: MUSLIM DIETARY GUIDELINES (HALAL)
+---------------------------------------------
+1. HALAL FOODS
+   - Permissible according to Islamic law
+   - Meat from properly slaughtered animals
+   - Fish and seafood
+   - Plant-based foods
+
+2. HARAM FOODS
+   - Pork and pork products
+   - Alcohol and intoxicants
+   - Blood and blood products
+   - Carnivorous animals
+   - Animals not slaughtered properly
+
+3. ZABIHA (PROPER SLAUGHTER)
+   - Animal must be healthy
+   - Tasmiyah (Bismillah) must be recited
+   - Sharp knife used for quick slaughter
+   - Blood must be drained completely
+
+4. FASTING (SAWM)
+   - Ramadan fasting from dawn to sunset
+   - No food, drink, or smoking during fasting hours
+   - Iftar (breaking fast) and Suhoor (pre-dawn meal)
+   - Special Ramadan foods and traditions
+
+CHAPTER 4: SIKH DIETARY GUIDELINES
+-----------------------------------
+1. LANGAR TRADITION
+   - Community kitchen
+   - Vegetarian food served to all
+   - Equality principle - everyone sits together
+   - Prepared by volunteers
+
+2. VEGETARIANISM
+   - Most Sikhs are vegetarian
+   - No beef consumption
+   - Some Sikhs may eat meat (Jhatka)
+
+3. JHATKA MEAT
+   - If meat is consumed, Jhatka method preferred
+   - Single blow to cause instant death
+   - No ritual slaughter
+
+4. PROHIBITED ITEMS
+   - Alcohol and intoxicants
+   - Tobacco and smoking
+   - Drugs and addictive substances
+
+CHAPTER 5: CHRISTIAN DIETARY PRACTICES
+---------------------------------------
+1. GENERAL PRACTICES
+   - No specific dietary restrictions for most Christians
+   - Moderation in all things
+   - Thanksgiving before meals
+
+2. FASTING AND ABSTINENCE
+   - Lenten fasting (40 days before Easter)
+   - Ash Wednesday and Good Friday fasting
+   - Friday abstinence (no meat for Catholics)
+   - Advent fasting in some traditions
+
+3. COMMUNION
+   - Bread and wine/wine juice
+   - Represents body and blood of Christ
+   - Central to Christian worship
+
+4. FESTIVAL FOODS
+   - Christmas: Christmas pudding, turkey, mince pies
+   - Easter: Easter eggs, hot cross buns, lamb
+   - Thanksgiving: Turkey, pumpkin pie, traditional foods
+
+CHAPTER 6: FESTIVAL FOODS AND RECIPES
+--------------------------------------
+HINDU FESTIVAL FOODS:
+- Diwali: Sweets (laddoo, barfi), savory snacks
+- Holi: Gujiya, thandai, puran poli
+- Navratri: Vrat special foods (singhare ka atta, kuttu ka atta)
+- Janmashtami: Panchamrit, makhan mishri
+
+MUSLIM FESTIVAL FOODS:
+- Eid al-Fitr: Sewaiyan, sheer khurma, biryani
+- Eid al-Adha: Qurbani meat dishes, kebabs
+- Ramadan: Dates, fruits, special Iftar dishes
+
+SIKH FESTIVAL FOODS:
+- Gurpurb: Karah prasad, langar special dishes
+- Vaisakhi: Traditional Punjabi dishes
+- Hola Mohalla: Community meals
+
+CHRISTIAN FESTIVAL FOODS:
+- Christmas: Christmas cake, roast turkey, ham
+- Easter: Easter bread, lamb dishes, colored eggs
+- Thanksgiving: Traditional American foods
+
+CHAPTER 7: FASTING GUIDELINES
+------------------------------
+1. HINDU FASTING
+   - Complete fasting or partial fasting
+   - Fruits, milk, and specific foods allowed
+   - No grains on fasting days
+   - Ekadashi, Purnima, Amavasya fasting
+
+2. MUSLIM FASTING
+   - No food or drink from dawn to sunset
+   - Ramadan month fasting
+   - Special prayers and charity
+   - Medical exemptions allowed
+
+3. CHRISTIAN FASTING
+   - Lenten fasting and abstinence
+   - Ash Wednesday and Good Friday
+   - Fish allowed on fasting days
+   - Age and health considerations
+
+CHAPTER 8: COOKING FOR RELIGIOUS CEREMONIES
+--------------------------------------------
+1. HINDU CEREMONIES
+   - Satvik food for pujas
+   - Prasad preparation
+   - Ritual purity in cooking
+   - Traditional recipes
+
+2. MUSLIM CEREMONIES
+   - Halal certified ingredients
+   - Proper food handling
+   - Community meals for Eid
+   - Traditional Islamic recipes
+
+3. SIKH CEREMONIES
+   - Langar preparation
+   - Community service
+   - Simple, nutritious food
+   - Traditional Punjabi recipes
+
+4. CHRISTIAN CEREMONIES
+   - Communion preparation
+   - Church potlucks
+   - Baptism and wedding receptions
+   - Traditional Christian recipes
+
+CONCLUSION
+----------
+This dietary guide provides comprehensive information about religious food practices across four major faith traditions. Understanding and respecting these dietary laws is essential for interfaith harmony and proper religious observance.
+
+FAITHCONNECT - Connecting you to authentic religious dietary practices.
+            `;
+        }
+
+        // Placeholder generators for other file types
+        function generatePrintCalendar() { return generateCalendarPDF(); }
+        function generateICalCalendar() { return "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:FaithConnect\nEND:VCALENDAR"; }
+        function generateMobileStarterGuide() { return generateStarterGuide(); }
+        function generateHinduChecklist() { return "Hindu ceremony checklist..."; }
+        function generateAudioPlaceholder() { return "Audio file placeholder"; }
+        function generateFestivalRecipes() { return "Festival recipes collection..."; }
+        function generateQuickCalendar() { return generateCalendarPDF(); }
+        function generateQuickStart() { return generateStarterGuide(); }
+        function generateEssentialPrayers() { return generatePrayerCollection(); }
+        function generateDietaryBasics() { return generateDietaryGuide(); }
+
+        // Data for all faiths, events, items, and services - EXPANDED WITH 15+ FESTIVALS EACH
         const faithData = {
             hindu: {
                 events: [
@@ -1352,23 +3254,21 @@
                     { id: 3, name: "Mundan", description: "First hair cutting ceremony", price: 3200 },
                     { id: 4, name: "Vivah", description: "Wedding ceremony", price: 15000 },
                     { id: 5, name: "Janeu", description: "Sacred thread ceremony", price: 4200 },
-                    { id: 6, name: "Griha Pravesh", description: "New home ceremony", price: 2800 },
-                    { id: 7, name: "Satyanarayan Katha", description: "Religious storytelling", price: 2200 },
-                    { id: 8, name: "Havan", description: "Fire ritual", price: 1900 },
-                    { id: 9, name: "Navgrah Shanti", description: "Planetary peace ceremony", price: 3500 },
-                    { id: 10, name: "Maha Mrityunjay Jaap", description: "Longevity ritual", price: 4500 },
-                    { id: 11, name: "Ganesh Chaturthi", description: "Ganesh worship", price: 2100 },
-                    { id: 12, name: "Durga Puja", description: "Goddess Durga worship", price: 3800 },
-                    { id: 13, name: "Satsang", description: "Spiritual gathering", price: 1200 },
-                    { id: 14, name: "Pitra Dosh Nivaran", description: "Ancestral peace ceremony", price: 5200 },
-                    { id: 15, name: "Vastu Puja", description: "Architectural harmony ritual", price: 2900 },
-                    { id: 16, name: "Rudrabhishek", description: "Shiva worship", price: 4100 },
-                    { id: 17, name: "Sunderkand Path", description: "Hanuman scripture reading", price: 1800 },
-                    { id: 18, name: "Bhumi Pujan", description: "Land blessing ceremony", price: 2300 },
-                    { id: 19, name: "Annaprashan", description: "First rice feeding", price: 2600 },
-                    { id: 20, name: "Godh Bharai", description: "Baby shower ceremony", price: 3100 },
-                    { id: 21, name: "Naamkaran", description: "Naming ceremony", price: 1900 },
-                    { id: 22, name: "Vijayadashami Puja", description: "Dussehra celebration", price: 2400 }
+                    { id: 6, name: "Griha Pravesh", description: "New home entry ceremony", price: 2800 },
+                    { id: 7, name: "Satyanarayan Katha", description: "Lord Vishnu worship", price: 2200 },
+                    { id: 8, name: "Maha Shivratri Puja", description: "Lord Shiva night worship", price: 3500 },
+                    { id: 9, name: "Navratri Puja", description: "Nine nights goddess worship", price: 4500 },
+                    { id: 10, name: "Ganesh Chaturthi", description: "Lord Ganesh birthday", price: 3200 },
+                    { id: 11, name: "Raksha Bandhan", description: "Brother-sister bond ceremony", price: 1500 },
+                    { id: 12, name: "Janmashtami", description: "Lord Krishna birthday", price: 3800 },
+                    { id: 13, name: "Holi Puja", description: "Festival of colors worship", price: 2000 },
+                    { id: 14, name: "Makar Sankranti", description: "Sun God worship", price: 1800 },
+                    { id: 15, name: "Vasant Panchami", description: "Goddess Saraswati worship", price: 2200 },
+                    { id: 16, name: "Akshaya Tritiya", description: "Gold buying ceremony", price: 2800 },
+                    { id: 17, name: "Nag Panchami", description: "Snake God worship", price: 1900 },
+                    { id: 18, name: "Pitra Paksha", description: "Ancestor worship", price: 3200 },
+                    { id: 19, name: "Sharad Purnima", description: "Full moon worship", price: 1700 },
+                    { id: 20, name: "Bhai Dooj", description: "Brother worship", price: 1600 }
                 ],
                 items: [
                     { id: 1, name: "Diya Set", price: 200 },
@@ -1377,22 +3277,17 @@
                     { id: 4, name: "Sandalwood Paste", price: 300 },
                     { id: 5, name: "Flowers Garland", price: 400 },
                     { id: 6, name: "Coconut", price: 50 },
-                    { id: 7, name: "Betel Leaves", price: 120 },
-                    { id: 8, name: "Kumkum", price: 80 },
-                    { id: 9, name: "Haldi", price: 90 },
-                    { id: 10, name: "Ganga Jal", price: 150 },
-                    { id: 11, name: "Roli", price: 70 },
-                    { id: 12, name: "Chawal", price: 60 },
-                    { id: 13, name: "Cloth for Puja", price: 350 },
-                    { id: 14, name: "Brass Bell", price: 450 },
-                    { id: 15, name: "Kalash", price: 600 }
+                    { id: 7, name: "Kumkum", price: 80 },
+                    { id: 8, name: "Turmeric", price: 70 },
+                    { id: 9, name: "Betel Leaves", price: 120 },
+                    { id: 10, name: "Fruits Basket", price: 500 }
                 ],
                 services: [
                     { id: 1, name: "North Indian Pandit", price: 2500 },
                     { id: 2, name: "South Indian Pandit", price: 2200 },
-                    { id: 3, name: "Maharashtra Pandit", price: 2000 },
-                    { id: 4, name: "Bengali Pandit", price: 2300 },
-                    { id: 5, name: "Senior Experienced Pandit", price: 3500 }
+                    { id: 3, name: "Senior Experienced Pandit", price: 3500 },
+                    { id: 4, name: "Vedic Scholar", price: 5000 },
+                    { id: 5, name: "Family Pandit", price: 4000 }
                 ]
             },
             muslim: {
@@ -1402,21 +3297,21 @@
                     { id: 3, name: "Eid ul-Fitr", description: "Prayer after Ramadan", price: 2000 },
                     { id: 4, name: "Eid ul-Adha", description: "Sacrifice festival prayer", price: 2500 },
                     { id: 5, name: "Jumu'ah", description: "Friday prayers", price: 1500 },
-                    { id: 6, name: "Milad un-Nabi", description: "Prophet's birthday", price: 3000 },
-                    { id: 7, name: "Shab-e-Barat", description: "Night of forgiveness", price: 2200 },
-                    { id: 8, name: "Shab-e-Qadr", description: "Night of power", price: 2800 },
-                    { id: 9, name: "Janazah", description: "Funeral prayer", price: 1800 },
-                    { id: 10, name: "Tahneek", description: "Birth ceremony", price: 1600 },
-                    { id: 11, name: "Bismillah", description: "Beginning ceremony", price: 1900 },
-                    { id: 12, name: "Arz-e-Quran", description: "Quran completion", price: 3200 },
-                    { id: 13, name: "Khatam", description: "Quran completion ceremony", price: 2700 },
-                    { id: 14, name: "Dua", description: "Supplication ceremony", price: 1400 },
-                    { id: 15, name: "Isha", description: "Night prayer gathering", price: 1300 },
-                    { id: 16, name: "Taraweeh", description: "Ramadan night prayers", price: 2100 },
-                    { id: 17, name: "Itikaf", description: "Spiritual retreat", price: 3800 },
-                    { id: 18, name: "Hajj", description: "Pilgrimage ceremony", price: 15000 },
-                    { id: 19, name: "Umrah", description: "Minor pilgrimage", price: 8500 },
-                    { id: 20, name: "Zabihah", description: "Halal slaughter ceremony", price: 2300 }
+                    { id: 6, name: "Taraweeh", description: "Ramadan night prayers", price: 3000 },
+                    { id: 7, name: "Janazah", description: "Funeral prayer", price: 1800 },
+                    { id: 8, name: "Istikhara", description: "Guidance prayer", price: 1200 },
+                    { id: 9, name: "Khatam Quran", description: "Quran completion ceremony", price: 2800 },
+                    { id: 10, name: "Milad un-Nabi", description: "Prophet's birthday", price: 3200 },
+                    { id: 11, name: "Laylat al-Qadr", description: "Night of Power", price: 3500 },
+                    { id: 12, name: "Shab-e-Barat", description: "Night of forgiveness", price: 2200 },
+                    { id: 13, name: "Eid-e-Milad", description: "Birth celebration", price: 1800 },
+                    { id: 14, name: "Ashura", description: "Muharram observance", price: 2000 },
+                    { id: 15, name: "Jumu'atul-Wida", description: "Last Friday of Ramadan", price: 1500 },
+                    { id: 16, name: "Laylat al-Miraj", description: "Night journey observance", price: 2500 },
+                    { id: 17, name: "Eid al-Ghadeer", description: "Succession celebration", price: 2800 },
+                    { id: 18, name: "Mawlid", description: "Prophet's birthday celebration", price: 3200 },
+                    { id: 19, name: "Isra and Mi'raj", description: "Night journey prayer", price: 3000 },
+                    { id: 20, name: "Friday Khutbah", description: "Friday sermon", price: 1200 }
                 ],
                 items: [
                     { id: 1, name: "Prayer Mat", price: 500 },
@@ -1424,23 +3319,18 @@
                     { id: 3, name: "Attar", price: 400 },
                     { id: 4, name: "Tasbih", price: 250 },
                     { id: 5, name: "Quran Stand", price: 600 },
-                    { id: 6, name: "Hijab", price: 350 },
-                    { id: 7, name: "Kufi", price: 200 },
-                    { id: 8, name: "Dates", price: 300 },
-                    { id: 9, name: "Rose Water", price: 180 },
-                    { id: 10, name: "Incense", price: 220 },
-                    { id: 11, name: "Islamic Books", price: 450 },
-                    { id: 12, name: "Prayer Rug", price: 800 },
-                    { id: 13, name: "Zamzam Water", price: 350 },
-                    { id: 14, name: "Islamic Calendar", price: 150 },
-                    { id: 15, name: "Dua Book", price: 280 }
+                    { id: 6, name: "Kufi Cap", price: 300 },
+                    { id: 7, name: "Hijab", price: 450 },
+                    { id: 8, name: "Dates Box", price: 350 },
+                    { id: 9, name: "Islamic Books", price: 800 },
+                    { id: 10, name: "Prayer Outfit", price: 1200 }
                 ],
                 services: [
                     { id: 1, name: "Local Imam", price: 2000 },
                     { id: 2, name: "Senior Imam", price: 3500 },
-                    { id: 3, name: "Qari", price: 2800 },
-                    { id: 4, name: "Islamic Scholar", price: 4000 },
-                    { id: 5, name: "Hafiz", price: 3200 }
+                    { id: 3, name: "Islamic Scholar", price: 4000 },
+                    { id: 4, name: "Quran Teacher", price: 1800 },
+                    { id: 5, name: "Marriage Counselor", price: 3000 }
                 ]
             },
             sikh: {
@@ -1450,21 +3340,21 @@
                     { id: 3, name: "Amrit Sanchar", description: "Initiation ceremony", price: 5200 },
                     { id: 4, name: "Naam Karan", description: "Naming ceremony", price: 2200 },
                     { id: 5, name: "Antam Sanskar", description: "Funeral ceremony", price: 3800 },
-                    { id: 6, name: "Gurpurb", description: "Guru's anniversary", price: 4500 },
-                    { id: 7, name: "Hola Mohalla", description: "Sikh festival", price: 3200 },
-                    { id: 8, name: "Sukhmani Sahib Path", description: "Prayer for peace", price: 2800 },
-                    { id: 9, name: "Japji Sahib Path", description: "Morning prayer", price: 1900 },
-                    { id: 10, name: "Rehras Sahib", description: "Evening prayer", price: 1800 },
-                    { id: 11, name: "Kirtan Sohila", description: "Night prayer", price: 1600 },
-                    { id: 12, name: "Ardas", description: "Sikh prayer", price: 1500 },
-                    { id: 13, name: "Bhog", description: "Conclusion ceremony", price: 2400 },
-                    { id: 14, name: "Sehaj Path", description: "Slow scripture reading", price: 6200 },
-                    { id: 15, name: "Sampat Path", description: "Prosperity prayer", price: 3500 },
-                    { id: 16, name: "Sadharan Path", description: "Regular scripture reading", price: 4100 },
-                    { id: 17, name: "Sukhmani Path", description: "Peace prayer", price: 2900 },
-                    { id: 18, name: "Chandi Di Vaar", description: "Martial prayer", price: 3300 },
-                    { id: 19, name: "Asa Di Vaar", description: "Morning prayer", price: 2600 },
-                    { id: 20, name: "Dastar Bandi", description: "Turban tying ceremony", price: 3100 }
+                    { id: 6, name: "Gurpurb", description: "Guru's birthday celebration", price: 4500 },
+                    { id: 7, name: "Vaisakhi", description: "Sikh New Year", price: 3200 },
+                    { id: 8, name: "Hola Mohalla", description: "Martial arts festival", price: 2800 },
+                    { id: 9, name: "Bandi Chhor Divas", description: "Diwali celebration", price: 3500 },
+                    { id: 10, name: "Martyrdom Day", description: "Guru martyrdom observance", price: 3000 },
+                    { id: 11, name: "Parkash Utsav", description: "Guru birth celebration", price: 4000 },
+                    { id: 12, name: "Gurgaddi Divas", description: "Guruship anniversary", price: 3500 },
+                    { id: 13, name: "Joti Jot", description: "Guru's passing observance", price: 3200 },
+                    { id: 14, name: "Sangrand", description: "New month celebration", price: 1800 },
+                    { id: 15, name: "Puranmashi", description: "Full moon prayer", price: 2000 },
+                    { id: 16, name: "Masya", description: "New moon prayer", price: 1800 },
+                    { id: 17, name: "Sukhmani Sahib Path", description: "Peace prayer recitation", price: 2800 },
+                    { id: 18, name: "Japji Sahib Path", description: "Morning prayer recitation", price: 2200 },
+                    { id: 19, name: "Rehras Sahib", description: "Evening prayer", price: 2000 },
+                    { id: 20, name: "Kirtan Darbar", description: "Devotional singing", price: 4500 }
                 ],
                 items: [
                     { id: 1, name: "Rumala Sahib", price: 800 },
@@ -1476,19 +3366,14 @@
                     { id: 7, name: "Kesh", price: 0 },
                     { id: 8, name: "Sikh Turban", price: 600 },
                     { id: 9, name: "Gutka Sahib", price: 350 },
-                    { id: 10, name: "Sikh Prayer Book", price: 450 },
-                    { id: 11, name: "Incense", price: 180 },
-                    { id: 12, name: "Diya", price: 150 },
-                    { id: 13, name: "Flowers", price: 400 },
-                    { id: 14, name: "Sikh Calendar", price: 200 },
-                    { id: 15, name: "Langar Items", price: 1000 }
+                    { id: 10, name: "Sikh Scriptures", price: 2500 }
                 ],
                 services: [
                     { id: 1, name: "Local Granthi", price: 2500 },
                     { id: 2, name: "Senior Granthi", price: 4000 },
                     { id: 3, name: "Ragi Jatha", price: 5000 },
-                    { id: 4, name: "Katha Vachak", price: 3500 },
-                    { id: 5, name: "Gurbani Teacher", price: 3000 }
+                    { id: 4, name: "Katha Vachik", price: 3500 },
+                    { id: 5, name: "Sikh Scholar", price: 4500 }
                 ]
             },
             christian: {
@@ -1498,21 +3383,21 @@
                     { id: 3, name: "Christmas Service", description: "Christmas celebration", price: 2800 },
                     { id: 4, name: "Easter Service", description: "Easter celebration", price: 2500 },
                     { id: 5, name: "First Communion", description: "First Eucharist", price: 3200 },
-                    { id: 6, name: "Confirmation", description: "Confirmation ceremony", price: 3000 },
-                    { id: 7, name: "Funeral Service", description: "Memorial service", price: 4200 },
-                    { id: 8, name: "Thanksgiving", description: "Harvest festival", price: 2200 },
-                    { id: 9, name: "House Blessing", description: "Home dedication", price: 2600 },
-                    { id: 10, name: "Baby Dedication", description: "Child presentation", price: 1800 },
-                    { id: 11, name: "Anniversary Service", description: "Church anniversary", price: 3500 },
-                    { id: 12, name: "Healing Service", description: "Prayer for healing", price: 2000 },
-                    { id: 13, name: "Bible Study", description: "Scripture study session", price: 1500 },
-                    { id: 14, name: "Prayer Meeting", description: "Group prayer", price: 1200 },
-                    { id: 15, name: "Vows Renewal", description: "Marriage vows renewal", price: 5000 },
-                    { id: 16, name: "Ordination", description: "Clergy ordination", price: 6000 },
-                    { id: 17, name: "Confession", description: "Sacrament of reconciliation", price: 1000 },
-                    { id: 18, name: "Advent Service", description: "Advent celebration", price: 2300 },
-                    { id: 19, name: "Palm Sunday", description: "Palm Sunday service", price: 1900 },
-                    { id: 20, name: "Pentecost", description: "Pentecost celebration", price: 2700 }
+                    { id: 6, name: "Confirmation", description: "Confirmation ceremony", price: 3800 },
+                    { id: 7, name: "Funeral Service", description: "Last rites", price: 4200 },
+                    { id: 8, name: "House Blessing", description: "Home dedication", price: 2800 },
+                    { id: 9, name: "Thanksgiving Service", description: "Thanksgiving prayer", price: 2200 },
+                    { id: 10, name: "Advent Service", description: "Advent celebration", price: 2500 },
+                    { id: 11, name: "Lent Service", description: "Lent observance", price: 2000 },
+                    { id: 12, name: "Palm Sunday", description: "Palm Sunday service", price: 1800 },
+                    { id: 13, name: "Good Friday", description: "Good Friday service", price: 2000 },
+                    { id: 14, name: "Pentecost", description: "Pentecost celebration", price: 2800 },
+                    { id: 15, name: "All Saints Day", description: "Saints remembrance", price: 2200 },
+                    { id: 16, name: "Epiphany", description: "Epiphany celebration", price: 2500 },
+                    { id: 17, name: "Ash Wednesday", description: "Ash Wednesday service", price: 1800 },
+                    { id: 18, name: "Maundy Thursday", description: "Last Supper observance", price: 2200 },
+                    { id: 19, name: "Ascension Day", description: "Ascension celebration", price: 2800 },
+                    { id: 20, name: "Reformation Day", description: "Reformation celebration", price: 3000 }
                 ],
                 items: [
                     { id: 1, name: "Bible", price: 600 },
@@ -1520,23 +3405,18 @@
                     { id: 3, name: "Candles", price: 200 },
                     { id: 4, name: "Rosary", price: 350 },
                     { id: 5, name: "Holy Water", price: 150 },
-                    { id: 6, name: "Incense", price: 250 },
-                    { id: 7, name: "Communion Set", price: 800 },
-                    { id: 8, name: "Prayer Book", price: 300 },
-                    { id: 9, name: "Christian Art", price: 700 },
-                    { id: 10, name: "Hymnal", price: 450 },
-                    { id: 11, name: "Advent Wreath", price: 600 },
-                    { id: 12, name: "Nativity Set", price: 1200 },
-                    { id: 13, name: "Baptismal Font", price: 900 },
-                    { id: 14, name: "Chalice", price: 1100 },
-                    { id: 15, name: "Christian Calendar", price: 200 }
+                    { id: 6, name: "Communion Set", price: 800 },
+                    { id: 7, name: "Christian Books", price: 500 },
+                    { id: 8, name: "Worship Music", price: 450 },
+                    { id: 9, name: "Prayer Cards", price: 120 },
+                    { id: 10, name: "Christian Art", price: 900 }
                 ],
                 services: [
                     { id: 1, name: "Local Pastor", price: 3000 },
                     { id: 2, name: "Senior Pastor", price: 4500 },
                     { id: 3, name: "Bishop", price: 7000 },
                     { id: 4, name: "Deacon", price: 2500 },
-                    { id: 5, name: "Evangelist", price: 4000 }
+                    { id: 5, name: "Christian Counselor", price: 3500 }
                 ]
             }
         };
@@ -1637,6 +3517,11 @@
             // Pricing questions
             if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('how much')) {
                 return "For accurate and updated pricing information, please check our website. The prices may vary based on your specific requirements and location.";
+            }
+            
+            // Download questions
+            if (lowerMessage.includes('download') || lowerMessage.includes('resource') || lowerMessage.includes('guide')) {
+                return "You can download all our resources from the Resources page. We have calendars, ceremony guides, prayer collections, and our comprehensive starter guide available for download.";
             }
             
             // Contact questions
