@@ -6,6 +6,8 @@
     <title>FaithConnect - Multi-Faith Event Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -19,6 +21,7 @@
             --muslim-color: #009900;
             --sikh-color: #ffcc00;
             --christian-color: #0066cc;
+            --jain-color: #9b1c2e;
             --light-bg: #f9f9f9;
             --dark-text: #333;
             --light-text: #fff;
@@ -88,6 +91,13 @@
             right: 5%;
             font-size: 2.8rem;
             animation-delay: 6s;
+        }
+
+        .floating-element:nth-child(5) {
+            top: 50%;
+            left: 50%;
+            font-size: 3rem;
+            animation-delay: 8s;
         }
 
         @keyframes float {
@@ -355,7 +365,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(90deg, var(--hindu-color), var(--muslim-color), var(--sikh-color), var(--christian-color));
+            background: linear-gradient(90deg, var(--hindu-color), var(--muslim-color), var(--sikh-color), var(--christian-color), var(--jain-color));
         }
 
         .faith-card.hindu::before {
@@ -372,6 +382,10 @@
 
         .faith-card.christian::before {
             background: var(--christian-color);
+        }
+
+        .faith-card.jain::before {
+            background: var(--jain-color);
         }
 
         @keyframes fadeInUp {
@@ -406,6 +420,10 @@
             border-top: 5px solid var(--christian-color);
         }
 
+        .faith-card.jain {
+            border-top: 5px solid var(--jain-color);
+        }
+
         .faith-icon {
             font-size: 4.5rem;
             padding: 1.5rem 0;
@@ -430,6 +448,10 @@
 
         .faith-card.christian .faith-icon {
             color: var(--christian-color);
+        }
+
+        .faith-card.jain .faith-icon {
+            color: var(--jain-color);
         }
 
         .faith-card h3 {
@@ -578,7 +600,7 @@
             box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
         }
 
-        .pandit-options, .priest-options, .granthi-options, .imam-options {
+        .pandit-options, .priest-options, .granthi-options, .imam-options, .jain-pandit-options {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 1.5rem;
@@ -1330,6 +1352,33 @@
             gap: 0.3rem;
         }
 
+        .audio-player {
+            width: 100%;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+
+        .payment-date-check {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #2196F3;
+        }
+
+        .date-input-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .date-input-group input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
         @media (max-width: 768px) {
             .faith-selection {
                 grid-template-columns: 1fr;
@@ -1376,6 +1425,7 @@
         <div class="floating-element">☪️</div>
         <div class="floating-element">🛐</div>
         <div class="floating-element">✡️</div>
+        <div class="floating-element">卐</div>
     </div>
 
     <div class="music-control" id="musicControl">
@@ -1417,7 +1467,7 @@
                         <i class="fas fa-hands-helping"></i>
                     </div>
                     <h3>Multi-Faith Services</h3>
-                    <p>Access authentic religious services for Hindu, Muslim, Sikh, and Christian faiths all in one platform.</p>
+                    <p>Access authentic religious services for Hindu, Muslim, Sikh, Christian, and Jain faiths all in one platform.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -1465,6 +1515,13 @@
                     <h3>Christianity</h3>
                     <p>Baptism, Wedding, Christmas services and more</p>
                 </div>
+                <div class="faith-card jain" data-page="services">
+                    <div class="faith-icon">
+                        <i class="fas fa-dharmachakra"></i>
+                    </div>
+                    <h3>Jainism</h3>
+                    <p>Pratishtha, Paryushan, and other ceremonies</p>
+                </div>
             </div>
         </div>
 
@@ -1500,6 +1557,13 @@
                     <h3>Christianity</h3>
                     <p>Baptism, Wedding, Christmas services and more</p>
                 </div>
+                <div class="faith-card jain" onclick="selectFaith('jain')">
+                    <div class="faith-icon">
+                        <i class="fas fa-dharmachakra"></i>
+                    </div>
+                    <h3>Jainism</h3>
+                    <p>Pratishtha, Paryushan, and other ceremonies</p>
+                </div>
             </div>
 
             <!-- All the booking flow containers -->
@@ -1530,6 +1594,13 @@
                 <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
                 <div class="events-grid">
                     <!-- Christian events will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="events-container" id="jain-events">
+                <button class="back-btn" onclick="goBackToFaiths()"><i class="fas fa-arrow-left"></i> Back to Religions</button>
+                <div class="events-grid">
+                    <!-- Jain events will be populated by JavaScript -->
                 </div>
             </div>
 
@@ -1575,6 +1646,14 @@
                 <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
             </div>
 
+            <div class="pandit-container" id="jain-pandit-container">
+                <button class="back-btn" onclick="goBackToItems()"><i class="fas fa-arrow-left"></i> Back to Items</button>
+                <div class="jain-pandit-options">
+                    <!-- Jain Pandit options will be populated by JavaScript -->
+                </div>
+                <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
+            </div>
+
             <h2 class="section-title" style="display: none;">Your Cart</h2>
             <div class="cart-container" id="cart-container">
                 <button class="back-btn" onclick="goBackToServices()"><i class="fas fa-arrow-left"></i> Back to Services</button>
@@ -1610,18 +1689,27 @@
                     <div class="verification-steps">
                         <li>Scan the QR code above with any UPI app</li>
                         <li>Pay the exact amount shown above</li>
-                        <li>Upload screenshot of payment confirmation</li>
-                        <li>Our system will automatically verify the payment</li>
-                        <li>Only exact payment matches will be accepted</li>
+                        <li>Upload screenshot of payment confirmation with today's date</li>
+                        <li>Enter the payment date from your screenshot</li>
+                        <li>Our system will verify both amount and date</li>
                     </div>
                     <div class="secure-notice">
-                        <i class="fas fa-lock"></i> <strong>Note:</strong> Partial payments will not be processed. The system automatically detects payment amounts.
+                        <i class="fas fa-lock"></i> <strong>Note:</strong> Partial payments or incorrect dates will not be processed. The system automatically detects payment amounts and dates.
+                    </div>
+                </div>
+                
+                <div class="payment-date-check">
+                    <h4>Payment Date Verification</h4>
+                    <p>Please enter the date shown in your payment screenshot:</p>
+                    <div class="date-input-group">
+                        <input type="date" id="payment-date" required>
+                        <span>This must match the date in your payment screenshot</span>
                     </div>
                 </div>
                 
                 <div class="screenshot-upload">
                     <h4>Upload Payment Screenshot</h4>
-                    <p>After making payment, take a screenshot of the confirmation and upload it here</p>
+                    <p>After making payment, take a screenshot of the confirmation showing today's date and upload it here</p>
                     <input type="file" id="screenshot-upload" accept="image/*">
                     <label for="screenshot-upload" class="upload-label">
                         <i class="fas fa-cloud-upload-alt"></i> Click to Upload Payment Screenshot
@@ -1647,7 +1735,7 @@
                 <!-- Multi-Faith Calendar Resource -->
                 <div class="resource-card">
                     <h3><i class="fas fa-calendar-alt"></i> Multi-Faith Religious Calendar 2024-2025</h3>
-                    <p>Comprehensive calendar featuring all major festivals, holy days, and observances across Hindu, Muslim, Sikh, and Christian traditions.</p>
+                    <p>Comprehensive calendar featuring all major festivals, holy days, and observances across Hindu, Muslim, Sikh, Christian, and Jain traditions.</p>
                     <div class="resource-details">
                         <h4>Upcoming Events:</h4>
                         <ul>
@@ -1655,6 +1743,7 @@
                             <li><strong>Eid al-Fitr</strong> - April 10, 2024 (Muslim)</li>
                             <li><strong>Guru Nanak Jayanti</strong> - November 15, 2024 (Sikh)</li>
                             <li><strong>Christmas</strong> - December 25, 2024 (Christian)</li>
+                            <li><strong>Mahavir Jayanti</strong> - April 21, 2024 (Jain)</li>
                         </ul>
                     </div>
                     <div class="file-info">
@@ -1705,6 +1794,9 @@
                         <button class="download-btn" onclick="downloadResource('starter-guide-mobile', this)">
                             <i class="fas fa-mobile-alt"></i> Mobile Version
                         </button>
+                        <button class="download-btn small" onclick="playAudioResource('starter-audio')">
+                            <i class="fas fa-volume-up"></i> Audio Guide
+                        </button>
                     </div>
                 </div>
 
@@ -1736,6 +1828,9 @@
                         <button class="download-btn small" onclick="downloadResource('hindu-checklist', this)">
                             <i class="fas fa-list-check"></i> Checklist
                         </button>
+                        <button class="download-btn small" onclick="playAudioResource('hindu-audio')">
+                            <i class="fas fa-volume-up"></i> Audio Guide
+                        </button>
                     </div>
                 </div>
 
@@ -1764,13 +1859,47 @@
                         <button class="download-btn" onclick="downloadResource('muslim-guide', this)">
                             <i class="fas fa-download"></i> Download Guide
                         </button>
+                        <button class="download-btn small" onclick="playAudioResource('muslim-audio')">
+                            <i class="fas fa-volume-up"></i> Audio Guide
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Jain Ceremonies Guide -->
+                <div class="resource-card">
+                    <h3><i class="fas fa-dharmachakra"></i> Jain Ceremonies Guide</h3>
+                    <p>Complete guide to Jain ceremonies including Pratishtha, Paryushan, Samvatsari, and other Jain rituals with proper procedures and requirements.</p>
+                    <div class="resource-details">
+                        <h4>Covered Ceremonies:</h4>
+                        <ul>
+                            <li>Pratishtha - Idol Consecration</li>
+                            <li>Paryushan - Festival of Forgiveness</li>
+                            <li>Samvatsari - Day of Forgiveness</li>
+                            <li>Mahavir Jayanti - Lord Mahavir's Birthday</li>
+                            <li>Snatra Puja - ceremonial bathing of idols</li>
+                        </ul>
+                    </div>
+                    <div class="file-info">
+                        <span><i class="fas fa-file-pdf"></i> PDF Document <span class="file-size">2.5 MB</span></span>
+                        <span class="download-count"><i class="fas fa-download"></i> 423 downloads</span>
+                    </div>
+                    <div class="download-progress" id="jain-guide-progress">
+                        <div class="download-progress-bar" id="jain-guide-progress-bar"></div>
+                    </div>
+                    <div class="download-section">
+                        <button class="download-btn" onclick="downloadResource('jain-guide', this)">
+                            <i class="fas fa-download"></i> Download Guide
+                        </button>
+                        <button class="download-btn small" onclick="playAudioResource('jain-audio')">
+                            <i class="fas fa-volume-up"></i> Audio Guide
+                        </button>
                     </div>
                 </div>
 
                 <!-- Prayer Collection -->
                 <div class="resource-card">
                     <h3><i class="fas fa-pray"></i> Multi-Faith Prayer Collection</h3>
-                    <p>Beautiful collection of prayers, mantras, hymns, and devotional texts from all four faith traditions with translations and explanations.</p>
+                    <p>Beautiful collection of prayers, mantras, hymns, and devotional texts from all five faith traditions with translations and explanations.</p>
                     <div class="resource-details">
                         <h4>Includes:</h4>
                         <ul>
@@ -1792,7 +1921,7 @@
                         <button class="download-btn" onclick="downloadResource('prayer-collection', this)">
                             <i class="fas fa-download"></i> Download Prayer Book
                         </button>
-                        <button class="download-btn small" onclick="downloadResource('prayer-audio', this)">
+                        <button class="download-btn small" onclick="playAudioResource('prayer-audio')">
                             <i class="fas fa-volume-up"></i> Audio Version
                         </button>
                     </div>
@@ -1809,6 +1938,7 @@
                             <li>Muslim Halal Guidelines</li>
                             <li>Sikh Langar Traditions</li>
                             <li>Christian Communion & Fasting</li>
+                            <li>Jain Vegetarianism & Fasting</li>
                             <li>Festival Recipes & Menus</li>
                         </ul>
                     </div>
@@ -1950,6 +2080,7 @@
                 <a href="#" data-page="services">Muslim Ceremonies</a>
                 <a href="#" data-page="services">Sikh Ceremonies</a>
                 <a href="#" data-page="services">Christian Ceremonies</a>
+                <a href="#" data-page="services">Jain Ceremonies</a>
                 <a href="#" data-page="services">Interfaith Services</a>
             </div>
             
@@ -1990,6 +2121,9 @@
     </footer>
 
     <script>
+        // Initialize jsPDF
+        const { jsPDF } = window.jspdf;
+
         // Page Navigation
         document.querySelectorAll('.nav-link, .cta-button, .faith-card[data-page], .footer-section a[data-page]').forEach(link => {
             link.addEventListener('click', function(e) {
@@ -2020,116 +2154,57 @@
             window.scrollTo(0, 0);
         }
 
-        // Download Resources Functionality with actual file creation
+        // Download Resources Functionality with actual PDF creation
         function downloadResource(resourceType, buttonElement = null) {
             const resources = {
                 'calendar': {
                     filename: 'FaithConnect-Religious-Calendar-2024-2025.pdf',
-                    content: generateCalendarPDF(),
+                    content: generateCalendarContent(),
                     message: 'Religious Calendar downloaded successfully!',
                     progressId: 'calendar-progress',
-                    size: '2.4 MB'
-                },
-                'calendar-print': {
-                    filename: 'FaithConnect-Calendar-Print-Version.pdf',
-                    content: generatePrintCalendar(),
-                    message: 'Printable calendar version downloaded!',
-                    progressId: 'calendar-progress',
-                    size: '1.8 MB'
-                },
-                'calendar-ical': {
-                    filename: 'FaithConnect-Calendar-2024-2025.ics',
-                    content: generateICalCalendar(),
-                    message: 'iCal calendar downloaded! Import to your calendar app.',
-                    progressId: 'calendar-progress',
-                    size: '0.8 MB'
+                    isPDF: true
                 },
                 'starter-guide': {
                     filename: 'FaithConnect-Complete-Starter-Guide.pdf',
-                    content: generateStarterGuide(),
+                    content: generateStarterGuideContent(),
                     message: 'Starter Guide downloaded successfully!',
                     progressId: 'starter-guide-progress',
-                    size: '5.7 MB'
-                },
-                'starter-guide-mobile': {
-                    filename: 'FaithConnect-Starter-Guide-Mobile.pdf',
-                    content: generateMobileStarterGuide(),
-                    message: 'Mobile Starter Guide downloaded!',
-                    progressId: 'starter-guide-progress',
-                    size: '3.2 MB'
+                    isPDF: true
                 },
                 'hindu-guide': {
                     filename: 'Hindu-Ceremonies-Complete-Guide.pdf',
-                    content: generateHinduGuide(),
+                    content: generateHinduGuideContent(),
                     message: 'Hindu Ceremonies Guide downloaded!',
                     progressId: 'hindu-guide-progress',
-                    size: '3.2 MB'
-                },
-                'hindu-checklist': {
-                    filename: 'Hindu-Ceremony-Checklist.pdf',
-                    content: generateHinduChecklist(),
-                    message: 'Hindu Ceremony Checklist downloaded!',
-                    progressId: 'hindu-guide-progress',
-                    size: '1.1 MB'
+                    isPDF: true
                 },
                 'muslim-guide': {
                     filename: 'Muslim-Ceremonies-Complete-Guide.pdf',
-                    content: generateMuslimGuide(),
+                    content: generateMuslimGuideContent(),
                     message: 'Muslim Ceremonies Guide downloaded!',
                     progressId: 'muslim-guide-progress',
-                    size: '2.8 MB'
+                    isPDF: true
+                },
+                'jain-guide': {
+                    filename: 'Jain-Ceremonies-Complete-Guide.pdf',
+                    content: generateJainGuideContent(),
+                    message: 'Jain Ceremonies Guide downloaded!',
+                    progressId: 'jain-guide-progress',
+                    isPDF: true
                 },
                 'prayer-collection': {
                     filename: 'Multi-Faith-Prayer-Collection.pdf',
-                    content: generatePrayerCollection(),
+                    content: generatePrayerCollectionContent(),
                     message: 'Prayer Collection downloaded successfully!',
                     progressId: 'prayer-collection-progress',
-                    size: '4.1 MB'
-                },
-                'prayer-audio': {
-                    filename: 'Prayer-Collection-Readings.mp3',
-                    content: generateAudioPlaceholder(),
-                    message: 'Audio prayers guide downloaded!',
-                    progressId: 'prayer-collection-progress',
-                    size: '15.2 MB'
+                    isPDF: true
                 },
                 'dietary-guide': {
                     filename: 'Religious-Dietary-Guide.pdf',
-                    content: generateDietaryGuide(),
+                    content: generateDietaryGuideContent(),
                     message: 'Dietary Guide downloaded successfully!',
                     progressId: 'dietary-guide-progress',
-                    size: '3.5 MB'
-                },
-                'festival-recipes': {
-                    filename: 'Festival-Recipes-Collection.pdf',
-                    content: generateFestivalRecipes(),
-                    message: 'Festival Recipes downloaded!',
-                    progressId: 'dietary-guide-progress',
-                    size: '2.1 MB'
-                },
-                'quick-calendar': {
-                    filename: 'FaithConnect-Quick-Calendar.pdf',
-                    content: generateQuickCalendar(),
-                    message: 'Quick Calendar downloaded!',
-                    size: '1.2 MB'
-                },
-                'quick-starter': {
-                    filename: 'FaithConnect-Quick-Start.pdf',
-                    content: generateQuickStart(),
-                    message: 'Quick Start Guide downloaded!',
-                    size: '2.3 MB'
-                },
-                'quick-prayers': {
-                    filename: 'Essential-Prayers.pdf',
-                    content: generateEssentialPrayers(),
-                    message: 'Essential Prayers downloaded!',
-                    size: '1.8 MB'
-                },
-                'quick-dietary': {
-                    filename: 'Dietary-Basics.pdf',
-                    content: generateDietaryBasics(),
-                    message: 'Dietary Basics downloaded!',
-                    size: '1.5 MB'
+                    isPDF: true
                 }
             };
 
@@ -2168,16 +2243,21 @@
 
                 // Simulate file download delay
                 setTimeout(() => {
-                    // Create and download actual file
-                    const blob = new Blob([resource.content], { type: getMimeType(resource.filename) });
-                    const url = window.URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = resource.filename;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    window.URL.revokeObjectURL(url);
+                    if (resource.isPDF) {
+                        // Create actual PDF
+                        createPDF(resource.content, resource.filename);
+                    } else {
+                        // Create text file
+                        const blob = new Blob([resource.content], { type: 'text/plain;charset=utf-8' });
+                        const url = window.URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = resource.filename;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        window.URL.revokeObjectURL(url);
+                    }
 
                     // Show success notification
                     showNotification(resource.message, 'success');
@@ -2199,13 +2279,87 @@
             }
         }
 
-        // Download all resources as ZIP
+        // Create actual PDF function
+        function createPDF(content, filename) {
+            const doc = new jsPDF();
+            
+            // Set document properties
+            doc.setProperties({
+                title: filename.replace('.pdf', ''),
+                subject: 'FaithConnect Resource',
+                author: 'FaithConnect',
+                keywords: 'religious, ceremonies, faith, guide',
+                creator: 'FaithConnect'
+            });
+            
+            // Add content to PDF
+            const lines = doc.splitTextToSize(content, 180);
+            doc.setFontSize(12);
+            doc.text(lines, 15, 15);
+            
+            // Save the PDF
+            doc.save(filename);
+        }
+
+        // Audio resource player
+        function playAudioResource(audioType) {
+            const audioResources = {
+                'starter-audio': {
+                    title: 'FaithConnect Starter Guide Audio',
+                    url: 'https://assets.mixkit.co/music/preview/mixkit-spiritual-wind-667.mp3'
+                },
+                'hindu-audio': {
+                    title: 'Hindu Ceremonies Guide Audio',
+                    url: 'https://assets.mixkit.co/music/preview/mixkit-spiritual-wind-667.mp3'
+                },
+                'muslim-audio': {
+                    title: 'Muslim Ceremonies Guide Audio',
+                    url: 'https://assets.mixkit.co/music/preview/mixkit-spiritual-wind-667.mp3'
+                },
+                'jain-audio': {
+                    title: 'Jain Ceremonies Guide Audio',
+                    url: 'https://assets.mixkit.co/music/preview/mixkit-spiritual-wind-667.mp3'
+                },
+                'prayer-audio': {
+                    title: 'Multi-Faith Prayer Collection Audio',
+                    url: 'https://assets.mixkit.co/music/preview/mixkit-spiritual-wind-667.mp3'
+                }
+            };
+
+            const audioResource = audioResources[audioType];
+            if (audioResource) {
+                // Create audio player
+                const audioPlayer = document.createElement('audio');
+                audioPlayer.className = 'audio-player';
+                audioPlayer.controls = true;
+                audioPlayer.innerHTML = 'Your browser does not support the audio element.';
+                
+                const source = document.createElement('source');
+                source.src = audioResource.url;
+                source.type = 'audio/mpeg';
+                audioPlayer.appendChild(source);
+                
+                // Show notification
+                showNotification(`Now playing: ${audioResource.title}`, 'success');
+                
+                // Add to page temporarily
+                const resourceCard = document.querySelector('.resource-card');
+                resourceCard.appendChild(audioPlayer);
+                
+                // Play audio
+                audioPlayer.play().catch(e => {
+                    console.log("Audio play failed:", e);
+                    showNotification('Audio playback failed. Please try again.', 'error');
+                });
+            }
+        }
+
+        // Download all resources as ZIP - Now creates actual PDFs
         function downloadAllResources() {
             showNotification('Preparing all resources for download...', 'success');
             
-            // Create a comprehensive guide combining all resources
-            const allResourcesContent = `
-FAITHCONNECT COMPLETE RESOURCE COLLECTION
+            // Create comprehensive PDF with all resources
+            const allResourcesContent = `FAITHCONNECT COMPLETE RESOURCE COLLECTION
 =========================================
 
 This package includes all essential FaithConnect resources:
@@ -2214,43 +2368,71 @@ This package includes all essential FaithConnect resources:
 2. Complete Starter Guide
 3. Hindu Ceremonies Guide
 4. Muslim Ceremonies Guide
-5. Multi-Faith Prayer Collection
-6. Religious Dietary Guide
-7. Festival Recipes Collection
-8. Ceremony Checklists
+5. Jain Ceremonies Guide
+6. Multi-Faith Prayer Collection
+7. Religious Dietary Guide
+8. Festival Recipes Collection
+9. Ceremony Checklists
+
+CONTACT INFORMATION:
+Email: support@faithconnect.com
+Phone: +91 98765 43210, +91 91234 56789
+Website: https://faithconnect.com
+
+UPCOMING MAJOR FESTIVALS 2024-2025:
+
+HINDU:
+- Diwali: October 31, 2024
+- Holi: March 25, 2024
+- Makar Sankranti: January 14, 2024
+
+MUSLIM:
+- Eid al-Fitr: April 10, 2024
+- Eid al-Adha: June 16, 2024
+
+SIKH:
+- Vaisakhi: April 13, 2024
+- Guru Nanak Jayanti: November 15, 2024
+
+CHRISTIAN:
+- Christmas: December 25, 2024
+- Easter: March 31, 2024
+
+JAIN:
+- Mahavir Jayanti: April 21, 2024
+- Paryushan: September 2-9, 2024
+
+BOOKING PROCESS:
+1. Select your faith (Hindu, Muslim, Sikh, Christian, Jain)
+2. Choose from 20+ ceremonies
+3. Add necessary religious items
+4. Select verified service provider
+5. Make secure payment via QR code
+6. Upload payment screenshot for verification
+
+SERVICE PROVIDERS:
+All our religious service providers are:
+- Thoroughly verified and background checked
+- Experienced in their respective traditions
+- Rated by previous customers
+- Available for consultation
+
+Thank you for choosing FaithConnect!
+We are honored to serve your spiritual needs.
 
 Visit https://faithconnect.com for updated resources and services.
-
-Thank you for using FaithConnect!
             `.trim();
 
-            const blob = new Blob([allResourcesContent], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'FaithConnect-Complete-Resources-Package.txt';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            window.URL.revokeObjectURL(url);
+            // Create PDF with all resources
+            createPDF(allResourcesContent, 'FaithConnect-Complete-Resources.pdf');
 
             setTimeout(() => {
                 showNotification('All resources downloaded successfully!', 'success');
             }, 1000);
         }
 
-        // Helper function to get MIME type from filename
-        function getMimeType(filename) {
-            if (filename.endsWith('.pdf')) return 'application/pdf';
-            if (filename.endsWith('.ics')) return 'text/calendar';
-            if (filename.endsWith('.mp3')) return 'audio/mpeg';
-            return 'application/octet-stream';
-        }
-
         // Update download count visually
         function updateDownloadCount(resourceType) {
-            // In a real application, this would update a database
-            // For demo purposes, we'll just update the visual count
             const resourceCards = document.querySelectorAll('.resource-card');
             resourceCards.forEach(card => {
                 const downloadCount = card.querySelector('.download-count');
@@ -2261,198 +2443,194 @@ Thank you for using FaithConnect!
             });
         }
 
-        // Content generation functions (simulated)
-        function generateCalendarPDF() {
+        // CONTENT GENERATION FUNCTIONS - Creating proper PDF content
+        function generateCalendarContent() {
             return `FAITHCONNECT RELIGIOUS CALENDAR 2024-2025
+========================================
 
 COMPREHENSIVE MULTI-FAITH CALENDAR
 
-This calendar includes all major religious festivals, holy days, and observances
-across Hindu, Muslim, Sikh, and Christian traditions for the years 2024-2025.
-
 HINDU FESTIVALS 2024-2025:
-- Makar Sankranti: January 14, 2024
-- Vasant Panchami: January 25, 2024
-- Maha Shivaratri: March 8, 2024
-- Holi: March 25, 2024
-- Ram Navami: April 17, 2024
-- Hanuman Jayanti: April 23, 2024
-- Akshaya Tritiya: May 10, 2024
-- Vat Savitri: June 6, 2024
-- Jagannath Rath Yatra: July 7, 2024
-- Guru Purnima: July 21, 2024
-- Raksha Bandhan: August 19, 2024
-- Janmashtami: August 26, 2024
-- Ganesh Chaturthi: September 7, 2024
-- Navratri: October 3-12, 2024
-- Durga Puja: October 9-13, 2024
-- Dussehra: October 12, 2024
-- Karva Chauth: October 20, 2024
-- Diwali: October 31, 2024
-- Govardhan Puja: November 1, 2024
-- Bhai Dooj: November 2, 2024
-- Chhath Puja: November 7-10, 2024
+• Makar Sankranti: January 14, 2024
+• Vasant Panchami: January 25, 2024
+• Maha Shivaratri: March 8, 2024
+• Holi: March 25, 2024
+• Ram Navami: April 17, 2024
+• Hanuman Jayanti: April 23, 2024
+• Akshaya Tritiya: May 10, 2024
+• Vat Savitri: June 6, 2024
+• Jagannath Rath Yatra: July 7, 2024
+• Guru Purnima: July 21, 2024
+• Raksha Bandhan: August 19, 2024
+• Janmashtami: August 26, 2024
+• Ganesh Chaturthi: September 7, 2024
+• Navratri: October 3-12, 2024
+• Durga Puja: October 9-13, 2024
+• Dussehra: October 12, 2024
+• Karva Chauth: October 20, 2024
+• Diwali: October 31, 2024
+• Govardhan Puja: November 1, 2024
+• Bhai Dooj: November 2, 2024
 
 MUSLIM FESTIVALS 2024-2025:
-- Eid al-Fitr: April 10, 2024
-- Eid al-Adha: June 16, 2024
-- Islamic New Year: July 7, 2024
-- Ashura: July 16, 2024
-- Mawlid al-Nabi: September 15, 2024
-- Ramadan: March 1 - March 30, 2025
+• Eid al-Fitr: April 10, 2024
+• Eid al-Adha: June 16, 2024
+• Islamic New Year: July 7, 2024
+• Ashura: July 16, 2024
+• Mawlid al-Nabi: September 15, 2024
+• Ramadan: March 1 - March 30, 2025
 
 SIKH FESTIVALS 2024-2025:
-- Guru Gobind Singh Jayanti: January 5, 2024
-- Hola Mohalla: March 25, 2024
-- Vaisakhi: April 13, 2024
-- Guru Arjan Dev Martyrdom: June 16, 2024
-- Guru Purnima: July 21, 2024
-- Parkash Guru Granth Sahib: September 1, 2024
-- Bandi Chhor Divas: October 31, 2024
-- Guru Nanak Jayanti: November 15, 2024
-- Guru Tegh Bahadur Martyrdom: November 24, 2024
+• Guru Gobind Singh Jayanti: January 5, 2024
+• Hola Mohalla: March 25, 2024
+• Vaisakhi: April 13, 2024
+• Guru Arjan Dev Martyrdom: June 16, 2024
+• Guru Purnima: July 21, 2024
+• Parkash Guru Granth Sahib: September 1, 2024
+• Bandi Chhor Divas: October 31, 2024
+• Guru Nanak Jayanti: November 15, 2024
+• Guru Tegh Bahadur Martyrdom: November 24, 2024
 
 CHRISTIAN FESTIVALS 2024-2025:
-- Good Friday: March 29, 2024
-- Easter Sunday: March 31, 2024
-- Pentecost: May 19, 2024
-- Christmas: December 25, 2024
-- Epiphany: January 6, 2025
-- Ash Wednesday: February 26, 2025
-- Palm Sunday: April 13, 2025
-- Good Friday: April 18, 2025
-- Easter Sunday: April 20, 2025
+• Good Friday: March 29, 2024
+• Easter Sunday: March 31, 2024
+• Pentecost: May 19, 2024
+• Christmas: December 25, 2024
+• Epiphany: January 6, 2025
+• Ash Wednesday: February 26, 2025
+• Palm Sunday: April 13, 2025
+• Good Friday: April 18, 2025
+• Easter Sunday: April 20, 2025
 
-This calendar is provided by FaithConnect - Connecting you to divine services.
-For booking ceremonies and religious services, visit: faithconnect.com
-            `;
+JAIN FESTIVALS 2024-2025:
+• Mahavir Jayanti: April 21, 2024
+• Paryushan: September 2-9, 2024
+• Samvatsari: September 9, 2024
+• Kshamavani: September 10, 2024
+• Diwali: October 31, 2024
+• New Year: November 12, 2024
+• Maun Agiyaras: December 10, 2024
+
+IMPORTANT NOTES:
+- Dates may vary based on regional customs and moon sightings
+- Consult local religious authorities for exact dates
+- Some festivals span multiple days
+
+BOOKING INFORMATION:
+For booking religious ceremonies and services, visit:
+https://faithconnect.com
+or contact: support@faithconnect.com
+
+FaithConnect - Connecting You to Divine Services
+© 2024 FaithConnect. All Rights Reserved.`;
         }
 
-        function generateStarterGuide() {
+        function generateStarterGuideContent() {
             return `FAITHCONNECT COMPLETE STARTER GUIDE
+================================
 
 WELCOME TO FAITHCONNECT
 =======================
 
-Thank you for choosing FaithConnect, India's first multi-faith platform connecting you with authentic religious services across all major faith traditions.
+FaithConnect is India's first multi-faith platform connecting you with authentic religious services across Hindu, Muslim, Sikh, Christian, and Jain traditions.
 
-TABLE OF CONTENTS
------------------
-1. Introduction to FaithConnect
-2. How to Book Ceremonies
-3. Understanding Different Faith Traditions
-4. Service Provider Selection Guide
-5. Payment & Verification Process
-6. Frequently Asked Questions
-7. Contact & Support
+QUICK START GUIDE
+=================
 
-CHAPTER 1: INTRODUCTION TO FAITHCONNECT
----------------------------------------
-FaithConnect is a revolutionary platform that brings tradition and technology together. We serve four major faith traditions:
+1. SELECT YOUR FAITH
+   - Choose from Hindu, Muslim, Sikh, Christian, or Jain
+   - Browse available ceremonies (20+ for each faith)
 
-- Hindu Dharma
-- Islam
-- Sikhism
-- Christianity
+2. CHOOSE CEREMONY
+   - Select from various religious ceremonies
+   - View descriptions and pricing
+   - Check availability
 
-Our mission is to make authentic religious services accessible to everyone, regardless of location or background.
+3. ADD ITEMS
+   - Select necessary religious items
+   - Choose from verified suppliers
+   - Add to your cart
 
-CHAPTER 2: HOW TO BOOK CEREMONIES
-----------------------------------
-The booking process is simple and straightforward:
+4. BOOK SERVICE PROVIDER
+   - Choose from verified religious leaders
+   - View experience and ratings
+   - Select based on your needs
 
-1. Select Your Faith: Choose from Hindu, Muslim, Sikh, or Christian
-2. Choose Ceremony: Browse through 15+ ceremonies for each faith
-3. Select Items: Add necessary religious items to your cart
-4. Book Service Provider: Choose from verified religious leaders
-5. Make Payment: Secure payment via QR code
-6. Verification: Upload payment screenshot for confirmation
+5. MAKE PAYMENT
+   - Secure payment via QR code
+   - Multiple UPI options
+   - Payment verification system
 
-CHAPTER 3: UNDERSTANDING DIFFERENT FAITH TRADITIONS
-----------------------------------------------------
-HINDU DHARMA:
-- Over 20 ceremonies including Vivah, Gharparvesh, Mundan
-- Traditional rituals with authentic pandits
-- Complete puja samagri available
+6. VERIFICATION
+   - Upload payment screenshot
+   - Enter payment date
+   - Automatic verification
+   - Booking confirmation
 
-ISLAM:
-- Nikah, Aqiqah, Eid prayers and more
-- Verified Imams and Islamic scholars
-- Halal-certified services
+AVAILABLE CEREMONIES BY FAITH
+==============================
 
-SIKHISM:
-- Akhand Path, Anand Karaj, Amrit Sanchar
-- Experienced Granthis and Ragis
-- Gurmat-compliant services
+HINDU (20+ Ceremonies):
+• Gharparvesh (House Warming)
+• Diwali Puja
+• Mundan (First Hair Cutting)
+• Vivah (Wedding)
+• Janeu (Sacred Thread)
+• And 15+ more...
 
-CHRISTIANITY:
-- Baptism, Wedding, Christmas services
-- Ordained Pastors and Bishops
-- Traditional Christian rituals
+MUSLIM (20+ Ceremonies):
+• Nikah (Islamic Marriage)
+• Aqiqah (Birth Ceremony)
+• Eid ul-Fitr Prayers
+• Eid ul-Adha Prayers
+• Jumu'ah (Friday Prayers)
+• And 15+ more...
 
-CHAPTER 4: SERVICE PROVIDER SELECTION GUIDE
--------------------------------------------
-All our service providers are:
-- Thoroughly verified and background checked
-- Experienced in their respective traditions
-- Rated by previous customers
-- Available for consultation
+SIKH (20+ Ceremonies):
+• Akhand Path (Scripture Reading)
+• Anand Karaj (Wedding)
+• Amrit Sanchar (Initiation)
+• Naam Karan (Naming)
+• Antam Sanskar (Funeral)
+• And 15+ more...
 
-CHAPTER 5: PAYMENT & VERIFICATION PROCESS
------------------------------------------
-We use a secure payment verification system:
+CHRISTIAN (20+ Ceremonies):
+• Baptism
+• Wedding
+• Christmas Service
+• Easter Service
+• First Communion
+• And 15+ more...
 
-1. Scan QR code with any UPI app
-2. Pay the exact amount shown
-3. Upload payment screenshot
-4. Automatic verification
-5. Booking confirmation
+JAIN (20+ Ceremonies):
+• Pratishtha (Idol Consecration)
+• Paryushan (Festival of Forgiveness)
+• Snatra Puja (Idol Bathing)
+• Mahavir Jayanti Celebration
+• And 15+ more...
 
-CHAPTER 6: FREQUENTLY ASKED QUESTIONS
---------------------------------------
-Q: How do I know the service providers are authentic?
-A: All providers undergo thorough verification including background checks and certification verification.
+CONTACT & SUPPORT
+=================
 
-Q: Can I book ceremonies for interfaith marriages?
-A: Yes, we specialize in interfaith ceremonies with proper protocols.
-
-Q: What if I need to cancel my booking?
-A: Cancellation policies vary by service type. Contact support for assistance.
-
-CHAPTER 7: CONTACT & SUPPORT
------------------------------
 Email: support@faithconnect.com
 Phone: +91 98765 43210, +91 91234 56789
-Gmail: chanakyasahni8@gmail.com
+Website: https://faithconnect.com
 
-Thank you for choosing FaithConnect!
-We are honored to serve your spiritual needs.
-            `;
+OPERATING HOURS:
+Monday - Sunday: 7:00 AM - 10:00 PM
+Emergency Services: 24/7 Available
+
+FaithConnect - Your Spiritual Journey Partner
+© 2024 FaithConnect. All Rights Reserved.`;
         }
 
-        function generateHinduGuide() {
+        function generateHinduGuideContent() {
             return `HINDU CEREMONIES COMPLETE GUIDE
+==============================
 
-COMPREHENSIVE GUIDE TO HINDU RELIGIOUS CEREMONIES
+MAJOR HINDU CEREMONIES & SAMSKARAS
+===================================
 
-This guide covers all major Hindu ceremonies with detailed rituals, requirements, and procedures.
-
-TABLE OF CONTENTS
------------------
-1. Introduction to Hindu Ceremonies
-2. Samskaras (Sacraments)
-3. Festival Pujas
-4. Daily Worship
-5. Special Ceremonies
-6. Ritual Items Guide
-7. Pandit Selection
-
-CHAPTER 1: INTRODUCTION TO HINDU CEREMONIES
--------------------------------------------
-Hindu ceremonies, known as Samskaras, are sacred rituals that mark important life events. There are 16 major Samskaras in Hindu tradition.
-
-CHAPTER 2: MAJOR SAMSKARAS (SACRAMENTS)
-----------------------------------------
 1. GARBHADHANA (Conception Ceremony)
    - Performed before conception
    - Blessings for healthy child
@@ -2533,8 +2711,9 @@ CHAPTER 2: MAJOR SAMSKARAS (SACRAMENTS)
     - Final Samskara
     - Liberation rituals
 
-CHAPTER 3: MAJOR FESTIVAL PUJAS
---------------------------------
+FESTIVAL PUJAS & CEREMONIES
+===========================
+
 1. DIWALI PUJA
    - Lakshmi Puja for wealth
    - Kali Puja in some regions
@@ -2560,128 +2739,36 @@ CHAPTER 3: MAJOR FESTIVAL PUJAS
    - Kite flying festival
    - Harvest celebration
 
-6. RAKSHA BANDHAN
-   - Brother-sister bond
-   - Rakhi tying ceremony
-   - Protection vows
+ESSENTIAL ITEMS FOR HINDU CEREMONIES
+====================================
 
-7. JANMASHTAMI
-   - Lord Krishna's birth
-   - Midnight celebrations
-   - Dahi Handi
+• Diya Set (Oil Lamps)
+• Incense Sticks
+• Camphor
+• Sandalwood Paste
+• Flowers Garland
+• Coconut
+• Kumkum
+• Turmeric
+• Betel Leaves
+• Fruits Basket
 
-8. MAHA SHIVRATRI
-   - Lord Shiva worship
-   - Night-long vigil
-   - Bael leaves offering
+BOOKING INFORMATION:
+Website: https://faithconnect.com
+Contact: support@faithconnect.com
+Phone: +91 98765 43210
 
-CHAPTER 4: DAILY WORSHIP
--------------------------
-1. SANDHYA VANDANA
-   - Morning and evening prayers
-   - Gayatri Mantra chanting
-   - Sun worship
-
-2. PUJA VIDHI
-   - Daily worship procedure
-   - 16-step worship
-   - Mantra chanting
-
-CHAPTER 5: SPECIAL CEREMONIES
-------------------------------
-1. GRIHA PRAVESH (House Warming)
-   - New home blessing
-   - Vastu Puja
-   - Protection rituals
-
-2. VAHAN PUJA (Vehicle Blessing)
-   - Vehicle protection
-   - Safe travel prayers
-   - Regular ceremony
-
-3. BUSINESS PUJA
-   - Shop/office opening
-   - Lakshmi Puja for prosperity
-   - Success rituals
-
-CHAPTER 6: RITUAL ITEMS GUIDE
-------------------------------
-Essential items for Hindu ceremonies:
-
-1. PUJA THALI CONTENTS:
-   - Diya (Oil Lamp)
-   - Incense Sticks
-   - Camphor
-   - Kumkum
-   - Turmeric
-   - Sandalwood Paste
-   - Flowers
-   - Fruits
-   - Betel Leaves
-   - Coconut
-
-2. SPECIAL ITEMS:
-   - Kalash (Sacred Pot)
-   - Yagyopaveet (Sacred Thread)
-   - Rudraksha Beads
-   - Tulsi Leaves
-   - Bael Leaves
-
-CHAPTER 7: PANDIT SELECTION GUIDE
-----------------------------------
-Choosing the right Pandit:
-
-1. QUALIFICATIONS:
-   - Vedic education
-   - Experience level
-   - Specialization
-   - Language proficiency
-
-2. VERIFICATION:
-   - Background check
-   - Customer reviews
-   - Certification
-   - Experience proof
-
-3. SERVICES:
-   - Ceremony performance
-   - Mantra chanting
-   - Ritual guidance
-   - Custom ceremonies
-
-CONCLUSION
-----------
-This guide provides comprehensive information about Hindu ceremonies. For booking authentic Pandits and ceremonies, visit FaithConnect.
-
-All ceremonies are performed according to Vedic traditions with proper rituals and mantras.
-
-FAITHCONNECT - Connecting you to authentic Hindu religious services.
-            `;
+FaithConnect - Authentic Hindu Religious Services
+© 2024 FaithConnect. All Rights Reserved.`;
         }
 
-        function generateMuslimGuide() {
+        function generateMuslimGuideContent() {
             return `MUSLIM CEREMONIES COMPLETE GUIDE
+==============================
 
-COMPREHENSIVE GUIDE TO ISLAMIC RELIGIOUS CEREMONIES
+FIVE PILLARS OF ISLAM
+=====================
 
-This guide covers all major Islamic ceremonies with detailed procedures, requirements, and protocols according to Quran and Sunnah.
-
-TABLE OF CONTENTS
------------------
-1. Introduction to Islamic Ceremonies
-2. Five Pillars of Islam
-3. Life Cycle Ceremonies
-4. Festival Prayers
-5. Daily Worship
-6. Special Prayers
-7. Imam Selection Guide
-
-CHAPTER 1: INTRODUCTION TO ISLAMIC CEREMONIES
-----------------------------------------------
-Islamic ceremonies are based on Quranic teachings and Prophet Muhammad's (PBUH) traditions. All ceremonies must follow Shariah principles.
-
-CHAPTER 2: FIVE PILLARS OF ISLAM
----------------------------------
 1. SHAHADA (Declaration of Faith)
    - First pillar of Islam
    - Testimony of faith
@@ -2707,8 +2794,9 @@ CHAPTER 2: FIVE PILLARS OF ISLAM
    - Once in lifetime obligation
    - Spiritual journey
 
-CHAPTER 3: LIFE CYCLE CEREMONIES
----------------------------------
+LIFE CYCLE CEREMONIES
+=====================
+
 1. AQIQAH (Birth Ceremony)
    - 7th day after birth
    - Animal sacrifice
@@ -2732,8 +2820,9 @@ CHAPTER 3: LIFE CYCLE CEREMONIES
    - Salat al-Janazah
    - Burial procedures
 
-CHAPTER 4: FESTIVAL PRAYERS
-----------------------------
+FESTIVAL PRAYERS & CEREMONIES
+=============================
+
 1. EID AL-FITR
    - End of Ramadan
    - Special Eid prayer
@@ -2751,499 +2840,518 @@ CHAPTER 4: FESTIVAL PRAYERS
    - Khutbah (sermon)
    - Special blessings
 
-CHAPTER 5: DAILY WORSHIP
--------------------------
-1. FIVE DAILY PRAYERS:
-   - Fajr (Dawn)
-   - Dhuhr (Noon)
-   - Asr (Afternoon)
-   - Maghrib (Sunset)
-   - Isha (Night)
+DAILY WORSHIP & PRAYERS
+=======================
 
-2. TAHARAT (Purification)
-   - Wudu (ablution)
-   - Ghusl (bath)
-   - Tayammum (dry ablution)
+FIVE DAILY PRAYERS:
+• Fajr (Dawn)
+• Dhuhr (Noon)
+• Asr (Afternoon)
+• Maghrib (Sunset)
+• Isha (Night)
 
-3. QURAN RECITATION
-   - Daily reading
-   - Tajweed rules
-   - Memorization
+TAHARAT (Purification):
+• Wudu (ablution)
+• Ghusl (bath)
+• Tayammum (dry ablution)
 
-CHAPTER 6: SPECIAL PRAYERS
----------------------------
-1. TARAWEEH
-   - Ramadan night prayers
-   - 20 rakats
-   - Quran completion
+SPECIAL PRAYERS:
+• Taraweeh (Ramadan night prayers)
+• Tahajjud (Night vigil prayers)
+• Istikhara (Guidance prayer)
+• Salat ul-Hajah (Need prayer)
 
-2. TAHajjud
-   - Night vigil prayers
-   - Special blessings
-   - Acceptance of prayers
+ESSENTIAL ITEMS FOR MUSLIM CEREMONIES
+=====================================
 
-3. ISTIKHARA
-   - Guidance prayer
-   - Decision making
-   - Divine guidance
+• Prayer Mat
+• Miswak
+• Attar (Perfume)
+• Tasbih (Prayer Beads)
+• Quran Stand
+• Kufi Cap
+• Hijab
+• Dates Box
+• Islamic Books
+• Prayer Outfit
 
-4. SALAT UL-HAJAH
-   - Need prayer
-   - Specific requests
-   - Problem solving
+HALAL GUIDELINES:
+• Permissible foods according to Islamic law
+• Proper slaughter methods (Zabiha)
+• Prohibition of pork and alcohol
+• Blood must be drained completely
 
-CHAPTER 7: IMAM SELECTION GUIDE
---------------------------------
-Choosing the right Imam:
+BOOKING INFORMATION:
+Website: https://faithconnect.com
+Contact: support@faithconnect.com
+Phone: +91 98765 43210
 
-1. QUALIFICATIONS:
-   - Islamic education
-   - Quran knowledge
-   - Hadith knowledge
-   - Fiqh understanding
-
-2. VERIFICATION:
-   - Madrassa certification
-   - Experience proof
-   - Community recognition
-   - Language skills
-
-3. SERVICES:
-   - Prayer leadership
-   - Nikah performance
-   - Funeral services
-   - Islamic counseling
-
-CONCLUSION
-----------
-This guide provides comprehensive information about Islamic ceremonies. For booking authentic Imams and Islamic services, visit FaithConnect.
-
-All ceremonies are performed according to Quran and Sunnah with proper Islamic protocols.
-
-FAITHCONNECT - Connecting you to authentic Islamic religious services.
-            `;
+FaithConnect - Authentic Islamic Religious Services
+© 2024 FaithConnect. All Rights Reserved.`;
         }
 
-        function generatePrayerCollection() {
+        function generateJainGuideContent() {
+            return `JAIN CEREMONIES COMPLETE GUIDE
+==============================
+
+FUNDAMENTAL PRINCIPLES OF JAINISM
+=================================
+
+1. AHIMSA (Non-violence)
+   - Core principle of Jainism
+   - Non-violence in thought, word, and deed
+   - Respect for all living beings
+
+2. SATYA (Truth)
+   - Always speak the truth
+   - Avoid falsehood
+   - Truthful living
+
+3. ASTEYA (Non-stealing)
+   - Not taking what is not given
+   - Respect for others' property
+   - Contentment with what one has
+
+4. BRAHMACHARYA (Chastity)
+   - Celibacy for monks and nuns
+   - Faithfulness in marriage for householders
+   - Control over senses
+
+5. APARIGRAHA (Non-possessiveness)
+   - Non-attachment to material possessions
+   - Limiting one's needs
+   - Detachment from worldly things
+
+MAJOR JAIN CEREMONIES
+=====================
+
+1. PRATISHTHA (Idol Consecration)
+   - Installation of Jain idols in temples
+   - Complex ceremony with multiple rituals
+   - Performed by qualified Jain priests
+
+2. SNAATRA PUJA (Idol Bathing Ceremony)
+   - Ritual bathing of Jain Tirthankaras
+   - Performed with milk, curd, ghee, etc.
+   - Symbolic purification
+
+3. PARYUSHAN (Festival of Forgiveness)
+   - 8-day festival for Shwetambars
+   - 10-day festival for Digambars
+   - Fasting, meditation, and prayers
+   - Seeking and granting forgiveness
+
+4. SAMVATSARI (Day of Forgiveness)
+   - Last day of Paryushan
+   - Micchami Dukkadam - seeking forgiveness
+   - Annual confession of sins
+
+5. MAHAVIR JAYANTI (Lord Mahavir's Birthday)
+   - Celebration of Lord Mahavir's birth
+   - Temple visits and prayers
+   - Processions and cultural programs
+
+6. DEEPAWALI (Jain Diwali)
+   - Celebration of Lord Mahavir's nirvana
+   - Lighting of lamps
+   - Temple visits and prayers
+
+DAILY PRACTICES & RITUALS
+=========================
+
+SIX ESSENTIAL DUTIES (Avashyakas):
+1. Samayika - Equanimity meditation
+2. Chauvisattho - Veneration of 24 Tirthankaras
+3. Vandana - Respecting monks and nuns
+4. Pratikramana - Introspection and repentance
+5. Kayotsarga - Meditation in standing posture
+6. Pratyakhyana - Taking religious vows
+
+JAIN PUJAS:
+• Ashtaprakari Puja - 8-fold worship
+• Chaitya Vandan - Temple worship
+• Arihant Puja - Worship of liberated souls
+• Siddha Puja - Worship of perfected souls
+
+ESSENTIAL ITEMS FOR JAIN CEREMONIES
+===================================
+
+• Jain Idols or Pictures
+• Ashtamangal Items (8 auspicious items)
+• Rice grains
+• Flowers
+• Fruits
+• Incense sticks
+• Lamp (Diya)
+• Sacred water (Kalash)
+• Sweets (as offering)
+• Jain Scriptures
+
+DIETARY GUIDELINES:
+• Strict vegetarianism
+• No root vegetables (onions, garlic, potatoes)
+• No alcohol or intoxicants
+• Fasting on specific days
+• Sattvic food preparation
+
+BOOKING INFORMATION:
+Website: https://faithconnect.com
+Contact: support@faithconnect.com
+Phone: +91 98765 43210
+
+FaithConnect - Authentic Jain Religious Services
+© 2024 FaithConnect. All Rights Reserved.`;
+        }
+
+        function generatePrayerCollectionContent() {
             return `MULTI-FAITH PRAYER COLLECTION
+============================
 
-BEAUTIFUL COLLECTION OF PRAYERS FROM ALL FOUR FAITH TRADITIONS
+HINDU PRAYERS & MANTRAS
+=======================
 
-This collection includes prayers, mantras, hymns, and devotional texts from Hindu, Muslim, Sikh, and Christian traditions with translations and explanations.
+GAYATRI MANTRA:
+Om Bhur Bhuvaḥ Swaḥ
+Tat-savitur Vareñyaṃ
+Bhargo Devasya Dhīmahi
+Dhiyo Yonaḥ Prachodayāt
 
-TABLE OF CONTENTS
------------------
-1. Hindu Prayers and Mantras
-2. Muslim Duas and Prayers
-3. Sikh Shabads and Prayers
-4. Christian Hymns and Prayers
-5. Daily Prayer Guide
-6. Festival Special Prayers
-7. Meditation and Contemplation
+Translation:
+"We meditate on the glory of the Creator,
+Who has created the Universe,
+Who is worthy of Worship,
+Who is the embodiment of Knowledge and Light,
+Who is the remover of all Sin and Ignorance,
+May He enlighten our Intellect."
 
-CHAPTER 1: HINDU PRAYERS AND MANTRAS
--------------------------------------
-1. GAYATRI MANTRA
-   Sanskrit: 
-   ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्
+MAHA MRITYUNJAYA MANTRA:
+Om Tryambakaṃ Yajāmahe
+Sugandhiṃ Puṣṭi-vardhanam
+Urvārukam-iva Bandhanān
+Mṛtyor-mukṣīya Mā'mṛtāt
 
-   Translation:
-   "We meditate on the glory of the Creator,
-   Who has created the Universe,
-   Who is worthy of Worship,
-   Who is the embodiment of Knowledge and Light,
-   Who is the remover of all Sin and Ignorance,
-   May He enlighten our Intellect."
+SHANTI MANTRA:
+Om Sarveṣāṃ Svastir-bhavatu
+Sarveṣāṃ Śāntir-bhavatu
+Sarveṣāṃ Pūrṇaṃ-bhavatu
+Sarveṣāṃ Maṅgalaṃ-bhavatu
+Om Śāntiḥ Śāntiḥ Śāntiḥ
 
-2. MAHA MRITYUNJAYA MANTRA
-   Sanskrit:
-   ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्
-   उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात्
+MUSLIM DUAS & PRAYERS
+=====================
 
-   Translation:
-   "We worship the three-eyed Lord Shiva who is fragrant and who nourishes all beings.
-   May He liberate us from death for the sake of immortality,
-   even as the cucumber is severed from its bondage to the creeper."
+SURAH AL-FATIHAH:
+Bismillāhir-Raḥmānir-Raḥīm
+Al-ḥamdu lillāhi Rabbil-'ālamīn
+Ar-Raḥmānir-Raḥīm
+Māliki yawmid-dīn
+Iyyāka na'budu wa iyyāka nasta'īn
+Ihdināṣ-ṣirāṭal-mustaqīm
+Ṣirāṭal-lażīna an'amta 'alaihim
+Gairil-magḍūbi 'alaihim wa laḍ-ḍāllīn
 
-3. SHANTI MANTRA
-   Sanskrit:
-   ॐ सर्वेशां स्वस्तिर्भवतु सर्वेशां शान्तिर्भवतु
-   सर्वेशां पूर्णंभवतु सर्वेशां मङ्गलंभवतु
-   ॐ शान्तिः शान्तिः शान्तिः
+MORNING DUA:
+Aṣbaḥnā wa aṣbaḥal-mulku lillāhi
+wal-ḥamdu lillāhi
+lā ilāha illallāhu waḥdahū lā sharīka lahū
 
-   Translation:
-   "May there be well-being for all,
-   May there be peace for all,
-   May there be fulfillment for all,
-   May there be auspiciousness for all,
-   Om peace, peace, peace."
+PROTECTION DUA:
+A'ūdhu bikalimātillāhit-tāmmāti min sharri mā khalaq
 
-CHAPTER 2: MUSLIM DUAS AND PRAYERS
------------------------------------
-1. OPENING PRAYER (Surah Al-Fatihah)
-   Arabic:
-   بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-   الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
-   الرَّحْمَٰنِ الرَّحِيمِ
-   مَالِكِ يَوْمِ الدِّينِ
-   إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
-   اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
-   صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
+SIKH SHABADS & PRAYERS
+======================
 
-   Translation:
-   "In the name of Allah, the Entirely Merciful, the Especially Merciful.
-   Praise be to Allah, Lord of the worlds,
-   The Entirely Merciful, the Especially Merciful,
-   Sovereign of the Day of Recompense.
-   It is You we worship and You we ask for help.
-   Guide us to the straight path -
-   The path of those upon whom You have bestowed favor,
-   not of those who have earned Your anger or of those who are astray."
+JAPJI SAHIB (Opening Verse):
+Ik ōaṅkār sat nām
+Kartā purakh nirbhau nirvair
+Akāl mūrat ajūnī saibhaṅ
+Gur prasād
 
-2. MORNING DUA
-   Arabic:
-   أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ
+ARDAS (Sikh Prayer):
+Ik Oankaar Waheguroo Jee Kee Fateh
+Sri Bhagouti Jee Sahai
+Vaar Sri Bhagouti Jee Kee Paatshaahee 10
 
-   Translation:
-   "We have reached the morning and at this very time all sovereignty belongs to Allah,
-   and all praise is for Allah. None has the right to be worshipped except Allah,
-   alone without any partner."
+SHABAD HAZARE:
+Tera keeta jaato nahee maino jog keetoee
+Main nirguni-aare ko gun nahee apnaa prabh dhhiaaee
 
-3. PROTECTION DUA
-   Arabic:
-   أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِن شَرِّ مَا خَلَقَ
+CHRISTIAN HYMNS & PRAYERS
+=========================
 
-   Translation:
-   "I seek refuge in the perfect words of Allah from the evil of what He has created."
+THE LORD'S PRAYER:
+Our Father, who art in heaven,
+Hallowed be thy Name.
+Thy kingdom come.
+Thy will be done,
+On earth as it is in heaven.
+Give us this day our daily bread.
+And forgive us our trespasses,
+As we forgive those who trespass against us.
+And lead us not into temptation,
+But deliver us from evil.
+Amen.
 
-CHAPTER 3: SIKH SHABADS AND PRAYERS
-------------------------------------
-1. JAPJI SAHIB (Opening Verse)
-   Gurmukhi:
-   ੴ ਸਤਿ ਨਾਮੁ ਕਰਤਾ ਪੁਰਖੁ ਨਿਰਭਉ ਨਿਰਵੈਰੁ ਅਕਾਲ ਮੂਰਤਿ ਅਜੂਨੀ ਸੈਭੰ ਗੁਰ ਪ੍ਰਸਾਦਿ ॥
+PSALM 23:
+The Lord is my shepherd; I shall not want.
+He maketh me to lie down in green pastures:
+he leadeth me beside the still waters.
+He restoreth my soul...
 
-   Translation:
-   "There is One God,
-   Truth is His Name,
-   Creative Being Personified,
-   No Fear, No Hatred,
-   Image of the Timeless Being,
-   Beyond Birth, Self-Existent,
-   By Guru's Grace."
+SERENITY PRAYER:
+God, grant me the serenity to accept the things I cannot change,
+courage to change the things I can,
+and wisdom to know the difference.
 
-2. ARDAS (Sikh Prayer)
-   Gurmukhi:
-   ੴ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਹਿ
-   ਸ੍ਰੀ ਭਗੌਤੀ ਜੀ ਸਹਾਇ
-   ਵਾਰ ਸ੍ਰੀ ਭਗੌਤੀ ਜੀ ਕੀ ਪਾਤਸਾਹੀ ੧੦
+JAIN PRAYERS & MANTRA
+=====================
 
-   Translation:
-   "One Universal Creator God, Victory belongs to God.
-   May the respected sword (God in the form of the destroyer of evil) help us!
-   Ode of the respected sword recited by the Tenth Guru."
+NAVKAR MANTRA:
+Namo Arihantāṇam
+Namo Siddhāṇam
+Namo Āyariyāṇam
+Namo Uvajjhāyāṇam
+Namo Loe Savva Sāhūṇam
+Eso pañca Namokkāro
+Savva Pāvappaṇāsano
+Mangalāṇam ca Savvesim
+Paḍhamam Havai Mangalam
 
-3. SHABAD HAZARE
-   Gurmukhi:
-   ਤੇਰਾ ਕੀਤਾ ਜਾਤੋ ਨਾਹੀ ਮੈਨੋ ਜੋਗੁ ਕੀਤੋਈ ॥
-   ਮੈ ਨਿਰਗੁਣਿਆਰੇ ਕੋ ਗੁਣੁ ਨਾਹੀ ਅਪਣਾ ਪਰਭੁ ਧਿਆਈ ॥
+Translation:
+I bow to the Arihants (Conquerors)
+I bow to the Siddhas (Liberated Souls)
+I bow to the Acharyas (Spiritual Leaders)
+I bow to the Upadhyayas (Teachers)
+I bow to all the Sadhus (Saints) in the world
+These fivefold obeisance
+Destroys all sins
+And of all auspicious mantras
+Is the first and foremost
 
-   Translation:
-   "I cannot even assess what You have done for me,
-   You have made me into a Yogi.
-   I am unworthy, I have no virtues at all,
-   but I meditate on my God."
+DAILY PRAYER SCHEDULE
+=====================
 
-CHAPTER 4: CHRISTIAN HYMNS AND PRAYERS
----------------------------------------
-1. THE LORD'S PRAYER
-   "Our Father, who art in heaven,
-   Hallowed be thy Name.
-   Thy kingdom come.
-   Thy will be done,
-   On earth as it is in heaven.
-   Give us this day our daily bread.
-   And forgive us our trespasses,
-   As we forgive those who trespass against us.
-   And lead us not into temptation,
-   But deliver us from evil.
-   For thine is the kingdom,
-   and the power, and the glory,
-   for ever and ever. Amen."
-
-2. PSALM 23
-   "The Lord is my shepherd; I shall not want.
-   He maketh me to lie down in green pastures:
-   he leadeth me beside the still waters.
-   He restoreth my soul:
-   he leadeth me in the paths of righteousness for his name's sake.
-   Yea, though I walk through the valley of the shadow of death,
-   I will fear no evil: for thou art with me;
-   thy rod and thy staff they comfort me.
-   Thou preparest a table before me in the presence of mine enemies:
-   thou anointest my head with oil; my cup runneth over.
-   Surely goodness and mercy shall follow me all the days of my life:
-   and I will dwell in the house of the Lord for ever."
-
-3. SERENITY PRAYER
-   "God, grant me the serenity to accept the things I cannot change,
-   courage to change the things I can,
-   and wisdom to know the difference."
-
-CHAPTER 5: DAILY PRAYER GUIDE
-------------------------------
 MORNING PRAYERS:
-- Hindu: Gayatri Mantra and Surya Namaskar
-- Muslim: Fajr Prayer and Morning Duas
-- Sikh: Japji Sahib and Morning Prayers
-- Christian: Morning Devotion and Lord's Prayer
+• Hindu: Gayatri Mantra and Surya Namaskar
+• Muslim: Fajr Prayer and Morning Duas
+• Sikh: Japji Sahib and Morning Prayers
+• Christian: Morning Devotion and Lord's Prayer
+• Jain: Navkar Mantra and Samayik
 
 EVENING PRAYERS:
-- Hindu: Sandhya Vandana and Shanti Mantra
-- Muslim: Maghrib Prayer and Evening Duas
-- Sikh: Rehras Sahib and Evening Prayers
-- Christian: Evening Devotion and Psalms
+• Hindu: Sandhya Vandana and Shanti Mantra
+• Muslim: Maghrib Prayer and Evening Duas
+• Sikh: Rehras Sahib and Evening Prayers
+• Christian: Evening Devotion and Psalms
+• Jain: Pratikraman and Evening Prayers
 
-CHAPTER 6: FESTIVAL SPECIAL PRAYERS
-------------------------------------
-DIWALI:
-- Lakshmi Mantras and Ganesh Stotras
+FESTIVAL SPECIAL PRAYERS:
+• Diwali: Lakshmi Mantras (Hindu), Nirvana Prayers (Jain)
+• Eid: Takbeerat and Special Duas
+• Gurpurb: Special Shabads
+• Christmas: Christmas Carols
+• Paryushan: Special Jain Prayers
 
-EID:
-- Takbeerat and Special Duas
+BOOKING INFORMATION:
+Website: https://faithconnect.com
+Contact: support@faithconnect.com
+Phone: +91 98765 43210
 
-GURPURB:
-- Special Shabads and Ardas
-
-CHRISTMAS:
-- Christmas Carols and Nativity Prayers
-
-CHAPTER 7: MEDITATION AND CONTEMPLATION
-----------------------------------------
-1. BREATHING EXERCISES
-2. MANTRA MEDITATION
-3. MINDFULNESS PRACTICE
-4. CONTEMPLATIVE PRAYER
-
-CONCLUSION
-----------
-This prayer collection brings together the beautiful spiritual traditions of four major faiths. May these prayers bring peace, comfort, and spiritual growth to all who use them.
-
-FAITHCONNECT - Connecting you to divine prayers across all faiths.
-            `;
+FaithConnect - Connecting You to Divine Prayers
+© 2024 FaithConnect. All Rights Reserved.`;
         }
 
-        function generateDietaryGuide() {
+        function generateDietaryGuideContent() {
             return `RELIGIOUS DIETARY GUIDE
+======================
 
-COMPLETE GUIDE TO RELIGIOUS DIETARY LAWS AND FOOD TRADITIONS
+HINDU DIETARY GUIDELINES
+========================
 
-This comprehensive guide covers dietary practices, restrictions, and festival foods across Hindu, Muslim, Sikh, and Christian traditions.
+SATVIK DIET:
+• Pure, clean, and wholesome foods
+• Promotes spiritual growth
+• Includes fruits, vegetables, grains, dairy
+• Excludes onion, garlic, meat, fish, eggs
 
-TABLE OF CONTENTS
------------------
-1. Introduction to Religious Dietary Practices
-2. Hindu Dietary Guidelines
-3. Muslim Dietary Guidelines (Halal)
-4. Sikh Dietary Guidelines
-5. Christian Dietary Practices
-6. Festival Foods and Recipes
-7. Fasting Guidelines
-8. Cooking for Religious Ceremonies
+VEGETARIANISM:
+• Ahimsa (non-violence) principle
+• Most Hindus are vegetarian
+• No beef consumption (cow is sacred)
 
-CHAPTER 1: INTRODUCTION TO RELIGIOUS DIETARY PRACTICES
--------------------------------------------------------
-Food holds significant spiritual importance across all religious traditions. This guide helps understand and respect various dietary practices.
+FASTING PRACTICES:
+• Ekadashi fasting (11th day of lunar cycle)
+• Navratri fasting
+• Maha Shivratri fasting
+• Fasting rules vary by region
 
-CHAPTER 2: HINDU DIETARY GUIDELINES
-------------------------------------
-1. SATVIK DIET
-   - Pure, clean, and wholesome foods
-   - Promotes spiritual growth
-   - Includes fruits, vegetables, grains, dairy
-   - Excludes onion, garlic, meat, fish, eggs
+MUSLIM DIETARY GUIDELINES (HALAL)
+==================================
 
-2. RAJASIC FOODS
-   - Stimulating foods
-   - Can increase passion and restlessness
-   - Includes spicy, salty, sour foods
+HALAL FOODS:
+• Permissible according to Islamic law
+• Meat from properly slaughtered animals
+• Fish and seafood
+• Plant-based foods
 
-3. TAMASIC FOODS
-   - Dulling foods
-   - Promotes inertia and ignorance
-   - Includes meat, alcohol, stale food
+HARAM FOODS:
+• Pork and pork products
+• Alcohol and intoxicants
+• Blood and blood products
+• Carnivorous animals
 
-4. VEGETARIANISM
-   - Ahimsa (non-violence) principle
-   - Most Hindus are vegetarian
-   - No beef consumption (cow is sacred)
+ZABIHA (PROPER SLAUGHTER):
+• Animal must be healthy
+• Tasmiyah (Bismillah) must be recited
+• Sharp knife used for quick slaughter
+• Blood must be drained completely
 
-5. FASTING PRACTICES
-   - Ekadashi fasting (11th day of lunar cycle)
-   - Navratri fasting
-   - Maha Shivratri fasting
-   - Fasting rules vary by region and tradition
+FASTING (SAWM):
+• Ramadan fasting from dawn to sunset
+• No food, drink, or smoking during fasting hours
+• Iftar (breaking fast) and Suhoor (pre-dawn meal)
 
-CHAPTER 3: MUSLIM DIETARY GUIDELINES (HALAL)
----------------------------------------------
-1. HALAL FOODS
-   - Permissible according to Islamic law
-   - Meat from properly slaughtered animals
-   - Fish and seafood
-   - Plant-based foods
+SIKH DIETARY GUIDELINES
+=======================
 
-2. HARAM FOODS
-   - Pork and pork products
-   - Alcohol and intoxicants
-   - Blood and blood products
-   - Carnivorous animals
-   - Animals not slaughtered properly
+LANGAR TRADITION:
+• Community kitchen
+• Vegetarian food served to all
+• Equality principle - everyone sits together
+• Prepared by volunteers
 
-3. ZABIHA (PROPER SLAUGHTER)
-   - Animal must be healthy
-   - Tasmiyah (Bismillah) must be recited
-   - Sharp knife used for quick slaughter
-   - Blood must be drained completely
+VEGETARIANISM:
+• Most Sikhs are vegetarian
+• No beef consumption
+• Some Sikhs may eat meat (Jhatka)
 
-4. FASTING (SAWM)
-   - Ramadan fasting from dawn to sunset
-   - No food, drink, or smoking during fasting hours
-   - Iftar (breaking fast) and Suhoor (pre-dawn meal)
-   - Special Ramadan foods and traditions
+JHATKA MEAT:
+• If meat is consumed, Jhatka method preferred
+• Single blow to cause instant death
+• No ritual slaughter
 
-CHAPTER 4: SIKH DIETARY GUIDELINES
------------------------------------
-1. LANGAR TRADITION
-   - Community kitchen
-   - Vegetarian food served to all
-   - Equality principle - everyone sits together
-   - Prepared by volunteers
+PROHIBITED ITEMS:
+• Alcohol and intoxicants
+• Tobacco and smoking
+• Drugs and addictive substances
 
-2. VEGETARIANISM
-   - Most Sikhs are vegetarian
-   - No beef consumption
-   - Some Sikhs may eat meat (Jhatka)
+CHRISTIAN DIETARY PRACTICES
+===========================
 
-3. JHATKA MEAT
-   - If meat is consumed, Jhatka method preferred
-   - Single blow to cause instant death
-   - No ritual slaughter
+GENERAL PRACTICES:
+• No specific dietary restrictions for most Christians
+• Moderation in all things
+• Thanksgiving before meals
 
-4. PROHIBITED ITEMS
-   - Alcohol and intoxicants
-   - Tobacco and smoking
-   - Drugs and addictive substances
+FASTING AND ABSTINENCE:
+• Lenten fasting (40 days before Easter)
+• Ash Wednesday and Good Friday fasting
+• Friday abstinence (no meat for Catholics)
+• Advent fasting in some traditions
 
-CHAPTER 5: CHRISTIAN DIETARY PRACTICES
----------------------------------------
-1. GENERAL PRACTICES
-   - No specific dietary restrictions for most Christians
-   - Moderation in all things
-   - Thanksgiving before meals
+COMMUNION:
+• Bread and wine/grape juice
+• Represents body and blood of Christ
+• Central to Christian worship
 
-2. FASTING AND ABSTINENCE
-   - Lenten fasting (40 days before Easter)
-   - Ash Wednesday and Good Friday fasting
-   - Friday abstinence (no meat for Catholics)
-   - Advent fasting in some traditions
+JAIN DIETARY GUIDELINES
+=======================
 
-3. COMMUNION
-   - Bread and wine/wine juice
-   - Represents body and blood of Christ
-   - Central to Christian worship
+STRICT VEGETARIANISM:
+• No meat, fish, eggs
+• No root vegetables (onions, garlic, potatoes, carrots)
+• No alcohol or intoxicants
+• No fermented foods
 
-4. FESTIVAL FOODS
-   - Christmas: Christmas pudding, turkey, mince pies
-   - Easter: Easter eggs, hot cross buns, lamb
-   - Thanksgiving: Turkey, pumpkin pie, traditional foods
+AHIMSA IN FOOD:
+• Minimal harm to living beings
+• Careful food preparation
+• Filtered water to avoid microorganisms
+• Seasonal and local foods preferred
 
-CHAPTER 6: FESTIVAL FOODS AND RECIPES
---------------------------------------
+FASTING PRACTICES:
+• Regular fasting on specific days
+• Paryushan fasting (8-10 days)
+• Ekasana (eating once a day)
+• Bevasana (eating alternate days)
+
+FOOD PREPARATION:
+• Sattvic food preparation
+• Freshly cooked meals
+• No food after sunset
+• Mindful eating practices
+
+FESTIVAL FOODS BY RELIGION
+==========================
+
 HINDU FESTIVAL FOODS:
-- Diwali: Sweets (laddoo, barfi), savory snacks
-- Holi: Gujiya, thandai, puran poli
-- Navratri: Vrat special foods (singhare ka atta, kuttu ka atta)
-- Janmashtami: Panchamrit, makhan mishri
+• Diwali: Sweets (laddoo, barfi), savory snacks
+• Holi: Gujiya, thandai, puran poli
+• Navratri: Vrat special foods
+• Janmashtami: Panchamrit, makhan mishri
 
 MUSLIM FESTIVAL FOODS:
-- Eid al-Fitr: Sewaiyan, sheer khurma, biryani
-- Eid al-Adha: Qurbani meat dishes, kebabs
-- Ramadan: Dates, fruits, special Iftar dishes
+• Eid al-Fitr: Sewaiyan, sheer khurma, biryani
+• Eid al-Adha: Qurbani meat dishes, kebabs
+• Ramadan: Dates, fruits, special Iftar dishes
 
 SIKH FESTIVAL FOODS:
-- Gurpurb: Karah prasad, langar special dishes
-- Vaisakhi: Traditional Punjabi dishes
-- Hola Mohalla: Community meals
+• Gurpurb: Karah prasad, langar special dishes
+• Vaisakhi: Traditional Punjabi dishes
+• Hola Mohalla: Community meals
 
 CHRISTIAN FESTIVAL FOODS:
-- Christmas: Christmas cake, roast turkey, ham
-- Easter: Easter bread, lamb dishes, colored eggs
-- Thanksgiving: Traditional American foods
+• Christmas: Christmas cake, roast turkey, ham
+• Easter: Easter bread, lamb dishes, colored eggs
+• Thanksgiving: Traditional American foods
 
-CHAPTER 7: FASTING GUIDELINES
-------------------------------
-1. HINDU FASTING
-   - Complete fasting or partial fasting
-   - Fruits, milk, and specific foods allowed
-   - No grains on fasting days
-   - Ekadashi, Purnima, Amavasya fasting
+JAIN FESTIVAL FOODS:
+• Paryushan: Simple fasting foods
+• Mahavir Jayanti: Traditional Jain sweets
+• Diwali: Special Jain sweets and snacks
+• All festivals: Strict vegetarian, no root vegetables
 
-2. MUSLIM FASTING
-   - No food or drink from dawn to sunset
-   - Ramadan month fasting
-   - Special prayers and charity
-   - Medical exemptions allowed
+COOKING FOR RELIGIOUS CEREMONIES
+================================
 
-3. CHRISTIAN FASTING
-   - Lenten fasting and abstinence
-   - Ash Wednesday and Good Friday
-   - Fish allowed on fasting days
-   - Age and health considerations
+HINDU CEREMONIES:
+• Satvik food for pujas
+• Prasad preparation
+• Ritual purity in cooking
+• Traditional recipes
 
-CHAPTER 8: COOKING FOR RELIGIOUS CEREMONIES
---------------------------------------------
-1. HINDU CEREMONIES
-   - Satvik food for pujas
-   - Prasad preparation
-   - Ritual purity in cooking
-   - Traditional recipes
+MUSLIM CEREMONIES:
+• Halal certified ingredients
+• Proper food handling
+• Community meals for Eid
+• Traditional Islamic recipes
 
-2. MUSLIM CEREMONIES
-   - Halal certified ingredients
-   - Proper food handling
-   - Community meals for Eid
-   - Traditional Islamic recipes
+SIKH CEREMONIES:
+• Langar preparation
+• Community service
+• Simple, nutritious food
+• Traditional Punjabi recipes
 
-3. SIKH CEREMONIES
-   - Langar preparation
-   - Community service
-   - Simple, nutritious food
-   - Traditional Punjabi recipes
+CHRISTIAN CEREMONIES:
+• Communion preparation
+• Church potlucks
+• Baptism and wedding receptions
+• Traditional Christian recipes
 
-4. CHRISTIAN CEREMONIES
-   - Communion preparation
-   - Church potlucks
-   - Baptism and wedding receptions
-   - Traditional Christian recipes
+JAIN CEREMONIES:
+• Strict vegetarian preparation
+• No root vegetables
+• Freshly prepared food
+• Traditional Jain recipes
 
-CONCLUSION
-----------
-This dietary guide provides comprehensive information about religious food practices across four major faith traditions. Understanding and respecting these dietary laws is essential for interfaith harmony and proper religious observance.
+BOOKING INFORMATION:
+Website: https://faithconnect.com
+Contact: support@faithconnect.com
+Phone: +91 98765 43210
 
-FAITHCONNECT - Connecting you to authentic religious dietary practices.
-            `;
+FaithConnect - Authentic Religious Dietary Services
+© 2024 FaithConnect. All Rights Reserved.`;
         }
-
-        // Placeholder generators for other file types
-        function generatePrintCalendar() { return generateCalendarPDF(); }
-        function generateICalCalendar() { return "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:FaithConnect\nEND:VCALENDAR"; }
-        function generateMobileStarterGuide() { return generateStarterGuide(); }
-        function generateHinduChecklist() { return "Hindu ceremony checklist..."; }
-        function generateAudioPlaceholder() { return "Audio file placeholder"; }
-        function generateFestivalRecipes() { return "Festival recipes collection..."; }
-        function generateQuickCalendar() { return generateCalendarPDF(); }
-        function generateQuickStart() { return generateStarterGuide(); }
-        function generateEssentialPrayers() { return generatePrayerCollection(); }
-        function generateDietaryBasics() { return generateDietaryGuide(); }
 
         // Data for all faiths, events, items, and services - EXPANDED WITH 15+ FESTIVALS EACH
         const faithData = {
@@ -3280,7 +3388,12 @@ FAITHCONNECT - Connecting you to authentic religious dietary practices.
                     { id: 7, name: "Kumkum", price: 80 },
                     { id: 8, name: "Turmeric", price: 70 },
                     { id: 9, name: "Betel Leaves", price: 120 },
-                    { id: 10, name: "Fruits Basket", price: 500 }
+                    { id: 10, name: "Fruits Basket", price: 500 },
+                    { id: 11, name: "Ganga Jal", price: 150 },
+                    { id: 12, name: "Havan Samagri", price: 350 },
+                    { id: 13, name: "Rudraksha Mala", price: 600 },
+                    { id: 14, name: "Brass Kalash", price: 800 },
+                    { id: 15, name: "Puja Thali", price: 450 }
                 ],
                 services: [
                     { id: 1, name: "North Indian Pandit", price: 2500 },
@@ -3323,7 +3436,12 @@ FAITHCONNECT - Connecting you to authentic religious dietary practices.
                     { id: 7, name: "Hijab", price: 450 },
                     { id: 8, name: "Dates Box", price: 350 },
                     { id: 9, name: "Islamic Books", price: 800 },
-                    { id: 10, name: "Prayer Outfit", price: 1200 }
+                    { id: 10, name: "Prayer Outfit", price: 1200 },
+                    { id: 11, name: "Quran", price: 1500 },
+                    { id: 12, name: "Halal Meat", price: 800 },
+                    { id: 13, name: "Islamic Calendar", price: 200 },
+                    { id: 14, name: "Dua Book", price: 300 },
+                    { id: 15, name: "Ramadan Kit", price: 1200 }
                 ],
                 services: [
                     { id: 1, name: "Local Imam", price: 2000 },
@@ -3366,7 +3484,12 @@ FAITHCONNECT - Connecting you to authentic religious dietary practices.
                     { id: 7, name: "Kesh", price: 0 },
                     { id: 8, name: "Sikh Turban", price: 600 },
                     { id: 9, name: "Gutka Sahib", price: 350 },
-                    { id: 10, name: "Sikh Scriptures", price: 2500 }
+                    { id: 10, name: "Sikh Scriptures", price: 2500 },
+                    { id: 11, name: "Langar Items", price: 1200 },
+                    { id: 12, name: "Nishan Sahib", price: 1800 },
+                    { id: 13, name: "Sikh Art", price: 900 },
+                    { id: 14, name: "Kirtan Instruments", price: 2500 },
+                    { id: 15, name: "Sikh History Books", price: 800 }
                 ],
                 services: [
                     { id: 1, name: "Local Granthi", price: 2500 },
@@ -3409,7 +3532,12 @@ FAITHCONNECT - Connecting you to authentic religious dietary practices.
                     { id: 7, name: "Christian Books", price: 500 },
                     { id: 8, name: "Worship Music", price: 450 },
                     { id: 9, name: "Prayer Cards", price: 120 },
-                    { id: 10, name: "Christian Art", price: 900 }
+                    { id: 10, name: "Christian Art", price: 900 },
+                    { id: 11, name: "Advent Wreath", price: 700 },
+                    { id: 12, name: "Nativity Set", price: 1200 },
+                    { id: 13, name: "Easter Eggs", price: 300 },
+                    { id: 14, name: "Christian Jewelry", price: 800 },
+                    { id: 15, name: "Worship Instruments", price: 2500 }
                 ],
                 services: [
                     { id: 1, name: "Local Pastor", price: 3000 },
@@ -3417,6 +3545,54 @@ FAITHCONNECT - Connecting you to authentic religious dietary practices.
                     { id: 3, name: "Bishop", price: 7000 },
                     { id: 4, name: "Deacon", price: 2500 },
                     { id: 5, name: "Christian Counselor", price: 3500 }
+                ]
+            },
+            jain: {
+                events: [
+                    { id: 1, name: "Pratishtha", description: "Idol consecration ceremony", price: 8500 },
+                    { id: 2, name: "Paryushan", description: "Festival of forgiveness", price: 4500 },
+                    { id: 3, name: "Samvatsari", description: "Day of forgiveness", price: 2800 },
+                    { id: 4, name: "Mahavir Jayanti", description: "Lord Mahavir's birthday", price: 3500 },
+                    { id: 5, name: "Snatra Puja", description: "Idol bathing ceremony", price: 3200 },
+                    { id: 6, name: "Antyesti", description: "Funeral ceremony", price: 3800 },
+                    { id: 7, name: "Vivah", description: "Wedding ceremony", price: 12000 },
+                    { id: 8, name: "Namokar Mantra Jaap", description: "Chanting of sacred mantra", price: 2200 },
+                    { id: 9, name: "Ashtahnika", description: "8-day festival", price: 5200 },
+                    { id: 10, name: "Ayambil", description: "Simple food observance", price: 1800 },
+                    { id: 11, name: "Poshadh", description: "Fasting observance", price: 2000 },
+                    { id: 12, name: "Chaitya Paripati", description: "Temple pilgrimage", price: 2800 },
+                    { id: 13, name: "Varshitap", description: "Year-long fasting", price: 6500 },
+                    { id: 14, name: "Maun", description: "Silence observance", price: 2500 },
+                    { id: 15, name: "Diksha", description: "Initiation ceremony", price: 15000 },
+                    { id: 16, name: "Guru Purnima", description: "Teacher's day", price: 2200 },
+                    { id: 17, name: "Jnan Panchami", description: "Knowledge day", price: 2000 },
+                    { id: 18, name: "Navpad Oli", description: "9-day festival", price: 3800 },
+                    { id: 19, name: "Paush Dashmi", description: "10th day of Paush", price: 1800 },
+                    { id: 20, name: "Akshay Tritiya", description: "Immortal third", price: 2800 }
+                ],
+                items: [
+                    { id: 1, name: "Jain Idol", price: 1500 },
+                    { id: 2, name: "Ashtamangal", price: 800 },
+                    { id: 3, name: "Rice Grains", price: 100 },
+                    { id: 4, name: "Flowers", price: 300 },
+                    { id: 5, name: "Fruits", price: 400 },
+                    { id: 6, name: "Incense Sticks", price: 150 },
+                    { id: 7, name: "Diya", price: 200 },
+                    { id: 8, name: "Kalash", price: 600 },
+                    { id: 9, name: "Sweets", price: 350 },
+                    { id: 10, name: "Jain Scriptures", price: 1200 },
+                    { id: 11, name: "Muhapatti", price: 250 },
+                    { id: 12, name: "Jain Calendar", price: 200 },
+                    { id: 13, name: "Puja Asan", price: 500 },
+                    { id: 14, name: "Jain Art", price: 900 },
+                    { id: 15, name: "Fasting Kit", price: 800 }
+                ],
+                services: [
+                    { id: 1, name: "Local Jain Pandit", price: 2500 },
+                    { id: 2, name: "Senior Jain Pandit", price: 4000 },
+                    { id: 3, name: "Jain Scholar", price: 4500 },
+                    { id: 4, name: "Jain Monk", price: 0 },
+                    { id: 5, name: "Jain Teacher", price: 3000 }
                 ]
             }
         };
@@ -3549,27 +3725,32 @@ FAITHCONNECT - Connecting you to authentic religious dietary practices.
                 return "For Christian ceremonies, we provide Baptism, Wedding, Christmas services, Easter services, and other Christian rituals. You can find all Christian ceremonies on our website.";
             }
             
+            // Jain ceremonies
+            if (lowerMessage.includes('jain') || lowerMessage.includes('mahavir') || lowerMessage.includes('paryushan')) {
+                return "For Jain ceremonies, we offer Pratishtha, Paryushan, Samvatsari, Mahavir Jayanti, and other Jain rituals. Browse all Jain ceremonies on our website.";
+            }
+            
             // Payment questions
             if (lowerMessage.includes('payment') || lowerMessage.includes('pay') || lowerMessage.includes('qr')) {
-                return "We accept payments via QR code through all major UPI apps. After booking, you'll get a QR code to scan and make payment securely.";
+                return "We accept payments via QR code through all major UPI apps. After booking, you'll get a QR code to scan and make payment securely. You'll need to upload a screenshot with today's date for verification.";
             }
             
             // Booking process
             if (lowerMessage.includes('book') || lowerMessage.includes('how to') || lowerMessage.includes('process')) {
-                return "The booking process is simple: 1) Select your faith 2) Choose ceremony 3) Add items 4) Select service provider 5) Make payment via QR code 6) Upload payment screenshot for verification.";
+                return "The booking process is simple: 1) Select your faith 2) Choose ceremony 3) Add items 4) Select service provider 5) Make payment via QR code 6) Upload payment screenshot with today's date for verification.";
             }
             
             // Service providers
-            if (lowerMessage.includes('pandit') || lowerMessage.includes('priest') || lowerMessage.includes('imam') || lowerMessage.includes('granthi')) {
+            if (lowerMessage.includes('pandit') || lowerMessage.includes('priest') || lowerMessage.includes('imam') || lowerMessage.includes('granthi') || lowerMessage.includes('jain pandit')) {
                 return "We have verified religious service providers for all faiths. You can choose from different regions and experience levels during the booking process.";
             }
             
             // Default response
             const defaultResponses = [
-                "I can help you book religious ceremonies for Hindu, Muslim, Sikh, or Christian faiths.",
+                "I can help you book religious ceremonies for Hindu, Muslim, Sikh, Christian, or Jain faiths.",
                 "You can select items needed for your ceremony and book religious service providers.",
-                "After booking, you'll need to upload a payment screenshot for verification.",
-                "We ensure your payment matches the total amount before confirming your booking.",
+                "After booking, you'll need to upload a payment screenshot with today's date for verification.",
+                "We ensure your payment matches the total amount and date before confirming your booking.",
                 "Our service providers will be notified once your payment is verified successfully.",
                 "Feel free to browse our website to see all available ceremonies and services.",
                 "I'm here to assist you with any questions about religious ceremonies and bookings."
@@ -3711,12 +3892,14 @@ FAITHCONNECT - Connecting you to authentic religious dietary practices.
                 serviceContainer = document.getElementById('granthi-container');
             } else if (currentFaith === 'christian') {
                 serviceContainer = document.getElementById('priest-container');
+            } else if (currentFaith === 'jain') {
+                serviceContainer = document.getElementById('jain-pandit-container');
             }
             
             serviceContainer.style.display = 'block';
             
             // Populate service options
-            const serviceOptions = serviceContainer.querySelector(`.${currentFaith === 'hindu' ? 'pandit' : currentFaith === 'muslim' ? 'imam' : currentFaith === 'sikh' ? 'granthi' : 'priest'}-options`);
+            const serviceOptions = serviceContainer.querySelector(`.${currentFaith === 'hindu' ? 'pandit' : currentFaith === 'muslim' ? 'imam' : currentFaith === 'sikh' ? 'granthi' : currentFaith === 'christian' ? 'priest' : 'jain-pandit'}-options`);
             serviceOptions.innerHTML = '';
             
             faithData[currentFaith].services.forEach(service => {
@@ -3739,7 +3922,7 @@ FAITHCONNECT - Connecting you to authentic religious dietary practices.
 
         // Function to show cart
         function showCart() {
-            document.querySelectorAll('.pandit-container, .priest-container, .granthi-container, .imam-container').forEach(container => {
+            document.querySelectorAll('.pandit-container, .priest-container, .granthi-container, .imam-container, .jain-pandit-container').forEach(container => {
                 container.style.display = 'none';
             });
             document.getElementById('services-title').style.display = 'none';
@@ -3807,11 +3990,27 @@ FAITHCONNECT - Connecting you to authentic religious dietary practices.
         function verifyPayment() {
             const total = calculateTotal();
             const screenshotUploaded = document.getElementById('preview-container').style.display !== 'none';
+            const paymentDate = document.getElementById('payment-date').value;
+            const today = new Date().toISOString().split('T')[0];
             
             const resultDiv = document.getElementById('verification-result');
             
             if (!screenshotUploaded) {
                 resultDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please upload payment screenshot';
+                resultDiv.className = 'verification-result verification-error';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            if (!paymentDate) {
+                resultDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter payment date from your screenshot';
+                resultDiv.className = 'verification-result verification-error';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            if (paymentDate !== today) {
+                resultDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Payment date does not match today\'s date. Please upload a screenshot with today\'s date.';
                 resultDiv.className = 'verification-result verification-error';
                 resultDiv.style.display = 'block';
                 return;
@@ -3862,7 +4061,7 @@ FAITHCONNECT - Connecting you to authentic religious dietary practices.
         // Navigation functions
         function goBackToFaiths() {
             document.querySelector('.faith-selection').style.display = 'grid';
-            document.querySelectorAll('.events-container, .items-container, .pandit-container, .priest-container, .granthi-container, .imam-container, .cart-container, .payment-container').forEach(container => {
+            document.querySelectorAll('.events-container, .items-container, .pandit-container, .priest-container, .granthi-container, .imam-container, .jain-pandit-container, .cart-container, .payment-container').forEach(container => {
                 container.style.display = 'none';
             });
             document.getElementById('events-title').style.display = 'none';
@@ -3888,7 +4087,7 @@ FAITHCONNECT - Connecting you to authentic religious dietary practices.
         function goBackToItems() {
             document.getElementById('items-container').style.display = 'block';
             document.getElementById('items-title').style.display = 'block';
-            document.querySelectorAll('.pandit-container, .priest-container, .granthi-container, .imam-container').forEach(container => {
+            document.querySelectorAll('.pandit-container, .priest-container, .granthi-container, .imam-container, .jain-pandit-container').forEach(container => {
                 container.style.display = 'none';
             });
             document.getElementById('services-title').style.display = 'none';
@@ -3920,6 +4119,7 @@ FAITHCONNECT - Connecting you to authentic religious dietary practices.
         // Function to reset payment form
         function resetPaymentForm() {
             document.getElementById('screenshot-upload').value = '';
+            document.getElementById('payment-date').value = '';
             document.getElementById('preview-container').style.display = 'none';
             document.getElementById('verification-result').style.display = 'none';
         }
