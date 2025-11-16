@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FaithConnect - India's first multi-faith platform for religious ceremonies and services">
+    <meta name="keywords" content="religious services, multi-faith, ceremonies, pandit, priest, imam, granthi">
     <title>FaithConnect - Multi-Faith Event Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
@@ -25,10 +27,13 @@
             --dark-text: #333;
             --light-text: #fff;
             --chatbot-bg: #f0f8ff;
+            --primary-gradient: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background: var(--primary-gradient);
             background-attachment: fixed;
             color: var(--dark-text);
             line-height: 1.6;
@@ -104,8 +109,26 @@
             50% { transform: translateY(-20px) rotate(10deg); }
         }
 
+        /* Skip to main content for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #4a148c;
+            color: white;
+            padding: 8px;
+            z-index: 10000;
+            text-decoration: none;
+            border-radius: 0 0 4px 4px;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
         header {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             color: var(--dark-text);
             text-align: center;
             padding: 2rem 1rem;
@@ -155,10 +178,13 @@
         }
 
         .nav-container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .nav-menu {
@@ -217,9 +243,9 @@
         .hero-section {
             text-align: center;
             padding: 4rem 2rem;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
             margin-bottom: 3rem;
@@ -304,11 +330,11 @@
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 16px;
             padding: 2rem;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.3s;
@@ -316,7 +342,7 @@
 
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--hover-shadow);
         }
 
         .feature-icon {
@@ -343,10 +369,10 @@
         }
 
         .faith-card {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             transition: all 0.4s ease;
             cursor: pointer;
             text-align: center;
@@ -400,7 +426,7 @@
 
         .faith-card:hover {
             transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--hover-shadow);
         }
 
         .faith-card.hindu {
@@ -481,7 +507,7 @@
             border-radius: 20px;
             padding: 2rem;
             margin: 2rem 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             backdrop-filter: blur(10px);
         }
 
@@ -698,10 +724,10 @@
         /* Events and Booking Styles */
         .events-container, .items-container, .pandit-container, .cart-container {
             display: none;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             margin-bottom: 2rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -738,7 +764,7 @@
         .event-card:hover {
             background: white;
             transform: translateY(-8px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--hover-shadow);
         }
 
         .event-card h4 {
@@ -760,51 +786,120 @@
 
         .items-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
         .item-card {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 12px;
-            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 2rem;
             text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--card-shadow);
             border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .item-card:hover {
             background: white;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
         }
 
         .item-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #4a148c;
         }
 
         .item-price {
             font-weight: bold;
-            margin: 0.5rem 0;
+            margin: 1rem 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .item-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .item-includes {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .item-includes h5 {
+            color: #4a148c;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .item-includes ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .item-includes li {
+            padding: 0.4rem 0;
+            color: #555;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .item-includes li:last-child {
+            border-bottom: none;
+        }
+
+        .item-includes li i {
+            color: #4CAF50;
+            font-size: 0.9rem;
+        }
+
+        .kit-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #4a148c, #6a1b9a);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .kit-badge.complete {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+        }
+
+        .kit-badge.basic {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
         }
 
         .add-to-cart {
             background: linear-gradient(45deg, #4CAF50, #45a049);
             color: white;
             border: none;
-            padding: 0.6rem 1.2rem;
+            padding: 1rem 2rem;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
-            font-weight: 500;
+            font-weight: 600;
             box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 1rem;
         }
 
         .add-to-cart:hover {
             background: linear-gradient(45deg, #45a049, #4CAF50);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
         }
 
@@ -828,7 +923,7 @@
         .service-option:hover {
             background: white;
             transform: translateY(-8px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--hover-shadow);
         }
 
         .service-option h4 {
@@ -839,6 +934,63 @@
         .service-price {
             font-weight: bold;
             margin: 0.5rem 0;
+        }
+
+        /* Address Form Styles */
+        .address-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInUp 0.8s ease;
+        }
+
+        .address-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .address-form .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .address-form .form-group:nth-child(9),
+        .address-form .form-group:nth-child(10) {
+            grid-column: 1 / -1;
+        }
+
+        .address-form label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .address-form input,
+        .address-form textarea {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .address-form input:focus,
+        .address-form textarea:focus {
+            outline: none;
+            border-color: #4a148c;
+            box-shadow: 0 0 0 3px rgba(74, 20, 140, 0.1);
+        }
+
+        .address-form textarea {
+            min-height: 100px;
+            resize: vertical;
         }
 
         .cart-items {
@@ -911,10 +1063,10 @@
         /* Payment Styles */
         .payment-container {
             display: none;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             margin-bottom: 2rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1328,10 +1480,10 @@
 
         /* Contact Form Styles */
         .contact-container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             margin-bottom: 2rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1415,10 +1567,10 @@
         }
 
         .resource-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.3s;
@@ -1426,7 +1578,7 @@
 
         .resource-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--hover-shadow);
         }
 
         .resource-card h3 {
@@ -1543,7 +1695,7 @@
             border-radius: 20px;
             padding: 2rem;
             margin: 2rem 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             backdrop-filter: blur(10px);
             text-align: center;
         }
@@ -1592,7 +1744,7 @@
             border-radius: 20px;
             padding: 2rem;
             margin: 2rem 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             backdrop-filter: blur(10px);
         }
 
@@ -1613,6 +1765,22 @@
             margin: 0 auto;
         }
 
+        /* Loading Spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Improved Mobile Responsiveness */
         @media (max-width: 768px) {
             .faith-selection {
                 grid-template-columns: 1fr;
@@ -1668,10 +1836,64 @@
             .download-options {
                 grid-template-columns: 1fr;
             }
+            
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            
+            .hero-section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .feature-card, .faith-card, .resource-card {
+                padding: 1.5rem;
+            }
+            
+            .address-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                padding: 0.5rem;
+            }
+            
+            .nav-item {
+                margin: 0.3rem 0;
+            }
+            
+            .nav-link {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .faith-card h3 {
+                font-size: 1.5rem;
+            }
+            
+            .faith-icon {
+                font-size: 3.5rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <div class="floating-elements">
         <div class="floating-element">🕉️</div>
         <div class="floating-element">☪️</div>
@@ -1697,7 +1919,7 @@
         </ul>
     </nav>
 
-    <div class="container">
+    <div class="container" id="main-content">
         <!-- Home Page -->
         <div class="page active" id="home-page">
             <div class="hero-section">
@@ -1737,7 +1959,7 @@
                         <i class="fas fa-om"></i>
                     </div>
                     <h3>Hindu Dharma</h3>
-                    <p>Gharparvesh, Diwali Puja, and 20+ ceremonies</p>
+                    <p>Grihaparvesh, Deepawali Puja, and 20+ ceremonies</p>
                 </div>
                 <div class="faith-card muslim" data-page="services">
                     <div class="faith-icon">
@@ -1779,7 +2001,7 @@
                         <i class="fas fa-om"></i>
                     </div>
                     <h3>Hindu Dharma</h3>
-                    <p>Gharparvesh, Diwali Puja, and 20+ ceremonies</p>
+                    <p>Grihaparvesh, Deepawali Puja, and 20+ ceremonies</p>
                 </div>
                 <div class="faith-card muslim" onclick="selectFaith('muslim')">
                     <div class="faith-icon">
@@ -1849,7 +2071,7 @@
                 </div>
             </div>
 
-            <h2 class="section-title" id="items-title" style="display: none;">Select Items for Your Ceremony</h2>
+            <h2 class="section-title" id="items-title" style="display: none;">Select Ceremony Kit</h2>
             <div class="items-container" id="items-container">
                 <button class="back-btn" onclick="goBackToEvents()"><i class="fas fa-arrow-left"></i> Back to Ceremonies</button>
                 <div class="items-grid">
@@ -1864,7 +2086,6 @@
                 <div class="pandit-options">
                     <!-- Pandit options will be populated by JavaScript -->
                 </div>
-                <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
             </div>
 
             <div class="pandit-container" id="priest-container">
@@ -1872,7 +2093,6 @@
                 <div class="priest-options">
                     <!-- Priest options will be populated by JavaScript -->
                 </div>
-                <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
             </div>
 
             <div class="pandit-container" id="granthi-container">
@@ -1880,7 +2100,6 @@
                 <div class="granthi-options">
                     <!-- Granthi options will be populated by JavaScript -->
                 </div>
-                <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
             </div>
 
             <div class="pandit-container" id="imam-container">
@@ -1888,7 +2107,6 @@
                 <div class="imam-options">
                     <!-- Imam options will be populated by JavaScript -->
                 </div>
-                <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
             </div>
 
             <div class="pandit-container" id="jain-pandit-container">
@@ -1896,12 +2114,71 @@
                 <div class="jain-pandit-options">
                     <!-- Jain Pandit options will be populated by JavaScript -->
                 </div>
-                <button class="checkout-btn" onclick="showCart()">Proceed to Checkout</button>
+            </div>
+
+            <!-- Address Input Section -->
+            <h2 class="section-title" id="address-title" style="display: none;">Enter Your Address</h2>
+            <div class="address-container" id="address-container">
+                <button class="back-btn" onclick="goBackToServices()"><i class="fas fa-arrow-left"></i> Back to Services</button>
+                
+                <div class="address-form">
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone-number">Phone Number</label>
+                        <input type="tel" id="phone-number" placeholder="Enter your phone number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address-line1">Address Line 1</label>
+                        <input type="text" id="address-line1" placeholder="House/Flat No, Building Name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address-line2">Address Line 2</label>
+                        <input type="text" id="address-line2" placeholder="Street Name, Area" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="landmark">Landmark</label>
+                        <input type="text" id="landmark" placeholder="Nearby landmark" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" placeholder="Enter your city" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" placeholder="Enter your state" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pincode">PIN Code</label>
+                        <input type="text" id="pincode" placeholder="Enter PIN code" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ceremony-date">Preferred Ceremony Date</label>
+                        <input type="date" id="ceremony-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="special-instructions">Special Instructions (Optional)</label>
+                        <textarea id="special-instructions" placeholder="Any special requirements or instructions for the ceremony"></textarea>
+                    </div>
+                </div>
+                
+                <button class="checkout-btn" onclick="saveAddressAndProceed()">Proceed to Checkout</button>
             </div>
 
             <h2 class="section-title" style="display: none;">Your Cart</h2>
             <div class="cart-container" id="cart-container">
-                <button class="back-btn" onclick="goBackToServices()"><i class="fas fa-arrow-left"></i> Back to Services</button>
+                <button class="back-btn" onclick="goBackToAddress()"><i class="fas fa-arrow-left"></i> Back to Address</button>
                 <div class="cart-items" id="cart-items">
                     <!-- Cart items will be populated by JavaScript -->
                 </div>
@@ -2267,83 +2544,516 @@
             <div class="message bot-message">
                 Hello! I'm your FaithConnect assistant. How can I help you with your religious ceremony today?
             </div>
-            <div class="price-note">
-                <i class="fas fa-exclamation-circle"></i> The prices may differ in this chatbot but the updated prices will be on the website.
-            </div>
-        </div>
+          </div>
         <div class="chatbot-input">
             <input type="text" id="chatbotInput" placeholder="Ask me anything...">
             <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <div class="contact-info">
-                    <i class="fas fa-phone"></i>
-                    <span>+91 98765 43210</span>
-                </div>
-                <div class="contact-info">
-                    <i class="fas fa-phone"></i>
-                    <span>+91 91234 56789</span>
-                </div>
-                <div class="contact-info">
-                    <i class="fas fa-envelope"></i>
-                    <span>support@faithconnect.com</span>
-                </div>
-                <div class="contact-info">
-                    <i class="fas fa-envelope"></i>
-                    <span>chanakyasahni8@gmail.com</span>
-                </div>
+   <footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <div class="contact-info" onclick="handleContactClick('phone')">
+                <i class="fas fa-phone"></i>
+                <span>+91 98661 93066</span>
             </div>
-            
-            <div class="footer-section">
-                <h3>Our Services</h3>
-                <a href="#" data-page="services">Hindu Ceremonies</a>
-                <a href="#" data-page="services">Muslim Ceremonies</a>
-                <a href="#" data-page="services">Sikh Ceremonies</a>
-                <a href="#" data-page="services">Christian Ceremonies</a>
-                <a href="#" data-page="services">Jain Ceremonies</a>
-                <a href="#" data-page="services">Interfaith Services</a>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <a href="#" data-page="home">About Us</a>
-                <a href="#" data-page="resources">FAQs</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms & Conditions</a>
-                <a href="#">Refund Policy</a>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Follow Us</h3>
-                <div class="contact-info">
-                    <i class="fab fa-facebook"></i>
-                    <span>FaithConnect Official</span>
-                </div>
-                <div class="contact-info">
-                    <i class="fab fa-instagram"></i>
-                    <span>@FaithConnect</span>
-                </div>
-                <div class="contact-info">
-                    <i class="fab fa-twitter"></i>
-                    <span>@FaithConnect</span>
-                </div>
-                <div class="contact-info">
-                    <i class="fab fa-youtube"></i>
-                    <span>FaithConnect Channel</span>
-                </div>
+            <div class="contact-info" onclick="handleContactClick('email')">
+                <i class="fas fa-envelope"></i>
+                <span>chanakyasahni8@gmail.com</span>
             </div>
         </div>
         
-        <div class="copyright">
-            <p>&copy; 2023 FaithConnect. All rights reserved. | Connecting You to Divine Services</p>
-            <p>Disclaimer: This is a demo website for educational purposes</p>
+        <div class="footer-section">
+            <h3>Our Services</h3>
+            <a href="#" class="footer-link" data-page="services" onclick="handleServiceClick('hindu')">Hindu Ceremonies</a>
+            <a href="#" class="footer-link" data-page="services" onclick="handleServiceClick('muslim')">Muslim Ceremonies</a>
+            <a href="#" class="footer-link" data-page="services" onclick="handleServiceClick('sikh')">Sikh Ceremonies</a>
+            <a href="#" class="footer-link" data-page="services" onclick="handleServiceClick('christian')">Christian Ceremonies</a>
+            <a href="#" class="footer-link" data-page="services" onclick="handleServiceClick('jain')">Jain Ceremonies</a>
+            <a href="#" class="footer-link" data-page="services" onclick="handleServiceClick('interfaith')">Interfaith Services</a>
         </div>
-    </footer>
+        
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <a href="#" class="footer-link" onclick="showPolicy('privacy')">Privacy Policy</a>
+            <a href="#" class="footer-link" onclick="showPolicy('terms')">Terms & Conditions</a>
+            <a href="#" class="footer-link" onclick="showPolicy('refund')">Refund Policy</a>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-links">
+                <div class="social-link" onclick="handleSocialClick('facebook')">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>Facebook</span>
+                </div>
+                <div class="social-link" onclick="handleSocialClick('instagram')">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </div>
+                <div class="social-link" onclick="handleSocialClick('twitter')">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </div>
+                <div class="social-link" onclick="handleSocialClick('youtube')">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-divider"></div>
+    
+    <div class="copyright">
+        <div class="copyright-content">
+            <p>&copy; 2025 FaithConnect. All rights reserved. | Connecting You to Divine Services</p>
+            <p class="disclaimer">Disclaimer: This is still a demo website.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Policy Modals -->
+<div class="policy-modal" id="privacy-policy-modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal('privacy-policy-modal')">&times;</span>
+        <h2>Privacy Policy</h2>
+        <div class="policy-content">
+            <h3>Information We Collect</h3>
+            <p>We collect information that you provide directly to us, including:</p>
+            <ul>
+                <li>Name, email address, and phone number</li>
+                <li>Address and location information</li>
+                <li>Payment information (processed securely through our payment partners)</li>
+                <li>Religious ceremony preferences and requirements</li>
+            </ul>
+            
+            <h3>How We Use Your Information</h3>
+            <p>We use the information we collect to:</p>
+            <ul>
+                <li>Provide and maintain our services</li>
+                <li>Process your bookings and payments</li>
+                <li>Connect you with verified religious service providers</li>
+                <li>Send you important updates about your ceremonies</li>
+                <li>Improve our platform and services</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="policy-modal" id="terms-policy-modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal('terms-policy-modal')">&times;</span>
+        <h2>Terms & Conditions</h2>
+        <div class="policy-content">
+            <h3>Acceptance of Terms</h3>
+            <p>By accessing and using FaithConnect, you accept and agree to be bound by these Terms and Conditions.</p>
+            
+            <h3>Service Description</h3>
+            <p>FaithConnect is a platform that connects users with verified religious service providers for various ceremonies across different faiths.</p>
+            
+            <h3>User Responsibilities</h3>
+            <ul>
+                <li>Provide accurate and complete information during registration and booking</li>
+                <li>Respect the religious traditions and practices of all faiths</li>
+                <li>Make payments in a timely manner for confirmed bookings</li>
+                <li>Follow appropriate conduct during ceremonies</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="policy-modal" id="refund-policy-modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal('refund-policy-modal')">&times;</span>
+        <h2>Refund Policy</h2>
+        <div class="policy-content">
+            <h3>Cancellation & Refund Eligibility</h3>
+            <p>Refunds are processed under the following conditions:</p>
+            <ul>
+                <li><strong>Full Refund:</strong> Cancellation 48+ hours before ceremony</li>
+                <li><strong>50% Refund:</strong> Cancellation 24-48 hours before ceremony</li>
+                <li><strong>No Refund:</strong> Cancellation less than 24 hours before ceremony</li>
+                <li><strong>Full Refund:</strong> If service provider cancels</li>
+            </ul>
+            
+            <h3>Refund Process</h3>
+            <p>Refunds are processed within 7-10 business days to the original payment method.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Footer Styles */
+footer {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    padding: 3rem 1rem 1rem;
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff9933, #009900, #ffcc00, #0066cc, #9b1c2e);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    text-align: left;
+}
+
+.footer-section h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    color: #ffcc00;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #ffcc00, transparent);
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-info:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(8px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.contact-info i {
+    color: #ffcc00;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.footer-link {
+    display: block;
+    color: #ddd;
+    text-decoration: none;
+    margin-bottom: 0.8rem;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.footer-link::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #ffcc00;
+    transition: transform 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ffcc00;
+    transform: translateX(8px);
+}
+
+.footer-link:hover::before {
+    transform: translateX(3px);
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(8px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.social-link i {
+    color: #ffcc00;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.footer-divider {
+    max-width: 1200px;
+    margin: 2rem auto 1.5rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.copyright {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.copyright-content p {
+    margin-bottom: 0.5rem;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.copyright-content .disclaimer {
+    font-size: 0.8rem;
+    color: #888;
+    font-style: italic;
+}
+
+/* Policy Modal Styles */
+.policy-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    overflow-y: auto;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 2.5rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 700px;
+    position: relative;
+    animation: modalSlideIn 0.4s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-modal:hover {
+    color: #ff0000;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+    color: #4a148c;
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.policy-content {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+.policy-content h3 {
+    color: #4a148c;
+    margin: 1.5rem 0 0.8rem 0;
+    font-size: 1.3rem;
+    border-left: 4px solid #4a148c;
+    padding-left: 1rem;
+}
+
+.policy-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.policy-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.policy-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+.policy-content strong {
+    color: #4a148c;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .contact-info:hover,
+    .footer-link:hover,
+    .social-link:hover {
+        transform: translateX(0);
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        padding: 1.5rem;
+        width: 95%;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.5rem;
+    }
+}
+</style>
+
+<script>
+// Footer JavaScript
+function handleContactClick(type) {
+    if (type === 'phone') {
+        window.open('tel:+919866193066', '_self');
+    } else if (type === 'email') {
+        window.open('mailto:chanakyasahni8@gmail.com', '_self');
+    }
+}
+
+function handleServiceClick(faith) {
+    showPage('services');
+    setTimeout(() => {
+        if (faith !== 'interfaith') {
+            selectFaith(faith);
+        }
+    }, 100);
+}
+
+function handleSocialClick(platform) {
+    const urls = {
+        facebook: 'https://facebook.com/FaithConnect',
+        instagram: 'https://instagram.com/FaithConnect',
+        twitter: 'https://twitter.com/FaithConnect',
+        youtube: 'https://youtube.com/c/FaithConnect'
+    };
+    
+    if (urls[platform]) {
+        window.open(urls[platform], '_blank');
+    }
+}
+
+function showPolicy(policyType) {
+    const modalId = `${policyType}-policy-modal`;
+    document.getElementById(modalId).style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Initialize footer event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.footer-link[data-page]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const pageId = this.getAttribute('data-page');
+            if (pageId) {
+                showPage(pageId);
+                window.scrollTo(0, 0);
+            }
+        });
+    });
+
+    window.addEventListener('click', function(event) {
+        const modals = document.querySelectorAll('.policy-modal');
+        modals.forEach(modal => {
+            if (event.target === modal) {
+                closeModal(modal.id);
+            }
+        });
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const modals = document.querySelectorAll('.policy-modal');
+            modals.forEach(modal => {
+                if (modal.style.display === 'block') {
+                    closeModal(modal.id);
+                }
+            });
+        }
+    });
+});
+</script>
 
     <script>
         // Comprehensive Multi-Faith Calendar Data 2024-2026
@@ -2394,7 +3104,7 @@
                         { date: "3-12", name: "Navratri" },
                         { date: "12", name: "Dussehra" },
                         { date: "17", name: "Valmiki Jayanti" },
-                        { date: "31", name: "Diwali" }
+                        { date: "31", name: "Deepawali" }
                     ],
                     November: [
                         { date: "1", name: "Govardhan Puja" },
@@ -2544,7 +3254,7 @@
                         { date: "31", name: "Dussehra" }
                     ],
                     November: [
-                        { date: "1", name: "Diwali" },
+                        { date: "1", name: "Deepawali" },
                         { date: "2", name: "Govardhan Puja" },
                         { date: "3", name: "Bhai Dooj" },
                         { date: "15", name: "Chhath Puja" }
@@ -2691,7 +3401,7 @@
                         { date: "20", name: "Dussehra" }
                     ],
                     November: [
-                        { date: "8", name: "Diwali" },
+                        { date: "8", name: "Deepawali" },
                         { date: "9", name: "Govardhan Puja" },
                         { date: "10", name: "Bhai Dooj" },
                         { date: "15", name: "Chhath Puja" }
@@ -2803,6 +3513,9 @@
             items: [],
             service: null
         };
+        
+        // Global variable to store address
+        let userAddress = {};
 
         // Initialize jsPDF
         const { jsPDF } = window.jspdf;
@@ -2850,7 +3563,7 @@
             // Add footer
             doc.setFontSize(8);
             doc.setTextColor(150, 150, 150);
-            doc.text('© 2024 FaithConnect. All Rights Reserved. Connecting You to Divine Services.', 105, 285, { align: 'center' });
+            doc.text('© 2025 FaithConnect. All Rights Reserved. Connecting You to Divine Services.', 105, 285, { align: 'center' });
             
             // Save PDF
             doc.save(filename);
@@ -3327,8 +4040,7 @@ Message:${message}`;
             // Define events for each faith (at least 15 each)
             const eventsData = {
                 hindu: [
-                    { name: "Gharparvesh (House Warming)", description: "Traditional house blessing ceremony", price: "₹2,500" },
-                    { name: "Diwali Puja", description: "Lakshmi Puja for prosperity", price: "₹1,800" },
+                    { name: "Deepawali Puja", description: "Lakshmi Puja for prosperity", price: "₹1,800" },
                     { name: "Satyanarayan Puja", description: "Monthly worship of Lord Vishnu", price: "₹1,500" },
                     { name: "Griha Pravesh", description: "New home inauguration ceremony", price: "₹3,000" },
                     { name: "Mundan Ceremony", description: "First hair cutting ceremony for child", price: "₹2,000" },
@@ -3464,136 +4176,271 @@ Message:${message}`;
             // Clear existing items
             itemsGrid.innerHTML = '';
             
-            // Define items for each faith (at least 15 each)
+            // Define item kits for each faith (only 2 options: Complete Kit and Basic Kit)
             const itemsData = {
-                hindu: [
-                    { name: "Puja Thali", price: "₹500" },
-                    { name: "Incense Sticks", price: "₹200" },
-                    { name: "Diya Set", price: "₹300" },
-                    { name: "Flower Garland", price: "₹400" },
-                    { name: "Sweets Prasad", price: "₹600" },
-                    { name: "Coconut", price: "₹50" },
-                    { name: "Banana Leaves", price: "₹150" },
-                    { name: "Sandalwood Paste", price: "₹250" },
-                    { name: "Kumkum", price: "₹100" },
-                    { name: "Haldi", price: "₹120" },
-                    { name: "Chandan", price: "₹180" },
-                    { name: "Akshata", price: "₹80" },
-                    { name: "Betel Leaves", price: "₹90" },
-                    { name: "Camphor", price: "₹70" },
-                    { name: "Ganga Jal", price: "₹200" },
-                    { name: "Lotus Flowers", price: "₹350" },
-                    { name: "Bell", price: "₹150" },
-                    { name: "Conch Shell", price: "₹400" }
-                ],
-                muslim: [
-                    { name: "Prayer Mat", price: "₹800" },
-                    { name: "Dates", price: "₹300" },
-                    { name: "Attar", price: "₹500" },
-                    { name: "Quran Stand", price: "₹1,200" },
-                    { name: "Tasbih", price: "₹400" },
-                    { name: "Kufi Cap", price: "₹250" },
-                    { name: "Miswak", price: "₹150" },
-                    { name: "Henna", price: "₹200" },
-                    { name: "Rose Water", price: "₹180" },
-                    { name: "Oudh", price: "₹600" },
-                    { name: "Bakhoor", price: "₹450" },
-                    { name: "Islamic Calligraphy", price: "₹1,000" },
-                    { name: "Prayer Rug", price: "₹1,500" },
-                    { name: "Quran", price: "₹800" },
-                    { name: "Hijab", price: "₹400" },
-                    { name: "Abaya", price: "₹1,200" },
-                    { name: "Islamic Books", price: "₹600" },
-                    { name: "Ramadan Calendar", price: "₹200" }
-                ],
-                sikh: [
-                    { name: "Rumala Sahib", price: "₹1,500" },
-                    { name: "Karah Parshad", price: "₹400" },
-                    { name: "Sikh Flag", price: "₹600" },
-                    { name: "Kirpan", price: "₹2,000" },
-                    { name: "Kanga", price: "₹300" },
-                    { name: "Kara", price: "₹250" },
-                    { name: "Kachera", price: "₹400" },
-                    { name: "Keski", price: "₹350" },
-                    { name: "Dastar", price: "₹500" },
-                    { name: "Gutka Sahib", price: "₹600" },
-                    { name: "Sikh Calendar", price: "₹200" },
-                    { name: "Kirtan Harmonium", price: "₹3,000" },
-                    { name: "Tabla", price: "₹2,500" },
-                    { name: "Sikh Art", price: "₹1,200" },
-                    { name: "Langar Utensils", price: "₹1,800" },
-                    { name: "Nishan Sahib", price: "₹2,000" },
-                    { name: "Guru Granth Sahib Stand", price: "₹2,500" },
-                    { name: "Sikh Prayer Book", price: "₹400" }
-                ],
-                christian: [
-                    { name: "Communion Set", price: "₹1,000" },
-                    { name: "Bible", price: "₹800" },
-                    { name: "Cross", price: "₹500" },
-                    { name: "Candles", price: "₹300" },
-                    { name: "Rosary", price: "₹400" },
-                    { name: "Holy Water", price: "₹200" },
-                    { name: "Incense", price: "₹350" },
-                    { name: "Chalice", price: "₹1,200" },
-                    { name: "Censer", price: "₹800" },
-                    { name: "Stole", price: "₹600" },
-                    { name: "Alb", price: "₹900" },
-                    { name: "Chasuble", price: "₹1,500" },
-                    { name: "Christian Art", price: "₹1,200" },
-                    { name: "Hymnal", price: "₹400" },
-                    { name: "Advent Wreath", price: "₹600" },
-                    { name: "Nativity Set", price: "₹1,800" },
-                    { name: "Easter Lily", price: "₹300" },
-                    { name: "Palm Cross", price: "₹150" }
-                ],
-                jain: [
-                    { name: "Ashtaprakari Puja Set", price: "₹2,000" },
-                    { name: "Rice", price: "₹200" },
-                    { name: "Kalash", price: "₹800" },
-                    { name: "Saffron", price: "₹1,200" },
-                    { name: "Jain Flag", price: "₹600" },
-                    { name: "Prayer Book", price: "₹400" },
-                    { name: "Incense", price: "₹300" },
-                    { name: "Diya", price: "₹250" },
-                    { name: "Flowers", price: "₹350" },
-                    { name: "Fruits", price: "₹500" },
-                    { name: "Sweets", price: "₹450" },
-                    { name: "Jain Calendar", price: "₹200" },
-                    { name: "Jain Art", price: "₹1,500" },
-                    { name: "Muhapatti", price: "₹400" },
-                    { name: "Ogho", price: "₹300" },
-                    { name: "Jain Scriptures", price: "₹1,000" },
-                    { name: "Meditation Mat", price: "₹600" },
-                    { name: "Jain Symbol", price: "₹700" }
-                ]
+                hindu: {
+                    complete: {
+                        name: "Complete Puja Kit",
+                        price: "₹5,000",
+                        description: "Everything needed for a complete Hindu ceremony",
+                        includes: [
+                            "Puja Thali with all essentials",
+                            "Premium Incense Sticks & Dhoop",
+                            "Brass Diya Set with Ghee",
+                            "Fresh Flower Garland & Petals",
+                            "Assorted Sweets Prasad",
+                            "Coconut & Fruits",
+                            "Sandalwood Paste & Kumkum",
+                            "Haldi & Chandan",
+                            "Akshata (Rice)",
+                            "Betel Leaves & Nuts",
+                            "Camphor & Matchbox",
+                            "Ganga Jal",
+                            "Bell & Conch Shell",
+                            "Sacred Thread",
+                            "Priest Offering Envelope"
+                        ]
+                    },
+                    basic: {
+                        name: "Essential Puja Kit",
+                        price: "₹2,500",
+                        description: "Basic essentials for Hindu ceremonies",
+                        includes: [
+                            "Standard Puja Thali",
+                            "Incense Sticks",
+                            "Oil Diya Set",
+                            "Flower Garland",
+                            "Simple Sweets Prasad",
+                            "Coconut",
+                            "Kumkum & Haldi",
+                            "Akshata (Rice)",
+                            "Camphor",
+                            "Basic Bell"
+                        ]
+                    }
+                },
+                muslim: {
+                    complete: {
+                        name: "Complete Islamic Ceremony Kit",
+                        price: "₹6,000",
+                        description: "Complete set for Islamic ceremonies and prayers",
+                        includes: [
+                            "Premium Prayer Mat & Rug",
+                            "Quality Dates & Fruits",
+                            "Attar & Oudh Set",
+                            "Decorative Quran Stand",
+                            "Tasbih (Prayer Beads)",
+                            "Islamic Calligraphy Art",
+                            "Miswak & Henna",
+                            "Rose Water & Bakhoor",
+                            "Kufi Caps (Set of 5)",
+                            "Islamic Books Collection",
+                            "Ramadan Calendar",
+                            "Halal Certification Kit",
+                            "Ceremony Decoration Set",
+                            "Guest Seating Arrangement"
+                        ]
+                    },
+                    basic: {
+                        name: "Basic Islamic Kit",
+                        price: "₹3,000",
+                        description: "Essential items for Islamic ceremonies",
+                        includes: [
+                            "Standard Prayer Mat",
+                            "Dates & Fruits",
+                            "Basic Attar",
+                            "Quran Stand",
+                            "Tasbih",
+                            "Henna Kit",
+                            "Rose Water",
+                            "Kufi Caps (Set of 2)"
+                        ]
+                    }
+                },
+                sikh: {
+                    complete: {
+                        name: "Complete Gurdwara Kit",
+                        price: "₹7,000",
+                        description: "Complete set for Sikh ceremonies and prayers",
+                        includes: [
+                            "Premium Rumala Sahib",
+                            "Fresh Karah Parshad Ingredients",
+                            "Sikh Flag & Nishan Sahib",
+                            "Kirpan in Decorative Case",
+                            "Complete 5Ks Set",
+                            "Dastar (Turbans) - Multiple",
+                            "Gutka Sahib Collection",
+                            "Kirtan Harmonium & Tabla",
+                            "Langar Utensils Set",
+                            "Sikh Art & Calendar",
+                            "Guru Granth Sahib Stand",
+                            "Community Seating",
+                            "Prasad Distribution Set",
+                            "Ceremony Documentation"
+                        ]
+                    },
+                    basic: {
+                        name: "Basic Sikh Ceremony Kit",
+                        price: "₹3,500",
+                        description: "Essential items for Sikh ceremonies",
+                        includes: [
+                            "Standard Rumala Sahib",
+                            "Karah Parshad Ingredients",
+                            "Sikh Flag",
+                            "Basic Kirpan",
+                            "Kara & Kanga",
+                            "Dastar (2 pieces)",
+                            "Gutka Sahib",
+                            "Langar Basic Utensils"
+                        ]
+                    }
+                },
+                christian: {
+                    complete: {
+                        name: "Complete Church Ceremony Kit",
+                        price: "₹8,000",
+                        description: "Complete set for Christian ceremonies and services",
+                        includes: [
+                            "Premium Communion Set",
+                            "Leather Bound Bible",
+                            "Decorative Cross & Candles",
+                            "Rosary & Holy Water",
+                            "Chalice & Censer Set",
+                            "Priest Vestments Set",
+                            "Christian Art Collection",
+                            "Hymnal Books (Multiple)",
+                            "Advent Wreath & Decor",
+                            "Nativity Set Display",
+                            "Easter Lily Arrangement",
+                            "Baptism Font Setup",
+                            "Wedding Arch & Decor",
+                            "Sound System Setup"
+                        ]
+                    },
+                    basic: {
+                        name: "Basic Christian Kit",
+                        price: "₹4,000",
+                        description: "Essential items for Christian ceremonies",
+                        includes: [
+                            "Standard Communion Set",
+                            "Bible",
+                            "Cross & Candles",
+                            "Rosary",
+                            "Holy Water",
+                            "Basic Vestments",
+                            "Hymnal Book",
+                            "Baptism Essentials"
+                        ]
+                    }
+                },
+                jain: {
+                    complete: {
+                        name: "Complete Jain Puja Kit",
+                        price: "₹6,500",
+                        description: "Complete set for Jain ceremonies and rituals",
+                        includes: [
+                            "Ashtaprakari Puja Full Set",
+                            "Premium Rice & Grains",
+                            "Decorative Kalash Set",
+                            "Pure Saffron & Spices",
+                            "Jain Flag & Symbols",
+                            "Prayer Books Collection",
+                            "Incense & Diya Set",
+                            "Fresh Flowers & Fruits",
+                            "Sweets & Dry Fruits",
+                            "Jain Calendar & Art",
+                            "Muhapatti & Ogho Set",
+                            "Meditation Mat & Cushions",
+                            "Scriptures Collection",
+                            "Ritual Documentation"
+                        ]
+                    },
+                    basic: {
+                        name: "Basic Jain Ritual Kit",
+                        price: "₹3,200",
+                        description: "Essential items for Jain ceremonies",
+                        includes: [
+                            "Basic Puja Set",
+                            "Rice & Grains",
+                            "Kalash",
+                            "Incense & Diya",
+                            "Flowers & Fruits",
+                            "Sweets Prasad",
+                            "Jain Calendar",
+                            "Muhapatti"
+                        ]
+                    }
+                }
             };
             
-            // Add items to the grid
-            itemsData[faith].forEach(item => {
-                const itemCard = document.createElement('div');
-                itemCard.className = 'item-card';
-                itemCard.innerHTML = `
-                    <h4>${item.name}</h4>
-                    <div class="item-price">${item.price}</div>
-                    <button class="add-to-cart" onclick="addItemToCart('${item.name}', '${item.price}')">Add to Cart</button>
-                `;
-                itemsGrid.appendChild(itemCard);
-            });
+            // Add item kits to the grid
+            const faithItems = itemsData[faith];
+            
+            // Complete Kit
+            const completeCard = document.createElement('div');
+            completeCard.className = 'item-card';
+            completeCard.innerHTML = `
+                <div class="kit-badge complete">COMPLETE KIT</div>
+                <h4>${faithItems.complete.name}</h4>
+                <div class="item-price">${faithItems.complete.price}</div>
+                <div class="item-description">${faithItems.complete.description}</div>
+                <div class="item-includes">
+                    <h5>Includes:</h5>
+                    <ul>
+                        ${faithItems.complete.includes.map(item => `<li><i class="fas fa-check"></i> ${item}</li>`).join('')}
+                    </ul>
+                </div>
+                <button class="add-to-cart" onclick="addItemToCart('${faithItems.complete.name}', '${faithItems.complete.price}', 'complete')">Select Complete Kit</button>
+            `;
+            itemsGrid.appendChild(completeCard);
+            
+            // Basic Kit
+            const basicCard = document.createElement('div');
+            basicCard.className = 'item-card';
+            basicCard.innerHTML = `
+                <div class="kit-badge basic">BASIC KIT</div>
+                <h4>${faithItems.basic.name}</h4>
+                <div class="item-price">${faithItems.basic.price}</div>
+                <div class="item-description">${faithItems.basic.description}</div>
+                <div class="item-includes">
+                    <h5>Includes:</h5>
+                    <ul>
+                        ${faithItems.basic.includes.map(item => `<li><i class="fas fa-check"></i> ${item}</li>`).join('')}
+                    </ul>
+                </div>
+                <button class="add-to-cart" onclick="addItemToCart('${faithItems.basic.name}', '${faithItems.basic.price}', 'basic')">Select Basic Kit</button>
+            `;
+            itemsGrid.appendChild(basicCard);
         }
 
-        function addItemToCart(name, price) {
-            cart.items.push({ name, price });
+        function addItemToCart(name, price, type) {
+            // Clear any existing items first (only one kit allowed)
+            cart.items = [];
+            
+            // Add the selected kit
+            cart.items.push({ 
+                name: name, 
+                price: price,
+                type: type
+            });
+            
             showNotification(`${name} added to cart!`, 'success');
+            
+            // Auto-proceed to service selection after a short delay
+            setTimeout(() => {
+                showServiceOptions();
+            }, 1500);
         }
 
         function goBackToFaiths() {
             document.querySelector('.faith-selection').style.display = 'grid';
-            document.querySelectorAll('.events-container, .items-container, .pandit-container, .priest-container, .granthi-container, .imam-container, .jain-pandit-container, .cart-container, .payment-container').forEach(container => {
+            document.querySelectorAll('.events-container, .items-container, .pandit-container, .priest-container, .granthi-container, .imam-container, .jain-pandit-container, .cart-container, .payment-container, .address-container').forEach(container => {
                 container.style.display = 'none';
             });
             document.getElementById('events-title').style.display = 'none';
             document.getElementById('items-title').style.display = 'none';
             document.getElementById('services-title').style.display = 'none';
+            document.getElementById('address-title').style.display = 'none';
         }
 
         function goBackToEvents() {
@@ -3607,7 +4454,6 @@ Message:${message}`;
             document.getElementById('items-title').style.display = 'none';
         }
 
-        // FIXED: Added missing goBackToItems function
         function goBackToItems() {
             document.getElementById('items-container').style.display = 'block';
             document.getElementById('items-title').style.display = 'block';
@@ -3640,7 +4486,6 @@ Message:${message}`;
             }
         }
 
-        // UPDATED: Service providers with regional scholars instead of personal names
         function populateServiceOptions(faith) {
             let serviceContainer;
             let containerElement;
@@ -3677,38 +4522,38 @@ Message:${message}`;
             // Clear existing options
             serviceContainer.innerHTML = '';
             
-            // Define service providers for each faith with regional scholars
+            // Define service providers for each faith (simplified without experience, specialization, rating)
             const serviceData = {
                 hindu: [
-                    { name: "North Indian Vedic Scholar", experience: "18 years", price: "₹2,800", rating: "4.9", specialization: "Vedic rituals, Wedding ceremonies, Havan" },
-                    { name: "South Indian Temple Priest", experience: "22 years", price: "₹3,200", rating: "4.8", specialization: "Temple rituals, Daily Puja, Festival ceremonies" },
-                    { name: "East Indian Traditional Pandit", experience: "15 years", price: "₹2,500", rating: "4.7", specialization: "Bengali rituals, Durga Puja, Traditional ceremonies" },
-                    { name: "West Indian Ritual Specialist", experience: "20 years", price: "₹2,900", rating: "4.9", specialization: "Maharashtra rituals, Ganesh Chaturthi, House warming" },
-                    { name: "Sanskrit Scholar & Priest", experience: "25 years", price: "₹3,500", rating: "5.0", specialization: "Vedic chanting, Sanskrit mantras, Complex rituals" }
+                    { name: "North Indian Vedic Scholar", price: "₹2,800" },
+                    { name: "South Indian Temple Priest", price: "₹3,200" },
+                    { name: "East Indian Traditional Pandit", price: "₹2,500" },
+                    { name: "West Indian Ritual Specialist", price: "₹2,900" },
+                    { name: "Sanskrit Scholar & Priest", price: "₹3,500" }
                 ],
                 muslim: [
-                    { name: "North Indian Islamic Scholar", experience: "15 years", price: "₹2,800", rating: "4.8", specialization: "Nikah ceremonies, Quran teaching, Islamic guidance" },
-                    { name: "South Indian Mosque Imam", experience: "12 years", price: "₹2,400", rating: "4.7", specialization: "Friday prayers, Eid ceremonies, Community events" },
-                    { name: "Arabic Language Specialist", experience: "18 years", price: "₹3,200", rating: "4.9", specialization: "Quran recitation, Arabic prayers, Islamic studies" },
-                    { name: "Islamic Jurisprudence Expert", experience: "20 years", price: "₹3,500", rating: "4.9", specialization: "Fiqh guidance, Halal certification, Religious rulings" }
+                    { name: "North Indian Islamic Scholar", price: "₹2,800" },
+                    { name: "South Indian Mosque Imam", price: "₹2,400" },
+                    { name: "Arabic Language Specialist", price: "₹3,200" },
+                    { name: "Islamic Jurisprudence Expert", price: "₹3,500" }
                 ],
                 sikh: [
-                    { name: "Punjabi Granthi Scholar", experience: "16 years", price: "₹2,800", rating: "4.8", specialization: "Gurbani, Kirtan, Anand Karaj ceremonies" },
-                    { name: "Sikh History Specialist", experience: "12 years", price: "₹2,400", rating: "4.7", specialization: "Sikh history, Gurmat teachings, Religious education" },
-                    { name: "Ragi & Kirtan Expert", experience: "14 years", price: "₹3,000", rating: "4.8", specialization: "Shabad Kirtan, Musical prayers, Religious hymns" },
-                    { name: "Sikh Ceremonies Coordinator", experience: "18 years", price: "₹3,200", rating: "4.9", specialization: "Akhand Path, Naming ceremonies, All Sikh rituals" }
+                    { name: "Punjabi Granthi Scholar", price: "₹2,800" },
+                    { name: "Sikh History Specialist", price: "₹2,400" },
+                    { name: "Ragi & Kirtan Expert", price: "₹3,000" },
+                    { name: "Sikh Ceremonies Coordinator", price: "₹3,200" }
                 ],
                 christian: [
-                    { name: "North Indian Church Pastor", experience: "18 years", price: "₹2,800", rating: "4.8", specialization: "Weddings, Baptisms, Sunday services" },
-                    { name: "South Indian Christian Priest", experience: "15 years", price: "₹2,600", rating: "4.7", specialization: "Traditional ceremonies, Church events, Prayer meetings" },
-                    { name: "Biblical Studies Scholar", experience: "20 years", price: "₹3,200", rating: "4.9", specialization: "Bible teaching, Theological guidance, Spiritual counseling" },
-                    { name: "Christian Community Leader", experience: "16 years", price: "₹2,900", rating: "4.8", specialization: "Community events, Youth programs, Family counseling" }
+                    { name: "North Indian Church Pastor", price: "₹2,800" },
+                    { name: "South Indian Christian Priest", price: "₹2,600" },
+                    { name: "Biblical Studies Scholar", price: "₹3,200" },
+                    { name: "Christian Community Leader", price: "₹2,900" }
                 ],
                 jain: [
-                    { name: "Digambar Jain Scholar", experience: "15 years", price: "₹2,800", rating: "4.8", specialization: "Digambar rituals, Paryushan, Jain philosophy" },
-                    { name: "Shwetambar Ritual Expert", experience: "18 years", price: "₹3,000", rating: "4.8", specialization: "Shwetambar ceremonies, Temple rituals, Daily prayers" },
-                    { name: "Jain Philosophy Teacher", experience: "20 years", price: "₹3,500", rating: "4.9", specialization: "Jain principles, Meditation guidance, Spiritual teaching" },
-                    { name: "Jain Ceremonies Coordinator", experience: "16 years", price: "₹2,900", rating: "4.7", specialization: "All Jain ceremonies, Festival rituals, Community events" }
+                    { name: "Digambar Jain Scholar", price: "₹2,800" },
+                    { name: "Shwetambar Ritual Expert", price: "₹3,000" },
+                    { name: "Jain Philosophy Teacher", price: "₹3,500" },
+                    { name: "Jain Ceremonies Coordinator", price: "₹2,900" }
                 ]
             };
             
@@ -3718,9 +4563,6 @@ Message:${message}`;
                 serviceOption.className = 'service-option';
                 serviceOption.innerHTML = `
                     <h4>${service.name}</h4>
-                    <p><strong>Experience:</strong> ${service.experience}</p>
-                    <p><strong>Specialization:</strong> ${service.specialization}</p>
-                    <p><strong>Rating:</strong> ⭐ ${service.rating}/5</p>
                     <div class="service-price">${service.price}</div>
                     <button class="add-to-cart" onclick="selectService(${JSON.stringify(service).replace(/"/g, '&quot;')}, '${faith}')">Select Provider</button>
                 `;
@@ -3731,17 +4573,67 @@ Message:${message}`;
         function selectService(service, faith) {
             cart.service = service;
             showNotification(`Selected ${service.name} as your service provider!`, 'success');
-            // Auto-proceed to cart after selection
+            
+            // Show address section instead of going directly to cart
             setTimeout(() => {
-                showCart();
+                showAddressSection();
             }, 1000);
         }
 
-        function showCart() {
+        function showAddressSection() {
             document.querySelectorAll('.pandit-container, .priest-container, .granthi-container, .imam-container, .jain-pandit-container').forEach(container => {
                 container.style.display = 'none';
             });
             document.getElementById('services-title').style.display = 'none';
+            document.getElementById('address-title').style.display = 'block';
+            document.getElementById('address-container').style.display = 'block';
+        }
+
+        function saveAddressAndProceed() {
+            // Get address form values
+            const addressData = {
+                fullName: document.getElementById('full-name').value,
+                phoneNumber: document.getElementById('phone-number').value,
+                addressLine1: document.getElementById('address-line1').value,
+                addressLine2: document.getElementById('address-line2').value,
+                landmark: document.getElementById('landmark').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                pincode: document.getElementById('pincode').value,
+                ceremonyDate: document.getElementById('ceremony-date').value,
+                specialInstructions: document.getElementById('special-instructions').value
+            };
+
+            // Validate required fields
+            if (!addressData.fullName || !addressData.phoneNumber || !addressData.addressLine1 || 
+                !addressData.addressLine2 || !addressData.landmark || !addressData.city || 
+                !addressData.state || !addressData.pincode || !addressData.ceremonyDate) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+
+            // Save address data
+            userAddress = addressData;
+            
+            // Proceed to cart
+            showCart();
+        }
+
+        function goBackToServices() {
+            document.getElementById('address-container').style.display = 'none';
+            document.getElementById('address-title').style.display = 'none';
+            showServiceOptions();
+        }
+
+        function goBackToAddress() {
+            document.getElementById('cart-container').style.display = 'none';
+            showAddressSection();
+        }
+
+        // Update showCart function to include address in display
+        function showCart() {
+            document.getElementById('address-container').style.display = 'none';
+            document.getElementById('address-title').style.display = 'none';
             document.getElementById('cart-container').style.display = 'block';
             
             // Update cart items
@@ -3753,18 +4645,24 @@ Message:${message}`;
                 const eventItem = document.createElement('div');
                 eventItem.className = 'cart-item';
                 eventItem.innerHTML = `
-                    <div>${currentEvent.name}</div>
+                    <div>
+                        <strong>${currentEvent.name}</strong>
+                        <div style="font-size: 0.9rem; color: #666;">${currentEvent.description}</div>
+                    </div>
                     <div>${currentEvent.price}</div>
                 `;
                 cartItems.appendChild(eventItem);
             }
             
-            // Add items to cart
+            // Add kit to cart
             cart.items.forEach(item => {
                 const itemElement = document.createElement('div');
                 itemElement.className = 'cart-item';
                 itemElement.innerHTML = `
-                    <div>${item.name}</div>
+                    <div>
+                        <strong>${item.name}</strong>
+                        <div style="font-size: 0.9rem; color: #666;">${item.type === 'complete' ? 'Complete Kit' : 'Basic Kit'}</div>
+                    </div>
                     <div>${item.price}</div>
                 `;
                 cartItems.appendChild(itemElement);
@@ -3775,10 +4673,33 @@ Message:${message}`;
                 const serviceItem = document.createElement('div');
                 serviceItem.className = 'cart-item';
                 serviceItem.innerHTML = `
-                    <div>${cart.service.name} (Service)</div>
+                    <div>
+                        <strong>${cart.service.name}</strong>
+                        <div style="font-size: 0.9rem; color: #666;">Religious Service Provider</div>
+                    </div>
                     <div>${cart.service.price}</div>
                 `;
                 cartItems.appendChild(serviceItem);
+            }
+            
+            // Add address information to cart display
+            if (userAddress.fullName) {
+                const addressItem = document.createElement('div');
+                addressItem.className = 'cart-item';
+                addressItem.innerHTML = `
+                    <div>
+                        <strong>Delivery Address</strong>
+                        <div style="font-size: 0.9rem; color: #666;">
+                            ${userAddress.fullName} | ${userAddress.phoneNumber}<br>
+                            ${userAddress.addressLine1}, ${userAddress.addressLine2}<br>
+                            ${userAddress.landmark}, ${userAddress.city}<br>
+                            ${userAddress.state} - ${userAddress.pincode}<br>
+                            Date: ${userAddress.ceremonyDate}
+                        </div>
+                    </div>
+                    <div>Included</div>
+                `;
+                cartItems.appendChild(addressItem);
             }
             
             // Calculate and display total
@@ -3789,11 +4710,6 @@ Message:${message}`;
             
             document.getElementById('cart-total').textContent = `Total: ₹${total}`;
             document.getElementById('payment-total').textContent = `₹${total}`;
-        }
-
-        function goBackToServices() {
-            document.getElementById('cart-container').style.display = 'none';
-            showServiceOptions();
         }
 
         function showPayment() {
@@ -3820,7 +4736,7 @@ Message:${message}`;
             }
             
             // Payment verification successful
-            resultDiv.innerHTML = `<i class="fas fa-check-circle"></i> Payment verified successfully! Your booking is confirmed.`;
+            resultDiv.innerHTML = `<i class="fas fa-check-circle"></i> Thank You for choosing FaithConnect`;
             resultDiv.className = 'verification-result verification-success';
             resultDiv.style.display = 'block';
             
@@ -3836,9 +4752,9 @@ Message:${message}`;
             }, 3000);
         }
 
-        // Function to send order email
+        // Update the sendOrderEmail function to include address in the Gmail
         function sendOrderEmail() {
-            // Create order summary
+            // Create order summary with address
             let orderSummary = `FaithConnect Order Confirmation\n\n`;
             orderSummary += `Thank you for your booking with FaithConnect!\n\n`;
             orderSummary += `Order Details:\n`;
@@ -3862,6 +4778,23 @@ Message:${message}`;
                 orderSummary += `Service Price: ${cart.service.price}\n\n`;
             }
             
+            // Add address information
+            orderSummary += `Delivery Address:\n`;
+            orderSummary += `-----------------\n`;
+            orderSummary += `Name: ${userAddress.fullName}\n`;
+            orderSummary += `Phone: ${userAddress.phoneNumber}\n`;
+            orderSummary += `Address: ${userAddress.addressLine1}, ${userAddress.addressLine2}\n`;
+            orderSummary += `Landmark: ${userAddress.landmark}\n`;
+            orderSummary += `City: ${userAddress.city}\n`;
+            orderSummary += `State: ${userAddress.state}\n`;
+            orderSummary += `PIN Code: ${userAddress.pincode}\n`;
+            orderSummary += `Ceremony Date: ${userAddress.ceremonyDate}\n`;
+            
+            if (userAddress.specialInstructions) {
+                orderSummary += `Special Instructions: ${userAddress.specialInstructions}\n`;
+            }
+            orderSummary += `\n`;
+            
             // Calculate total
             let total = 0;
             if (currentEvent) total += parseInt(currentEvent.price.replace('₹', '').replace(',', ''));
@@ -3874,10 +4807,10 @@ Message:${message}`;
             orderSummary += `For any queries, contact us at chanakyasahni8@gmail.com\n`;
             
             // Create email content
-            const subject = `FaithConnect Order Confirmation`;
+            const subject = `FaithConnect Order Confirmation - ${userAddress.fullName}`;
             const body = encodeURIComponent(orderSummary);
             
-            // Open Gmail with pre-filled order confirmation
+            // Open Gmail with pre-filled order confirmation including address
             const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=chanakyasahni8@gmail.com&su=${encodeURIComponent(subject)}&body=${body}`;
             
             // Open Gmail in new tab
