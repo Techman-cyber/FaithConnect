@@ -109,51 +109,6 @@
             50% { transform: translateY(-20px) rotate(10deg); }
         }
 
-        /* WhatsApp Button Styles */
-        .whatsapp-button {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1001;
-            transition: all 0.3s;
-            animation: pulse 2s infinite;
-            text-decoration: none;
-        }
-
-        .whatsapp-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .whatsapp-tooltip {
-            position: absolute;
-            right: 70px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .whatsapp-button:hover .whatsapp-tooltip {
-            opacity: 1;
-        }
-
         /* Skip to main content for accessibility */
         .skip-link {
             position: absolute;
@@ -1007,7 +962,8 @@
         }
 
         .address-form .form-group:nth-child(9),
-        .address-form .form-group:nth-child(10) {
+        .address-form .form-group:nth-child(10),
+        .address-form .form-group:nth-child(11) {
             grid-column: 1 / -1;
         }
 
@@ -1018,7 +974,8 @@
         }
 
         .address-form input,
-        .address-form textarea {
+        .address-form textarea,
+        .address-form select {
             padding: 1rem;
             border: 1px solid #ddd;
             border-radius: 10px;
@@ -1027,7 +984,8 @@
         }
 
         .address-form input:focus,
-        .address-form textarea:focus {
+        .address-form textarea:focus,
+        .address-form select:focus {
             outline: none;
             border-color: #4a148c;
             box-shadow: 0 0 0 3px rgba(74, 20, 140, 0.1);
@@ -1901,14 +1859,6 @@
             .address-form {
                 grid-template-columns: 1fr;
             }
-            
-            .whatsapp-button {
-                bottom: 90px;
-                right: 20px;
-                width: 55px;
-                height: 55px;
-                font-size: 1.6rem;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1946,15 +1896,6 @@
 <body>
     <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/919866193066?text=Hello%20FaithConnect%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services" 
-       class="whatsapp-button" 
-       target="_blank"
-       id="whatsappButton">
-        <i class="fab fa-whatsapp"></i>
-        <div class="whatsapp-tooltip">Contact us on WhatsApp</div>
-    </a>
 
     <div class="floating-elements">
         <div class="floating-element">🕉️</div>
@@ -2137,7 +2078,7 @@
             <div class="items-container" id="items-container">
                 <button class="back-btn" onclick="goBackToEvents()"><i class="fas fa-arrow-left"></i> Back to Ceremonies</button>
                 <div class="items-grid">
-                    <!-- Items will be populated by JavaScript - ONLY COMPLETE KIT -->
+                    <!-- Items will be populated by JavaScript -->
                 </div>
                 <button class="checkout-btn" onclick="showServiceOptions()">Proceed to Book Services</button>
             </div>
@@ -2193,6 +2134,26 @@
                         <label for="phone-number">Phone Number</label>
                         <input type="tel" id="phone-number" placeholder="Enter your phone number" required>
                     </div>
+
+                    <!-- Rashi Field (Only for Hindu) -->
+                    <div class="form-group" id="rashi-field" style="display: none;">
+                        <label for="rashi">Rashi (Zodiac Sign)</label>
+                        <select id="rashi" class="form-control">
+                            <option value="">Select Rashi</option>
+                            <option value="mesha">Mesha (Aries)</option>
+                            <option value="vrishabha">Vrishabha (Taurus)</option>
+                            <option value="mithuna">Mithuna (Gemini)</option>
+                            <option value="karka">Karka (Cancer)</option>
+                            <option value="simha">Simha (Leo)</option>
+                            <option value="kanya">Kanya (Virgo)</option>
+                            <option value="tula">Tula (Libra)</option>
+                            <option value="vrishchika">Vrishchika (Scorpio)</option>
+                            <option value="dhanu">Dhanu (Sagittarius)</option>
+                            <option value="makara">Makara (Capricorn)</option>
+                            <option value="kumbha">Kumbha (Aquarius)</option>
+                            <option value="meena">Meena (Pisces)</option>
+                        </select>
+                    </div>
                     
                     <div class="form-group">
                         <label for="address-line1">Address Line 1</label>
@@ -2227,6 +2188,11 @@
                     <div class="form-group">
                         <label for="ceremony-date">Preferred Ceremony Date</label>
                         <input type="date" id="ceremony-date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ceremony-time">Preferred Ceremony Time</label>
+                        <input type="time" id="ceremony-time" required>
                     </div>
                     
                     <div class="form-group">
@@ -2667,11 +2633,455 @@
         </div>
     </div>
     
+    <div class="footer-divider"></div>
+    
     <div class="copyright">
-        <p>&copy; 2025 FaithConnect. All rights reserved. | Connecting You to Divine Services</p>
-        <p class="disclaimer">Disclaimer: This is still a demo website.</p>
+        <div class="copyright-content">
+            <p>&copy; 2025 FaithConnect. All rights reserved. | Connecting You to Divine Services</p>
+            <p class="disclaimer">Disclaimer: This is still a demo website.</p>
+        </div>
     </div>
 </footer>
+
+<!-- Policy Modals -->
+<div class="policy-modal" id="privacy-policy-modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal('privacy-policy-modal')">&times;</span>
+        <h2>Privacy Policy</h2>
+        <div class="policy-content">
+            <h3>Information We Collect</h3>
+            <p>We collect information that you provide directly to us, including:</p>
+            <ul>
+                <li>Name, email address, and phone number</li>
+                <li>Address and location information</li>
+                <li>Payment information (processed securely through our payment partners)</li>
+                <li>Religious ceremony preferences and requirements</li>
+            </ul>
+            
+            <h3>How We Use Your Information</h3>
+            <p>We use the information we collect to:</p>
+            <ul>
+                <li>Provide and maintain our services</li>
+                <li>Process your bookings and payments</li>
+                <li>Connect you with verified religious service providers</li>
+                <li>Send you important updates about your ceremonies</li>
+                <li>Improve our platform and services</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="policy-modal" id="terms-policy-modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal('terms-policy-modal')">&times;</span>
+        <h2>Terms & Conditions</h2>
+        <div class="policy-content">
+            <h3>Acceptance of Terms</h3>
+            <p>By accessing and using FaithConnect, you accept and agree to be bound by these Terms and Conditions.</p>
+            
+            <h3>Service Description</h3>
+            <p>FaithConnect is a platform that connects users with verified religious service providers for various ceremonies across different faiths.</p>
+            
+            <h3>User Responsibilities</h3>
+            <ul>
+                <li>Provide accurate and complete information during registration and booking</li>
+                <li>Respect the religious traditions and practices of all faiths</li>
+                <li>Make payments in a timely manner for confirmed bookings</li>
+                <li>Follow appropriate conduct during ceremonies</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="policy-modal" id="refund-policy-modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal('refund-policy-modal')">&times;</span>
+        <h2>Refund Policy</h2>
+        <div class="policy-content">
+            <h3>Cancellation & Refund Eligibility</h3>
+            <p>Refunds are processed under the following conditions:</p>
+            <ul>
+                <li><strong>Full Refund:</strong> Cancellation 48+ hours before ceremony</li>
+                <li><strong>50% Refund:</strong> Cancellation 24-48 hours before ceremony</li>
+                <li><strong>No Refund:</strong> Cancellation less than 24 hours before ceremony</li>
+                <li><strong>Full Refund:</strong> If service provider cancels</li>
+            </ul>
+            
+            <h3>Refund Process</h3>
+            <p>Refunds are processed within 7-10 business days to the original payment method.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Footer Styles */
+footer {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    padding: 3rem 1rem 1rem;
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff9933, #009900, #ffcc00, #0066cc, #9b1c2e);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    text-align: left;
+}
+
+.footer-section h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    color: #ffcc00;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #ffcc00, transparent);
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-info:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(8px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.contact-info i {
+    color: #ffcc00;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.footer-link {
+    display: block;
+    color: #ddd;
+    text-decoration: none;
+    margin-bottom: 0.8rem;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.footer-link::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #ffcc00;
+    transition: transform 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ffcc00;
+    transform: translateX(8px);
+}
+
+.footer-link:hover::before {
+    transform: translateX(3px);
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(8px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.social-link i {
+    color: #ffcc00;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.footer-divider {
+    max-width: 1200px;
+    margin: 2rem auto 1.5rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.copyright {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.copyright-content p {
+    margin-bottom: 0.5rem;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.copyright-content .disclaimer {
+    font-size: 0.8rem;
+    color: #888;
+    font-style: italic;
+}
+
+/* Policy Modal Styles */
+.policy-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    overflow-y: auto;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 2.5rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 700px;
+    position: relative;
+    animation: modalSlideIn 0.4s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-modal:hover {
+    color: #ff0000;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+    color: #4a148c;
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.policy-content {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+.policy-content h3 {
+    color: #4a148c;
+    margin: 1.5rem 0 0.8rem 0;
+    font-size: 1.3rem;
+    border-left: 4px solid #4a148c;
+    padding-left: 1rem;
+}
+
+.policy-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.policy-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.policy-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+.policy-content strong {
+    color: #4a148c;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .contact-info:hover,
+    .footer-link:hover,
+    .social-link:hover {
+        transform: translateX(0);
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        padding: 1.5rem;
+        width: 95%;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.5rem;
+    }
+}
+</style>
+
+<script>
+// Footer JavaScript
+function handleContactClick(type) {
+    if (type === 'phone') {
+        window.open('tel:+919866193066', '_self');
+    } else if (type === 'email') {
+        window.open('mailto:chanakyasahni8@gmail.com', '_self');
+    }
+}
+
+function handleServiceClick(faith) {
+    showPage('services');
+    setTimeout(() => {
+        if (faith !== 'interfaith') {
+            selectFaith(faith);
+        }
+    }, 100);
+}
+
+function handleSocialClick(platform) {
+    const urls = {
+        facebook: 'https://facebook.com/FaithConnect',
+        instagram: 'https://instagram.com/FaithConnect',
+        twitter: 'https://twitter.com/FaithConnect',
+        youtube: 'https://youtube.com/c/FaithConnect'
+    };
+    
+    if (urls[platform]) {
+        window.open(urls[platform], '_blank');
+    }
+}
+
+function showPolicy(policyType) {
+    const modalId = `${policyType}-policy-modal`;
+    document.getElementById(modalId).style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Initialize footer event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.footer-link[data-page]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const pageId = this.getAttribute('data-page');
+            if (pageId) {
+                showPage(pageId);
+                window.scrollTo(0, 0);
+            }
+        });
+    });
+
+    window.addEventListener('click', function(event) {
+        const modals = document.querySelectorAll('.policy-modal');
+        modals.forEach(modal => {
+            if (event.target === modal) {
+                closeModal(modal.id);
+            }
+        });
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const modals = document.querySelectorAll('.policy-modal');
+            modals.forEach(modal => {
+                if (modal.style.display === 'block') {
+                    closeModal(modal.id);
+                }
+            });
+        }
+    });
+});
+</script>
 
     <script>
         // Comprehensive Multi-Faith Calendar Data 2024-2026
@@ -3548,6 +3958,193 @@
             showNotification(`Calendar ${year} downloaded successfully!`, 'success');
         }
 
+        // Updated function to send both Gmail and WhatsApp
+        function sendOrderConfirmations() {
+            // Create order summary
+            let orderSummary = createOrderSummary();
+            
+            // 1. Send to Gmail (normal message)
+            sendToGmail(orderSummary);
+            
+            // 2. Send to WhatsApp (with Yes/No options)
+            sendToWhatsApp(orderSummary);
+            
+            // Show success message
+            showNotification("Booking confirmed! Order details sent to Gmail and WhatsApp");
+        }
+
+        // Updated function to create comprehensive order summary with timing and rashi
+        function createOrderSummary() {
+            let total = calculateTotal();
+            
+            let summary = `FaithConnect Order Confirmation\n\n`;
+            summary += `ORDER DETAILS:\n`;
+            summary += `==============\n\n`;
+            
+            // Ceremony Details
+            if (currentEvent) {
+                summary += `CEREMONY:\n`;
+                summary += `• ${currentEvent.name}\n`;
+                summary += `• ${currentEvent.description}\n`;
+                summary += `• Price: ${currentEvent.price}\n\n`;
+            }
+            
+            // Items Details
+            if (cart.items.length > 0) {
+                summary += `ITEMS KIT:\n`;
+                cart.items.forEach(item => {
+                    summary += `• ${item.name}\n`;
+                    summary += `• Type: ${item.type === 'complete' ? 'Complete Kit' : 'Basic Kit'}\n`;
+                    summary += `• Price: ${item.price}\n\n`;
+                });
+            }
+            
+            // Service Provider Details
+            if (cart.service) {
+                summary += `SERVICE PROVIDER:\n`;
+                summary += `• ${cart.service.name}\n`;
+                summary += `• Price: ${cart.service.price}\n\n`;
+            }
+            
+            // Address Details
+            summary += `DELIVERY ADDRESS:\n`;
+            summary += `• Name: ${userAddress.fullName}\n`;
+            summary += `• Phone: ${userAddress.phoneNumber}\n`;
+            summary += `• Address: ${userAddress.addressLine1}, ${userAddress.addressLine2}\n`;
+            summary += `• Landmark: ${userAddress.landmark}\n`;
+            summary += `• City: ${userAddress.city}\n`;
+            summary += `• State: ${userAddress.state}\n`;
+            summary += `• PIN: ${userAddress.pincode}\n`;
+            summary += `• Ceremony Date: ${userAddress.ceremonyDate}\n`;
+            summary += `• Ceremony Time: ${userAddress.ceremonyTime}\n`;
+            
+            // Add Rashi for Hindu faith
+            if (currentFaith === 'hindu' && userAddress.rashi) {
+                summary += `• Rashi: ${userAddress.rashi}\n`;
+            }
+            
+            if (userAddress.specialInstructions) {
+                summary += `• Special Instructions: ${userAddress.specialInstructions}\n`;
+            }
+            summary += `\n`;
+            
+            // Total Amount
+            summary += `TOTAL AMOUNT: ₹${total}\n\n`;
+            
+            // Booking Information
+            summary += `BOOKING INFORMATION:\n`;
+            summary += `• Booking ID: FC${Date.now()}\n`;
+            summary += `• Booking Time: ${new Date().toLocaleString()}\n`;
+            summary += `• Faith: ${currentFaith.charAt(0).toUpperCase() + currentFaith.slice(1)}\n\n`;
+            
+            summary += `Thank you for choosing FaithConnect!\n`;
+            summary += `For queries: +91 9394792417 | chanakyasahni8@gmail.com\n`;
+            
+            return summary;
+        }
+
+        // Updated function to send to Gmail (normal message without Yes/No)
+        function sendToGmail(orderSummary) {
+            const subject = `FaithConnect Order Confirmation - ${userAddress.fullName}`;
+            const body = orderSummary;
+            
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=chanakyasahni8@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            window.open(gmailUrl, '_blank');
+        }
+
+        // Updated function to send to WhatsApp with Yes/No options
+        function sendToWhatsApp(orderSummary) {
+            // Determine WhatsApp number based on faith
+            const whatsappNumber = currentFaith === 'hindu' ? '919248868387' : '919866193066';
+            
+            // WhatsApp message with Yes/No confirmation
+            let whatsappMessage = `*FaithConnect - New ${currentFaith.charAt(0).toUpperCase() + currentFaith.slice(1)} Ceremony Booking*\n\n`;
+            whatsappMessage += orderSummary;
+            whatsappMessage += `\n*ACTION REQUIRED:* Please confirm by replying:\n`;
+            whatsappMessage += `✅ YES - To confirm this booking\n`;
+            whatsappMessage += `❌ NO - To cancel this booking\n\n`;
+            whatsappMessage += `*Sent from:* +91 9394792417 (FaithConnect System)`;
+            
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Function to calculate total
+        function calculateTotal() {
+            let total = 0;
+            if (currentEvent) total += parseInt(currentEvent.price.replace('₹', '').replace(',', ''));
+            cart.items.forEach(item => total += parseInt(item.price.replace('₹', '').replace(',', '')));
+            if (cart.service) total += parseInt(cart.service.price.replace('₹', '').replace(',', ''));
+            return total;
+        }
+
+        // Updated function to select faith with Rashi field handling
+        function selectFaith(faith) {
+            currentFaith = faith;
+            
+            // Show/hide Rashi field for Hindu faith
+            const rashiField = document.getElementById('rashi-field');
+            if (faith === 'hindu') {
+                rashiField.style.display = 'flex';
+            } else {
+                rashiField.style.display = 'none';
+            }
+            
+            // Hide all faith selection and show events for selected faith
+            document.querySelector('.faith-selection').style.display = 'none';
+            document.getElementById('events-title').style.display = 'block';
+            
+            // Hide all event containers first
+            document.querySelectorAll('.events-container').forEach(container => {
+                container.style.display = 'none';
+            });
+            
+            // Show events for selected faith
+            const eventsContainer = document.getElementById(`${faith}-events`);
+            eventsContainer.style.display = 'block';
+            
+            // Populate events based on faith
+            populateEvents(faith);
+        }
+
+        // Updated function to save address with timing and rashi
+        function saveAddressAndProceed() {
+            // Get address form values
+            const addressData = {
+                fullName: document.getElementById('full-name').value,
+                phoneNumber: document.getElementById('phone-number').value,
+                addressLine1: document.getElementById('address-line1').value,
+                addressLine2: document.getElementById('address-line2').value,
+                landmark: document.getElementById('landmark').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                pincode: document.getElementById('pincode').value,
+                ceremonyDate: document.getElementById('ceremony-date').value,
+                ceremonyTime: document.getElementById('ceremony-time').value,
+                specialInstructions: document.getElementById('special-instructions').value
+            };
+
+            // Add Rashi for Hindu faith
+            if (currentFaith === 'hindu') {
+                addressData.rashi = document.getElementById('rashi').value;
+            }
+
+            // Validate required fields
+            if (!addressData.fullName || !addressData.phoneNumber || !addressData.addressLine1 || 
+                !addressData.addressLine2 || !addressData.landmark || !addressData.city || 
+                !addressData.state || !addressData.pincode || !addressData.ceremonyDate || !addressData.ceremonyTime) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+
+            // Save address data
+            userAddress = addressData;
+            
+            // Proceed to cart
+            showCart();
+        }
+
         // Initialize with 2024 calendar
         document.addEventListener('DOMContentLoaded', function() {
             // Page Navigation
@@ -3597,7 +4194,9 @@
                 const subject = `FaithConnect Inquiry from ${name}`;
                 const body = `Name: ${name}
 Phone: ${phone}
-Message:${message}`;
+Message: ${message}
+
+This message was sent from FaithConnect website.`;
                 
                 const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=chanakyasahni8@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 
@@ -3606,18 +4205,6 @@ Message:${message}`;
                     document.getElementById('contactForm').reset();
                 }, 1000);
             });
-
-            // WhatsApp functionality
-            const whatsappButton = document.getElementById('whatsappButton');
-            if (whatsappButton) {
-                console.log('WhatsApp button initialized with link:', whatsappButton.href);
-                
-                // Add click event for tracking
-                whatsappButton.addEventListener('click', function() {
-                    console.log('WhatsApp button clicked');
-                    // You can add analytics tracking here
-                });
-            }
         });
 
         function showPage(pageId) {
@@ -3637,27 +4224,6 @@ Message:${message}`;
             
             // Scroll to top
             window.scrollTo(0, 0);
-        }
-
-        // Function to select a faith
-        function selectFaith(faith) {
-            currentFaith = faith;
-            
-            // Hide all faith selection and show events for selected faith
-            document.querySelector('.faith-selection').style.display = 'none';
-            document.getElementById('events-title').style.display = 'block';
-            
-            // Hide all event containers first
-            document.querySelectorAll('.events-container').forEach(container => {
-                container.style.display = 'none';
-            });
-            
-            // Show events for selected faith
-            const eventsContainer = document.getElementById(`${faith}-events`);
-            eventsContainer.style.display = 'block';
-            
-            // Populate events based on faith
-            populateEvents(faith);
         }
 
         function populateEvents(faith) {
@@ -3806,7 +4372,7 @@ Message:${message}`;
             // Clear existing items
             itemsGrid.innerHTML = '';
             
-            // Define item kits for each faith (ONLY COMPLETE KIT - no basic kit)
+            // Define item kits for each faith (only Complete Kit)
             const itemsData = {
                 hindu: {
                     complete: {
@@ -3926,10 +4492,10 @@ Message:${message}`;
                 }
             };
             
-            // Add ONLY COMPLETE KIT to the grid (no basic kit)
+            // Add item kits to the grid - Only Complete Kit
             const faithItems = itemsData[faith];
             
-            // Complete Kit Only
+            // Complete Kit
             const completeCard = document.createElement('div');
             completeCard.className = 'item-card';
             completeCard.innerHTML = `
@@ -4124,36 +4690,6 @@ Message:${message}`;
             document.getElementById('address-container').style.display = 'block';
         }
 
-        function saveAddressAndProceed() {
-            // Get address form values
-            const addressData = {
-                fullName: document.getElementById('full-name').value,
-                phoneNumber: document.getElementById('phone-number').value,
-                addressLine1: document.getElementById('address-line1').value,
-                addressLine2: document.getElementById('address-line2').value,
-                landmark: document.getElementById('landmark').value,
-                city: document.getElementById('city').value,
-                state: document.getElementById('state').value,
-                pincode: document.getElementById('pincode').value,
-                ceremonyDate: document.getElementById('ceremony-date').value,
-                specialInstructions: document.getElementById('special-instructions').value
-            };
-
-            // Validate required fields
-            if (!addressData.fullName || !addressData.phoneNumber || !addressData.addressLine1 || 
-                !addressData.addressLine2 || !addressData.landmark || !addressData.city || 
-                !addressData.state || !addressData.pincode || !addressData.ceremonyDate) {
-                showNotification('Please fill in all required fields', 'error');
-                return;
-            }
-
-            // Save address data
-            userAddress = addressData;
-            
-            // Proceed to cart
-            showCart();
-        }
-
         function goBackToServices() {
             document.getElementById('address-container').style.display = 'none';
             document.getElementById('address-title').style.display = 'none';
@@ -4229,7 +4765,9 @@ Message:${message}`;
                             ${userAddress.addressLine1}, ${userAddress.addressLine2}<br>
                             ${userAddress.landmark}, ${userAddress.city}<br>
                             ${userAddress.state} - ${userAddress.pincode}<br>
-                            Date: ${userAddress.ceremonyDate}
+                            Date: ${userAddress.ceremonyDate}<br>
+                            Time: ${userAddress.ceremonyTime}
+                            ${currentFaith === 'hindu' && userAddress.rashi ? `<br>Rashi: ${userAddress.rashi}` : ''}
                         </div>
                     </div>
                     <div>Included</div>
@@ -4271,85 +4809,22 @@ Message:${message}`;
             }
             
             // Payment verification successful
-            resultDiv.innerHTML = `<i class="fas fa-check-circle"></i> Thank You for choosing FaithConnect`;
+            resultDiv.innerHTML = `<i class="fas fa-check-circle"></i> Payment Verified! Sending order confirmations...`;
             resultDiv.className = 'verification-result verification-success';
             resultDiv.style.display = 'block';
             
-            // Send email with order details
-            sendOrderEmail();
-            
-            // Show notification
-            showNotification("Booking confirmed! Order details sent to your email.");
+            // Send both Gmail and WhatsApp confirmations
+            sendOrderConfirmations();
             
             // Reset for next booking after delay
             setTimeout(() => {
                 goBackToFaiths();
-            }, 3000);
-        }
-
-        // Update the sendOrderEmail function to include address in the Gmail
-        function sendOrderEmail() {
-            // Create order summary with address
-            let orderSummary = `FaithConnect Order Confirmation\n\n`;
-            orderSummary += `Thank you for your booking with FaithConnect!\n\n`;
-            orderSummary += `Order Details:\n`;
-            orderSummary += `================\n\n`;
-            
-            if (currentEvent) {
-                orderSummary += `Ceremony: ${currentEvent.name}\n`;
-                orderSummary += `Price: ${currentEvent.price}\n\n`;
-            }
-            
-            if (cart.items.length > 0) {
-                orderSummary += `Items:\n`;
-                cart.items.forEach(item => {
-                    orderSummary += `- ${item.name}: ${item.price}\n`;
-                });
-                orderSummary += `\n`;
-            }
-            
-            if (cart.service) {
-                orderSummary += `Service Provider: ${cart.service.name}\n`;
-                orderSummary += `Service Price: ${cart.service.price}\n\n`;
-            }
-            
-            // Add address information
-            orderSummary += `Delivery Address:\n`;
-            orderSummary += `-----------------\n`;
-            orderSummary += `Name: ${userAddress.fullName}\n`;
-            orderSummary += `Phone: ${userAddress.phoneNumber}\n`;
-            orderSummary += `Address: ${userAddress.addressLine1}, ${userAddress.addressLine2}\n`;
-            orderSummary += `Landmark: ${userAddress.landmark}\n`;
-            orderSummary += `City: ${userAddress.city}\n`;
-            orderSummary += `State: ${userAddress.state}\n`;
-            orderSummary += `PIN Code: ${userAddress.pincode}\n`;
-            orderSummary += `Ceremony Date: ${userAddress.ceremonyDate}\n`;
-            
-            if (userAddress.specialInstructions) {
-                orderSummary += `Special Instructions: ${userAddress.specialInstructions}\n`;
-            }
-            orderSummary += `\n`;
-            
-            // Calculate total
-            let total = 0;
-            if (currentEvent) total += parseInt(currentEvent.price.replace('₹', '').replace(',', ''));
-            cart.items.forEach(item => total += parseInt(item.price.replace('₹', '').replace(',', '')));
-            if (cart.service) total += parseInt(cart.service.price.replace('₹', '').replace(',', ''));
-            
-            orderSummary += `Total Amount: ₹${total}\n\n`;
-            orderSummary += `Your order will be confirmed as soon as we check the payment and our service provider will contact you shortly.\n\n`;
-            orderSummary += `Thank you for choosing FaithConnect!\n`;
-            orderSummary += `For any queries, contact us at chanakyasahni8@gmail.com\n`;
-            
-            // Create email content
-            const subject = `FaithConnect Order Confirmation - ${userAddress.fullName}`;
-            const body = encodeURIComponent(orderSummary);
-            
-            // Open Gmail with pre-filled order confirmation including address
-            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=chanakyasahni8@gmail.com&su=${encodeURIComponent(subject)}&body=${body}`;
-            
-            // Open Gmail in new tab
-            window.open(gmailUrl, '_blank');
+                // Reset form
+                document.getElementById('verification-result').style.display = 'none';
+                document.getElementById('preview-container').style.display = 'none';
+                document.getElementById('screenshot-upload').value = '';
+                document.getElementById('verify-btn').disabled = true;
+            }, 5000);
         }
 
         // Notification function
@@ -4432,41 +4907,6 @@ Message:${message}`;
             messageElement.textContent = text;
             messagesContainer.appendChild(messageElement);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        // Footer JavaScript
-        function handleContactClick(type) {
-            if (type === 'phone') {
-                window.open('tel:+919866193066', '_self');
-            } else if (type === 'email') {
-                window.open('mailto:chanakyasahni8@gmail.com', '_self');
-            }
-        }
-
-        function handleServiceClick(faith) {
-            showPage('services');
-            setTimeout(() => {
-                if (faith !== 'interfaith') {
-                    selectFaith(faith);
-                }
-            }, 100);
-        }
-
-        function handleSocialClick(platform) {
-            const urls = {
-                facebook: 'https://facebook.com/FaithConnect',
-                instagram: 'https://instagram.com/FaithConnect',
-                twitter: 'https://twitter.com/FaithConnect',
-                youtube: 'https://youtube.com/c/FaithConnect'
-            };
-            
-            if (urls[platform]) {
-                window.open(urls[platform], '_blank');
-            }
-        }
-
-        function showPolicy(policyType) {
-            alert(`Opening ${policyType} policy. This feature will be implemented in the full version.`);
         }
     </script>
 </body>
