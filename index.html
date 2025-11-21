@@ -3084,6 +3084,138 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
     <script>
+        // Enhanced CORS-free SMS and communication system
+        class CommunicationManager {
+            constructor() {
+                this.fallbackMethods = ['whatsapp', 'gmail', 'sms_link'];
+                this.currentMethod = 0;
+            }
+
+            // Enhanced SMS function with multiple fallbacks
+            async sendSMS(phoneNumber, message) {
+                console.log('Attempting to send SMS via multiple methods...');
+                
+                // Method 1: Direct SMS link (works on mobile)
+                const smsLink = `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
+                
+                // Method 2: WhatsApp API fallback
+                const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                
+                // Method 3: Gmail fallback
+                const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${phoneNumber}@sms.gateway&su=FaithConnect%20Booking&body=${encodeURIComponent(message)}`;
+                
+                // Try methods in sequence
+                const methods = [
+                    { name: 'SMS Link', link: smsLink },
+                    { name: 'WhatsApp', link: whatsappLink },
+                    { name: 'Gmail SMS', link: gmailLink }
+                ];
+                
+                for (let method of methods) {
+                    try {
+                        console.log(`Trying ${method.name}...`);
+                        const success = await this.tryCommunicationMethod(method.link);
+                        if (success) {
+                            console.log(`${method.name} successful!`);
+                            return true;
+                        }
+                    } catch (error) {
+                        console.log(`${method.name} failed, trying next method...`);
+                        continue;
+                    }
+                }
+                
+                // If all methods fail, show manual instructions
+                this.showManualSMSInstructions(phoneNumber, message);
+                return false;
+            }
+
+            tryCommunicationMethod(link) {
+                return new Promise((resolve) => {
+                    const timeout = setTimeout(() => {
+                        resolve(false);
+                    }, 2000);
+
+                    const newWindow = window.open(link, '_blank');
+                    
+                    // Check if window opened successfully
+                    if (newWindow) {
+                        setTimeout(() => {
+                            clearTimeout(timeout);
+                            resolve(true);
+                        }, 1000);
+                    } else {
+                        clearTimeout(timeout);
+                        resolve(false);
+                    }
+                });
+            }
+
+            showManualSMSInstructions(phoneNumber, message) {
+                const instructions = `
+                    Manual SMS Instructions:
+                    
+                    1. Open your messaging app
+                    2. Create new message to: ${phoneNumber}
+                    3. Copy and paste this message:
+                    
+                    ${message}
+                    
+                    4. Send the message
+                `;
+                
+                alert('Could not auto-open SMS. Please send manually:\n\n' + instructions);
+            }
+
+            // Enhanced communication sender
+            async sendOrderConfirmations(orderSummary, userAddress, currentFaith) {
+                const phoneNumber = this.getPhoneNumber(currentFaith);
+                
+                // Create optimized messages for different platforms
+                const smsMessage = this.createSMSMessage(orderSummary, userAddress);
+                const whatsappMessage = this.createWhatsAppMessage(orderSummary, userAddress);
+                const emailMessage = this.createEmailMessage(orderSummary, userAddress);
+                
+                // Send via multiple channels
+                await this.sendSMS(phoneNumber, smsMessage);
+                this.sendToWhatsApp(phoneNumber, whatsappMessage);
+                this.sendToGmail(emailMessage, userAddress);
+                
+                showNotification("Booking confirmed! Notifications sent via multiple channels");
+            }
+
+            getPhoneNumber(faith) {
+                return faith === 'hindu' ? '+919248868387' : '+919866193066';
+            }
+
+            createSMSMessage(orderSummary, userAddress) {
+                return `FaithConnect Booking: ${userAddress.fullName} - ${orderSummary.totalAmount}. Date: ${userAddress.ceremonyDate}. Check email for details.`;
+            }
+
+            createWhatsAppMessage(orderSummary, userAddress) {
+                return `*FaithConnect Booking Confirmation*\n\n${orderSummary.details}\n\n*Customer:* ${userAddress.fullName}\n*Phone:* ${userAddress.phoneNumber}\n*Date:* ${userAddress.ceremonyDate}\n\nPlease confirm this booking.`;
+            }
+
+            createEmailMessage(orderSummary, userAddress) {
+                return `FaithConnect Booking Details:\n\n${orderSummary.fullDetails}\n\nCustomer Information:\nName: ${userAddress.fullName}\nPhone: ${userAddress.phoneNumber}\nAddress: ${userAddress.addressLine1}, ${userAddress.city}\nCeremony Date: ${userAddress.ceremonyDate}`;
+            }
+
+            sendToWhatsApp(phoneNumber, message) {
+                const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappLink, '_blank');
+            }
+
+            sendToGmail(message, userAddress) {
+                const subject = `FaithConnect Booking - ${userAddress.fullName}`;
+                const body = message;
+                const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=chanakyasahni8@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                window.open(gmailLink, '_blank');
+            }
+        }
+
+        // Initialize communication manager
+        const commManager = new CommunicationManager();
+
         // Comprehensive Multi-Faith Calendar Data 2024-2026
         const multiFaithCalendar = {
             2024: {
@@ -3739,7 +3871,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
 
-        // Fixed downloadResource function
+        // Enhanced downloadResource function
         function downloadResource(resourceType, buttonElement) {
             // Show download progress
             const progressId = resourceType + '-progress';
@@ -3958,128 +4090,98 @@ document.addEventListener('DOMContentLoaded', function() {
             showNotification(`Calendar ${year} downloaded successfully!`, 'success');
         }
 
-        // Updated function to send both Gmail and WhatsApp
+        // Enhanced function to send order confirmations using CommunicationManager
         function sendOrderConfirmations() {
             // Create order summary
-            let orderSummary = createOrderSummary();
+            const orderSummary = createOrderSummary();
             
-            // 1. Send to Gmail (normal message)
-            sendToGmail(orderSummary);
-            
-            // 2. Send to WhatsApp (with Yes/No options)
-            sendToWhatsApp(orderSummary);
-            
-            // Show success message
-            showNotification("Booking confirmed! Order details sent to Gmail and WhatsApp");
+            // Use the enhanced communication manager
+            commManager.sendOrderConfirmations(orderSummary, userAddress, currentFaith);
         }
 
-        // Updated function to create comprehensive order summary with timing and rashi
+        // Enhanced function to create comprehensive order summary
         function createOrderSummary() {
             let total = calculateTotal();
             
-            let summary = `FaithConnect Order Confirmation\n\n`;
-            summary += `ORDER DETAILS:\n`;
-            summary += `==============\n\n`;
+            let summary = {
+                totalAmount: `₹${total}`,
+                details: '',
+                fullDetails: ''
+            };
+            
+            // Build details string
+            let details = `FaithConnect Order Confirmation\n\n`;
+            details += `ORDER DETAILS:\n`;
+            details += `==============\n\n`;
             
             // Ceremony Details
             if (currentEvent) {
-                summary += `CEREMONY:\n`;
-                summary += `• ${currentEvent.name}\n`;
-                summary += `• ${currentEvent.description}\n`;
-                summary += `• Price: ${currentEvent.price}\n\n`;
+                details += `CEREMONY:\n`;
+                details += `• ${currentEvent.name}\n`;
+                details += `• ${currentEvent.description}\n`;
+                details += `• Price: ${currentEvent.price}\n\n`;
             }
             
             // Items Details
             if (cart.items.length > 0) {
-                summary += `ITEMS KIT:\n`;
+                details += `ITEMS KIT:\n`;
                 cart.items.forEach(item => {
-                    summary += `• ${item.name}\n`;
-                    summary += `• Type: ${item.type === 'complete' ? 'Complete Kit' : 'Basic Kit'}\n`;
-                    summary += `• Price: ${item.price}\n\n`;
+                    details += `• ${item.name}\n`;
+                    details += `• Type: ${item.type === 'complete' ? 'Complete Kit' : 'Basic Kit'}\n`;
+                    details += `• Price: ${item.price}\n\n`;
                 });
             }
             
             // Service Provider Details
             if (cart.service) {
-                summary += `SERVICE PROVIDER:\n`;
-                summary += `• ${cart.service.name}\n`;
-                summary += `• Price: ${cart.service.price}\n\n`;
+                details += `SERVICE PROVIDER:\n`;
+                details += `• ${cart.service.name}\n`;
+                details += `• Price: ${cart.service.price}\n\n`;
             }
             
-            // Address Details
-            summary += `DELIVERY ADDRESS:\n`;
-            summary += `• Name: ${userAddress.fullName}\n`;
-            summary += `• Phone: ${userAddress.phoneNumber}\n`;
-            summary += `• Address: ${userAddress.addressLine1}, ${userAddress.addressLine2}\n`;
-            summary += `• Landmark: ${userAddress.landmark}\n`;
-            summary += `• City: ${userAddress.city}\n`;
-            summary += `• State: ${userAddress.state}\n`;
-            summary += `• PIN: ${userAddress.pincode}\n`;
-            summary += `• Ceremony Date: ${userAddress.ceremonyDate}\n`;
-            summary += `• Ceremony Time: ${userAddress.ceremonyTime}\n`;
+            summary.details = details;
+            
+            // Build full details for email
+            let fullDetails = details;
+            fullDetails += `DELIVERY ADDRESS:\n`;
+            fullDetails += `• Name: ${userAddress.fullName}\n`;
+            fullDetails += `• Phone: ${userAddress.phoneNumber}\n`;
+            fullDetails += `• Address: ${userAddress.addressLine1}, ${userAddress.addressLine2}\n`;
+            fullDetails += `• Landmark: ${userAddress.landmark}\n`;
+            fullDetails += `• City: ${userAddress.city}\n`;
+            fullDetails += `• State: ${userAddress.state}\n`;
+            fullDetails += `• PIN: ${userAddress.pincode}\n`;
+            fullDetails += `• Ceremony Date: ${userAddress.ceremonyDate}\n`;
+            fullDetails += `• Ceremony Time: ${userAddress.ceremonyTime}\n`;
             
             // Add Rashi for Hindu faith
             if (currentFaith === 'hindu' && userAddress.rashi) {
-                summary += `• Rashi: ${userAddress.rashi}\n`;
+                fullDetails += `• Rashi: ${userAddress.rashi}\n`;
             }
             
             if (userAddress.specialInstructions) {
-                summary += `• Special Instructions: ${userAddress.specialInstructions}\n`;
+                fullDetails += `• Special Instructions: ${userAddress.specialInstructions}\n`;
             }
-            summary += `\n`;
+            fullDetails += `\n`;
             
             // Total Amount
-            summary += `TOTAL AMOUNT: ₹${total}\n\n`;
+            fullDetails += `TOTAL AMOUNT: ₹${total}\n\n`;
             
             // Booking Information
-            summary += `BOOKING INFORMATION:\n`;
-            summary += `• Booking ID: FC${Date.now()}\n`;
-            summary += `• Booking Time: ${new Date().toLocaleString()}\n`;
-            summary += `• Faith: ${currentFaith.charAt(0).toUpperCase() + currentFaith.slice(1)}\n\n`;
+            fullDetails += `BOOKING INFORMATION:\n`;
+            fullDetails += `• Booking ID: FC${Date.now()}\n`;
+            fullDetails += `• Booking Time: ${new Date().toLocaleString()}\n`;
+            fullDetails += `• Faith: ${currentFaith.charAt(0).toUpperCase() + currentFaith.slice(1)}\n\n`;
             
-            summary += `Thank you for choosing FaithConnect!\n`;
-            summary += `For queries: +91 9394792417 | chanakyasahni8@gmail.com\n`;
+            fullDetails += `Thank you for choosing FaithConnect!\n`;
+            fullDetails += `For queries: +91 9394792417 | chanakyasahni8@gmail.com\n`;
+            
+            summary.fullDetails = fullDetails;
             
             return summary;
         }
 
-        // Updated function to send to Gmail (normal message without Yes/No)
-        function sendToGmail(orderSummary) {
-            const subject = `FaithConnect Order Confirmation - ${userAddress.fullName}`;
-            const body = orderSummary;
-            
-            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=chanakyasahni8@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
-            window.open(gmailUrl, '_blank');
-        }
-
-        // Updated function to send to WhatsApp with Yes/No options
-        function sendToWhatsApp(orderSummary) {
-            // Determine WhatsApp number based on faith
-            const whatsappNumber = currentFaith === 'hindu' ? '919248868387' : '919866193066';
-            
-            // WhatsApp message with Yes/No confirmation
-            let whatsappMessage = `*FaithConnect - New ${currentFaith.charAt(0).toUpperCase() + currentFaith.slice(1)} Ceremony Booking*\n\n`;
-            whatsappMessage += orderSummary;
-            whatsappMessage += `\n*ACTION REQUIRED:* Please confirm by replying:\n`;
-            whatsappMessage += `✅ YES - To confirm this booking\n`;
-            whatsappMessage += `❌ NO - To cancel this booking\n\n`;
-            whatsappMessage += `*Sent from:* +91 9394792417 (FaithConnect System)`;
-            
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-            window.open(whatsappUrl, '_blank');
-        }
-
-        // Function to calculate total
-        function calculateTotal() {
-            let total = 0;
-            if (currentEvent) total += parseInt(currentEvent.price.replace('₹', '').replace(',', ''));
-            cart.items.forEach(item => total += parseInt(item.price.replace('₹', '').replace(',', '')));
-            if (cart.service) total += parseInt(cart.service.price.replace('₹', '').replace(',', ''));
-            return total;
-        }
-
-        // Updated function to select faith with Rashi field handling
+        // Enhanced function to select faith with Rashi field handling
         function selectFaith(faith) {
             currentFaith = faith;
             
@@ -4108,7 +4210,7 @@ document.addEventListener('DOMContentLoaded', function() {
             populateEvents(faith);
         }
 
-        // Updated function to save address with timing and rashi
+        // Enhanced function to save address with timing and rashi
         function saveAddressAndProceed() {
             // Get address form values
             const addressData = {
@@ -4813,7 +4915,7 @@ This message was sent from FaithConnect website.`;
             resultDiv.className = 'verification-result verification-success';
             resultDiv.style.display = 'block';
             
-            // Send both Gmail and WhatsApp confirmations
+            // Send confirmations using enhanced communication manager
             sendOrderConfirmations();
             
             // Reset for next booking after delay
@@ -4907,6 +5009,15 @@ This message was sent from FaithConnect website.`;
             messageElement.textContent = text;
             messagesContainer.appendChild(messageElement);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Calculate total function
+        function calculateTotal() {
+            let total = 0;
+            if (currentEvent) total += parseInt(currentEvent.price.replace('₹', '').replace(',', ''));
+            cart.items.forEach(item => total += parseInt(item.price.replace('₹', '').replace(',', '')));
+            if (cart.service) total += parseInt(cart.service.price.replace('₹', '').replace(',', ''));
+            return total;
         }
     </script>
 </body>
